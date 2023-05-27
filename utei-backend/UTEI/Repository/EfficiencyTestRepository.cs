@@ -4,7 +4,7 @@ namespace UTEI.Repository
 {
     public class EfficiencyTestRepository : IEfficiencyTestRepository
     {
-        public Task<EfficiencyTestResult> CreateTest(EfficiencyTestResult testEfficiency)
+        public Task<EfficiencyTest> CreateTest(EfficiencyTest testEfficiency)
         {
             throw new NotImplementedException();
         }
@@ -19,12 +19,12 @@ namespace UTEI.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<EfficiencyTestResult>> GetAllSavedTest()
+        public Task<IEnumerable<EfficiencyTest>> GetAllSavedTest()
         {
             throw new NotImplementedException();
         }
 
-        public Task<EfficiencyTestResult> GetSavedTest(int id)
+        public Task<EfficiencyTest> GetSavedTest(int id)
         {
             throw new NotImplementedException();
         }
