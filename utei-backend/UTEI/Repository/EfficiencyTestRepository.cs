@@ -17,7 +17,7 @@ namespace UTEI.Repository
 
         public async Task<string> CreateTest(EfficiencyTest testEfficiency)
         {
-           await _efficiencyTest.InsertOneAsync(testEfficiency);
+            await _efficiencyTest.InsertOneAsync(testEfficiency);
             return testEfficiency.Id!;
         }
 
@@ -36,9 +36,9 @@ namespace UTEI.Repository
             throw new NotImplementedException();
         }
 
-        public Task<EfficiencyTest> GetSavedTest(int id)
+        public async Task<EfficiencyTest> GetSavedTest(string id)
         {
-            throw new NotImplementedException();
+            return await _efficiencyTest.Find(user => user.Id == id).FirstOrDefaultAsync();
         }
     }
 }
