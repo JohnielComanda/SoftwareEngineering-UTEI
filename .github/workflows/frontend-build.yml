@@ -25,11 +25,11 @@ jobs:
         node-version: 16.x
 
     - name: Install dependencies
-      working-directory: greeksmash-frontend/greeksmashreact
+      working-directory: utei-frontend
       run: npm install
 
     - name: Build
-      working-directory: greeksmash-frontend/greeksmashreact
+      working-directory: utei-frontend
       run: npm run build
       env:
         CI: false
