@@ -1,12 +1,12 @@
-﻿namespace UTEI.EfficiencyTest
+﻿namespace UTEI.Models
 {
-    public class EfficiencyTest
+    public class TestEfficiencyResult
     {
         public int Id { get; set; }
         public int UserId { get; set; }
         public string? UnitTest { get; set; }
         public string? ProgrammingLanguage { get; set; }
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
         public string? ResultSummary { get; set; }
         public int EfficiencyScore { get; set; }
         public string? TestSuggestions { get; set; }
