@@ -11,6 +11,7 @@ builder.Services.AddScoped<IEfficiencyTestRepository, EfficiencyTestRepository>(
 builder.Services.AddScoped<IEfficiencyTestService, EfficiencyTestService>();
 builder.Services.AddScoped<IAnalyzer, Analyzer>();
 builder.Services.AddScoped<IEfficiencyTestEnhancer, EfficiencyTestEnhancer>();
+builder.Services.AddHttpClient();
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

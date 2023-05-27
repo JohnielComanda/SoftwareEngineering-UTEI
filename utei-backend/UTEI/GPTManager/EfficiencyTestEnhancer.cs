@@ -20,7 +20,7 @@ namespace UTEI.GPTManager
         public async Task<string> SuggestionGenerator(string unitTest)
         {
             var prompt = $"Write suggestions for the code to improve it's efficiency and the conventions of writing proper unit test for this unit test method:```\n{unitTest}\n```";
-            return await GPTRequestHandler.RequestHandler(prompt);
+            return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }
     }
 }
