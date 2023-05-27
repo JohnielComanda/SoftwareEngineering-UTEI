@@ -1,0 +1,102 @@
+.output {
+    position: fixed;
+    margin: 50px 50px 10px 1001px;
+}
+
+.output-space-bg { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0 0 8px 8px;
+}
+
+.output-header {
+    border-radius: 8px 8px 0 0;
+    height: 50px;
+    width: 600.5px;
+    background-color: transparent;
+}
+
+.output-space {
+    height: 555px;
+    width: 600px;
+    background-color: #2F3139;
+    overflow-y: auto;
+    border-color: #2F3139;
+    font-size:medium;
+    color: #e4e4e4;
+    border-radius: 0 0 8px 8px;
+}
+
+.standard {
+    align-self: auto;
+    height: 100%;
+    width: 33.3%;
+    border-radius: 8px 0 8px 0;
+    background-color: #0B314C;
+    color: #ffffff;
+    cursor: pointer;
+    border: 2px solid #0B314C;
+}
+
+.suggestion {
+    align-self: auto;
+    height: 100%;
+    width: 33.4%;
+    border-radius: 8px 0 8px 0;
+    background-color: #0B314C;
+    color: #ffffff;
+    cursor: pointer;
+    border: 2px solid #0B314C;
+}
+
+.enhance {
+    align-self: auto;
+    height: 100%;
+    width: 33.3%;
+    border-radius: 8px 8px 0 0;
+    background-color: #0B314C;
+    color: #ffffff;
+    cursor: pointer;
+    border: 2px solid #0B314C;
+}
+
+.active-standard {
+    align-self: auto;
+    height: 100%;
+    width: 33.3%;
+    border-radius: 8px 0 8px 0;
+    background-color: #0B314C;
+    color: #e4e4e4;
+    border: 2px solid #0B314C;
+    border-bottom-color: #ffffff;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.active-suggestion {
+    align-self: auto;
+    height: 100%;
+    width: 33.4%;
+    border-radius: 8px 0 8px 0;
+    background-color: #0B314C;
+    color: #e4e4e4;
+    border: 2px solid #0B314C;
+    border-bottom-color: #ffffff;
+    pointer-events: none;
+    cursor: pointer;   
+}
+
+.active-enhance {
+    align-self: auto;
+    height: 100%;
+    width: 33.3%;
+    border-radius: 8px 8px 0 0;
+    background-color: #0B314C;
+    color: #e4e4e4;
+    border: 2px solid #0B314C;
+    border-bottom-color: #ffffff;
+    pointer-events: none;
+    cursor: pointer;
+}

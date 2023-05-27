@@ -1,0 +1,143 @@
+.sidebar {
+  background-color: #252934;
+  height: 100%;
+  margin: 0;
+  padding-top: 20px;
+  width: 300px;
+  position: fixed;
+  align-items:center;
+}
+
+.saved-test {
+  overflow-y: auto;
+  position: absolute;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-test {
+  background-image: url("C:\Users\Johniel\Desktop\UTEI\utei-frontend\public\approval.png"); 
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding-left: 35px;
+  background-size: 17px;
+  display: inline;
+  border-radius: 10px;
+  color: #fff;
+  text-align: left;
+  height: 40px;
+  margin-left: -25px;
+  width: 270px;
+  border: 1.5px solid #252934;
+  background-color: #252934;
+}
+
+li {
+  list-style: none;
+}
+
+.btn-test:hover {
+  background-color: #95a1ca;
+}
+
+.clear-history {
+  position: absolute;
+  bottom: 70px;
+  height: 45px;
+  width: 95%;
+  margin-bottom: 10px;
+  margin-left: 6.5px;
+  border-radius: 10px;
+  background-color: #252934;
+  color: #ffffff;
+  cursor: pointer;
+  border-top: 1.5px solid #474E6A;
+  border-left: 1.5px solid #474E6A;
+  border-right: 1.5px solid #474E6A;
+  border-bottom-color: #95a1ca;
+}
+  
+.buttons {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 13.5px;
+  border-bottom: 1.5px solid #474E6A;
+}
+.efficiency {
+  align-self: auto;
+  height: 45px;
+  width: 96%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #252934;
+  color: #ffffff;
+  cursor: pointer;
+  border: 1.5px solid #474E6A;
+}
+
+.accuracy {
+  align-self: auto;
+  height: 45px;
+  width: 96%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #252934;
+  color: #ffffff;
+  cursor: pointer;
+  border: 1.5px solid #474E6A;
+}
+
+.generate {
+  align-self: auto;
+  height: 45px;
+  width: 96%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #252934;
+  color: #ffffff;
+  cursor: pointer;
+  border: 1.5px solid #474E6A;
+}
+
+.active-efficiency {
+  align-self: auto;
+  height: 45px;
+  width: 96%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #0B314C;
+  color: #e4e4e4;
+  border: 1.5px solid #474E6A;
+  pointer-events: none;
+  cursor: pointer;
+}
+
+.active-accuracy {
+  align-self: auto;
+  height: 45px;
+  width: 96%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #0B314C;
+  color: #e4e4e4;
+  border: 1.5px solid #474E6A;
+  pointer-events: none;
+  cursor: pointer;   
+}
+
+.active-generate {
+  align-self: auto;
+  height: 45px;
+  width: 96%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: #0B314C;
+  color: #e4e4e4;
+  border: 1.5px solid #474E6A;
+  pointer-events: none;
+  cursor: pointer;
+}
+
