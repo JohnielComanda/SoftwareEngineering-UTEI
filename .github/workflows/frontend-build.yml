@@ -35,5 +35,5 @@ jobs:
         CI: false
 
     # - name: Test
-    #   working-directory: greeksmash-frontend/greeksmashreact
+    #   working-directory: utei-frontend
     #   run: npm run test
