@@ -3,6 +3,6 @@
     public interface IAnalyzer
     {
         Task<string> Analyze(string unitTest);
-        Task<string> EvaluateTest(string input);
+        Task<string> EvaluateTest(string unitTest);
     }
 }
