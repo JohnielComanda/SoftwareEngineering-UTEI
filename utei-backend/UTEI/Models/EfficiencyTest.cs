@@ -14,6 +14,5 @@ namespace UTEI.Models
         public int EfficiencyScore { get; set; }
         public string? TestSuggestions { get; set; }
         public string? EnhancedVersion { get; set; }
-
     }
 }
