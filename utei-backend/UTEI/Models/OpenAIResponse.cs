@@ -2,6 +2,6 @@
 {
     public class OpenAIResponse
     {
-        public string[]? choices { get; set; }
+        public OpenAIChoice[]? choices { get; set; }
     }
 }
