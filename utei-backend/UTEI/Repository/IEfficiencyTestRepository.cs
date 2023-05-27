@@ -2,7 +2,7 @@
 
 namespace UTEI.Repository
 {
-    public interface IEfficiencyResultRepository
+    public interface IEfficiencyTestRepository
     {
         Task<TestEfficiencyResult> CreateTest(TestEfficiencyResult testEfficiency);
         Task<TestEfficiencyResult> GetSavedTest(int id);

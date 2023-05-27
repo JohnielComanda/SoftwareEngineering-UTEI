@@ -2,7 +2,7 @@
 
 namespace UTEI.Repository
 {
-    public class EfficiencyResultRepository : IEfficiencyResultRepository
+    public class EfficiencyTestRepository : IEfficiencyTestRepository
     {
         public Task<TestEfficiencyResult> CreateTest(TestEfficiencyResult testEfficiency)
         {
