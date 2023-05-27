@@ -30,5 +30,24 @@ namespace UTEI.Controllers
                 return StatusCode(500, "Something went wrong!");
             }
         }
+        [HttpGet]
+        public async Task<ActionResult> GetSavedTest(string id)
+        {
+            try
+            {
+                var test = await _efficiencyService.GetSavedTest(id);
+                if (test == null)
+                {
+                    _logger.LogInformation("No test found");
+                    return NotFound();
+                }
+                return Ok(test);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return BadRequest();
+            }
+        }
     }
 }
