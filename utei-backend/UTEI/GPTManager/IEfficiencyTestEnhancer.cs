@@ -3,6 +3,6 @@
     public interface IEfficiencyTestEnhancer
     {
         Task<string> Enhancer(string progLang, string unitTest);
-        Task<string> SuggestionGenerator();
+        Task<string> SuggestionGenerator(string unitTest);
     }
 }

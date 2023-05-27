@@ -11,9 +11,10 @@ namespace UTEI.GPTManager
             return await GPTRequestHandler.RequestHandler(prompt);
         }
 
-        public Task<string> SuggestionGenerator()
+        public async Task<string> SuggestionGenerator(string unitTest)
         {
-            throw new NotImplementedException();
+            var prompt = $"Write suggestions for the code to improve it's efficiency and the conventions of writing proper unit test of the following unit test method:```\n{unitTest}\n```";
+            return await GPTRequestHandler.RequestHandler(prompt);
         }
     }
 }
