@@ -1,4 +1,4 @@
-﻿using UTEI.EfficiencyTest;
+﻿using UTEI.Models;
 
 namespace UTEI.Repository
 {
