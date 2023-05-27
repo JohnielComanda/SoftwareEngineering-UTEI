@@ -11,9 +11,10 @@ namespace UTEI.GPTManager
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<string> Analyze(string progLang, string unitTest)
+        public async Task<string> Analyze(string unitTest)
         {
-
+            var prompt = $"Write a summary of the code on how efficient it is and how it adheres to the conventions of writing proper unit test for this unit test method::```\n{unitTest}\n```";
+            return await GPTRequestHandler.RequestHandler(prompt);
         }
 
         public Task<string> EvaluateTest(string input)

@@ -2,7 +2,7 @@
 {
     public interface IAnalyzer
     {
-        Task<string> Analyze(string progLang, string unitTest);
+        Task<string> Analyze(string unitTest);
         Task<string> EvaluateTest(string input);
     }
 }
