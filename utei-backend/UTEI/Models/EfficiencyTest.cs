@@ -1,9 +1,12 @@
-﻿namespace UTEI.Models
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace UTEI.Models
 {
     public class EfficiencyTest
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
+        [BsonId]
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+        public string? Id { get; set; }
         public string? UnitTest { get; set; }
         public string? ProgrammingLanguage { get; set; }
         public DateTime Date { get; set; }
