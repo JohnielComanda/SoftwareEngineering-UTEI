@@ -17,7 +17,7 @@
 }
 
 .btn-test {
-  background-image: url("C:\Users\Johniel\Desktop\UTEI\utei-frontend\public\approval.png"); 
+  background-image: url("/public/approval.png"); 
   background-repeat: no-repeat;
   background-position: 10px center;
   padding-left: 35px;
