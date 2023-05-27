@@ -35,7 +35,7 @@ namespace UTEI.GPTManager
 
                         if (responseContent != null && responseContent.choices!.Length > 0)
                         {
-                            var improvedUnitTest = responseContent.choices[0].Trim();
+                            var improvedUnitTest = responseContent.choices[0].text!.Trim();
                             return improvedUnitTest;
                         }
                         else
