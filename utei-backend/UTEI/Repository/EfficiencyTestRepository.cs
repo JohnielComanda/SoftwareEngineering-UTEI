@@ -1,12 +1,24 @@
-﻿using UTEI.Models;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using UTEI.DatabaseSetting;
+using UTEI.Models;
 
 namespace UTEI.Repository
 {
     public class EfficiencyTestRepository : IEfficiencyTestRepository
     {
-        public Task<EfficiencyTest> CreateTest(EfficiencyTest testEfficiency)
+        private readonly IMongoCollection<EfficiencyTest> _efficiencyTest;
+        public EfficiencyTestRepository(IOptions<DatabaseSettings> options)
         {
-            throw new NotImplementedException();
+            var mongoClient = new MongoClient(options.Value.ConnectionString);
+            _efficiencyTest = mongoClient.GetDatabase(options.Value.DatabaseName)
+                .GetCollection<EfficiencyTest>(options.Value.EfficiencyTestsCollectionName);
+        }
+
+        public async Task<string> CreateTest(EfficiencyTest testEfficiency)
+        {
+           await _efficiencyTest.InsertOneAsync(testEfficiency);
+            return testEfficiency.Id!;
         }
 
         public Task<bool> DeleteAllTests()
