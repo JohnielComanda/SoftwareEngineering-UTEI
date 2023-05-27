@@ -1,12 +1,15 @@
-﻿using System.Text.Json;
+﻿using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 using UTEI.Models;
 
 namespace UTEI.GPTManager
 {
     public static class GPTRequestHandler
     {
-        public static async Task<string> RequestHandler(string prompt)
+        public static async Task<string> RequestHandler(string prompt, IHttpClientFactory httpClientFactory)
         {
+            IHttpClientFactory _httpClientFactory = httpClientFactory;
+
             var requestPayload = new
             {
                 prompt = prompt,
