@@ -1,6 +1,6 @@
 ﻿namespace UTEI.Models
 {
-    public class TestEfficiencyResult
+    public class EfficiencyTest
     {
         public int Id { get; set; }
         public int UserId { get; set; }
