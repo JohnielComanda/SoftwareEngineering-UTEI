@@ -14,9 +14,7 @@ namespace UTEI.Service
 
         public async Task<string> CreateTest(EfficiencyTestCreationDto testEfficiency)
         {
-            var temp = await _analyzer.Analyze(testEfficiency.ProgrammingLanguage, testEfficiency.UnitTest);
-            Console.WriteLine(temp);
-            return temp;
+            throw new NotImplementedException();
         }
 
         public Task<EfficiencyTest> GetSavedTest(string id)
