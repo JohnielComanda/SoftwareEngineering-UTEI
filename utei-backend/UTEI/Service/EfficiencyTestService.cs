@@ -38,9 +38,9 @@ namespace UTEI.Service
             return await _repository.CreateTest(efficiencyTest);
         }
 
-        public Task<EfficiencyTest> GetSavedTest(string id)
+        public async Task<EfficiencyTest> GetSavedTest(string id)
         {
-            throw new NotImplementedException();
+            return await _repository.GetSavedTest(id);
         }
     }
 }

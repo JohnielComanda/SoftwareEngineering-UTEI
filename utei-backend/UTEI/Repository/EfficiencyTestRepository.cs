@@ -38,7 +38,7 @@ namespace UTEI.Repository
 
         public async Task<EfficiencyTest> GetSavedTest(string id)
         {
-            return await _efficiencyTest.Find(user => user.Id == id).FirstOrDefaultAsync();
+            return await _efficiencyTest.Find(test => test.Id == id).FirstOrDefaultAsync();
         }
     }
 }
