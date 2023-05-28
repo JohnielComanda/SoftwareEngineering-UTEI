@@ -3,14 +3,6 @@
     margin: 50px 50px 10px 1001px;
 }
 
-.output-space-bg { 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 0 0 8px 8px;
-}
-
 .output-header {
     border-radius: 8px 8px 0 0;
     height: 50px;
@@ -19,14 +11,27 @@
 }
 
 .output-space {
+    top: 18.8vh;
+    left: 123.6vh;
+    position: absolute; 
     height: 555px;
     width: 600px;
     background-color: #2F3139;
-    overflow-y: auto;
     border-color: #2F3139;
-    font-size:medium;
     color: #e4e4e4;
     border-radius: 0 0 8px 8px;
+}
+
+.output-text {
+    font-size: 14px;
+    width: 530px;
+    height: 555px;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-top: 15px;
+    margin-left: 35px;
+    margin-right: 35px;
 }
 
 .standard {
