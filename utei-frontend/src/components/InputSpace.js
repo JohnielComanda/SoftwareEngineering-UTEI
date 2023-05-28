@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import SelectProgLang from './SelectProgLang';  
-import SaveButton from './SaveButton';
-import IdentifyButton from './IdentifyButton';
 import '../css/InputSpace.css';
 
 const InputSpace = () => {
@@ -19,8 +17,8 @@ const InputSpace = () => {
                 ></textarea>      
             </div>
             <div>
-                <SaveButton></SaveButton>
-                <IdentifyButton></IdentifyButton>     
+                <button className='btn-save'>Save</button>
+                <button className='btn-identify'>Identify</button>   
             </div>
         </>
     );
