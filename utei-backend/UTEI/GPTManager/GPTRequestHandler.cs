@@ -23,7 +23,7 @@ namespace UTEI.GPTManager
             using (var httpClient = new HttpClient())
             {
                 var apiUrl = "https://api.openai.com/v1/engines/text-davinci-003/completions";
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer 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");
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer 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");
 
                 try
                 {
