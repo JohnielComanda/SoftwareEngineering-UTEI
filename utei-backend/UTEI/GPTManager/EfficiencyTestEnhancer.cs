@@ -13,7 +13,7 @@ namespace UTEI.GPTManager
 
         public async Task<string> Enhancer(string progLang, string unitTest)
         {
-            var prompt = $"Write an improved version of the following unit test method using {progLang}:\n\n```\n{unitTest}\n``` that adheres to the proper conventions of writing proper unit test";
+            var prompt = $"Write an improved version of the following unit test method using {progLang}:\n\n```\n{unitTest}\n``` that adheres to the proper conventions of writing proper unit test. return just the improved code and nothing else";
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }
 

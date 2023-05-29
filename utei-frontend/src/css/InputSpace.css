@@ -75,7 +75,7 @@
   
 .spinner {
     position: absolute;
-    margin-top: 25%;
+    margin-top: 30%;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -85,8 +85,13 @@
 }
 
 .loading-msg {
+    color: #e4e4e4;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: medium;
     position: absolute;
-    margin-top: 35%;   
+    margin-top: 37%;  
+    font-weight: 100; 
+    white-space:pre-wrap;
 
 }
   

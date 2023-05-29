@@ -20,7 +20,7 @@
     border-color: #282c34;
     color: #e4e4e4;
     border-radius: 0 0 8px 8px;
-    overflow: auto;
+    overflow:hidden;
 }
 
 .default-space{
@@ -34,7 +34,7 @@
 }
 
 .output-text {
-    font-family: default;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
     width: 500px;
     height: 555px;
