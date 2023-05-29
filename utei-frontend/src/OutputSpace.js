@@ -1,30 +1,51 @@
-import { React, useState, useEffect } from 'react';
+import { React, useRef, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import ResultContext from './ResultContext';
 import './css/OutputSpace.css'
+import { act } from 'react-dom/test-utils';
+import StandardOutput from './outputs/StandardOutput';
+import SuggestionOutput from './outputs/SuggestionOutput';
+import EffiencyBar from './outputs/EfficiencyBar';
 
 const OutputSpace = () => {
     const [activeTab, setActiveTab] = useState(0);
-    const [testResult, setTestResult] = useState({});
     const navigate = useNavigate();
+    const location = useLocation();
+    const resultId = useContext(ResultContext);
+    const isFirstRender = useRef(true);
+    const [testResult, setTestResult] = useState({});
 
     useEffect(() => {
         const fetchTestResult = async () => {
-            await axios.get(`https://localhost:7070/api/EfficiencyTest?id=${'64723ce6f0219e3b4bac9645'}`)
-            .then(response => {
+            try {
+                const response = await axios.get(`https://localhost:7070/api/EfficiencyTest?id=${resultId}`);
                 setTestResult(response.data);
-            })
-            .catch(error => console.log(error));
-           }
+            } catch (error) {
+                console.log(error);
+            }
+        }
            fetchTestResult();
+    }, [resultId]);
+
+    useEffect(() => {
+        handleTabClick(activeTab);
+    }, []);
+
+    useEffect(() => {
+        if (!isFirstRender.current) {
+            navigate('/summary', { state: testResult });
+        } else {
+            isFirstRender.current = false;
+        }
     }, [testResult]);
 
-    const handleTabClick = (tabIndex) => {
-      setActiveTab(tabIndex);
-      { tabIndex === 0 && navigate('/standard', { state: testResult }) }
-      { tabIndex === 1 && navigate('/suggestion', { state: testResult }) }
-      { tabIndex === 2 && navigate('/enhancedVersion', { state: testResult }) }
-    };
+    const handleTabClick = (tabIndex) => {  
+        setActiveTab(tabIndex);
+        { tabIndex === 0 && navigate('/summary', { state: testResult })}
+        { tabIndex === 1 && navigate('/suggestion', { state: testResult })}
+        { tabIndex === 2 && navigate('/enhancedVersion', { state: testResult })}
+      };
 
     return (
         <div className='output'>
@@ -32,7 +53,7 @@ const OutputSpace = () => {
                 <button 
                     className={activeTab === 0 ? 'active-standard' : 'standard'}
                     onClick={() => handleTabClick(0)}
-                > Standard 
+                > Summary 
                 </button>
                 <button 
                     className={activeTab === 1 ? 'active-suggestion' : 'suggestion'}
@@ -45,6 +66,7 @@ const OutputSpace = () => {
                 > Enhanced Version 
                 </button>
             </div>
+            {testResult.efficiencyScore && <EffiencyBar score={testResult.efficiencyScore} />}
         </div>
     );
 }

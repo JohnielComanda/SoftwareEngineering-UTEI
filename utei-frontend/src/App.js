@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState, useRef } from 'react';
 import HeaderBar from './components/HeaderBar';
 import SideBar from './components/SideBar';
 import InputSpace from './components/InputSpace';
@@ -8,19 +8,24 @@ import { Routes, Route } from 'react-router-dom';
 import StandardOutput from './outputs/StandardOutput';
 import SuggestionOutput from './outputs/SuggestionOutput';
 import EnhancedOutput from './outputs/EnhancedOutput';
+import ResultContext from './ResultContext';
 
 function App() {
+  const [resultId, setResultId] = useState("");
+  const isFirstRender = useRef(true);
 
   return (
     <div className='background'>
       <HeaderBar/>
       <SideBar/>
-      <InputSpace/>
-      <OutputSpace/>
+      <ResultContext.Provider value={resultId}>
+        <InputSpace setResultId={setResultId} />
+        <OutputSpace resultId={resultId} />
+      </ResultContext.Provider>
       <Routes>
-          <Route path='/standard' element={<StandardOutput/>}></Route>
-          <Route path='/suggestion' element={<SuggestionOutput/>}></Route>
-          <Route path='/enhancedVersion' element={<EnhancedOutput/>}></Route>
+        <Route path='/summary' element={<StandardOutput/>}></Route>
+        <Route path='/suggestion' element={<SuggestionOutput/>}></Route>
+        <Route path='/enhancedVersion' element={<EnhancedOutput/>}></Route>
       </Routes>
     </div>
   );

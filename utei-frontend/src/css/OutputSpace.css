@@ -16,6 +16,17 @@
     position: absolute; 
     height: 555px;
     width: 600px;
+    background-color: #282c34;
+    border-color: #282c34;
+    color: #e4e4e4;
+    border-radius: 0 0 8px 8px;
+    overflow: auto;
+}
+
+.default-space{
+    position: absolute; 
+    height: 555px;
+    width: 600px;
     background-color: #2F3139;
     border-color: #2F3139;
     color: #e4e4e4;
@@ -23,15 +34,45 @@
 }
 
 .output-text {
+    font-family: default;
     font-size: 14px;
-    width: 530px;
+    width: 500px;
     height: 555px;
     overflow: hidden;
     white-space: pre-wrap;
     word-wrap: break-word;
-    margin-top: 15px;
-    margin-left: 35px;
-    margin-right: 35px;
+    margin-top: 30px;
+    margin-left: 55px;
+    margin-right: 45px;
+}
+
+.bar-container {
+    margin-top: 94%;
+    margin-left: 10px;
+    width: 580px;
+    height: 34px;
+    background-color: #e4e4e4;
+    border-radius: 10px;
+}
+
+.bar {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin-top: 94%;
+    width: 180px;
+    height: 34px;
+    background-color: #6a9f82;
+    border-radius: 10px;
+    align-items:center;    
+    justify-content:flex-end;
+    display: flex;
+}
+
+.score {
+    display: flex;
+    margin-right: 20px;
+    font-size: large;
+    font-weight: 500px;
+    color: #393939;
 }
 
 .standard {

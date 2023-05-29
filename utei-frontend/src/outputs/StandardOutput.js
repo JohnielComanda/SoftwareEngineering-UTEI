@@ -8,7 +8,7 @@ const StandardOutput = () => {
     return(
         <>
             <div className='output-space'>
-                <pre className='output-text'>{ testResult.resultSummary }</pre>
+                {testResult && <pre className='output-text'>{ testResult.resultSummary }</pre>}
             </div>
         </>
     );
