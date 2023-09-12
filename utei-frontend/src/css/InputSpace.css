@@ -60,6 +60,10 @@
     cursor: pointer;
 }
 
+.btn-identify:hover {
+    background-color: #143953;
+}
+
 .loading-indicator {
     position: absolute;
     top: 10%;

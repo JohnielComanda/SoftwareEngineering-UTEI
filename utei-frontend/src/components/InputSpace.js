@@ -6,7 +6,7 @@ import '../css/InputSpace.css';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 
-const InputSpace = ({ setResultId }) => {
+const InputSpace = ({ setResultId, setTestResult }) => {
     const temp = {
         unitTest: '', 
         programmingLanguage: ''
@@ -47,6 +47,7 @@ const InputSpace = ({ setResultId }) => {
             unitTest: `${unitTest}`,
             programmingLanguage: `${selectedLanguage}`
         }));
+        setTestResult({});
         setAction(prev => prev + 1);
     };
     const handleSelectedLanguageChange = (selectedValue) => {

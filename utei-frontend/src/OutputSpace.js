@@ -8,13 +8,12 @@ import StandardOutput from './outputs/StandardOutput';
 import SuggestionOutput from './outputs/SuggestionOutput';
 import EffiencyBar from './outputs/EfficiencyBar';
 
-const OutputSpace = () => {
+const OutputSpace = ({ testResult, setTestResult }) => {
     const [activeTab, setActiveTab] = useState(0);
     const navigate = useNavigate();
     const location = useLocation();
     const resultId = useContext(ResultContext);
     const isFirstRender = useRef(true);
-    const [testResult, setTestResult] = useState({});
 
     useEffect(() => {
         const fetchTestResult = async () => {

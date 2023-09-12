@@ -47,31 +47,33 @@
 }
 
 .bar-container {
-    margin-top: 94%;
+    margin-top: 95.5%;
     margin-left: 10px;
     width: 580px;
-    height: 34px;
+    height: 20px;
     background-color: #e4e4e4;
-    border-radius: 10px;
+    border-radius: 25px;
 }
 
 .bar {
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    margin-top: 94%;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:normal;
+    margin-top: 95.5%;
     width: 180px;
-    height: 34px;
+    height: 20px;
     background-color: #6a9f82;
     border-radius: 10px;
     align-items:center;    
     justify-content:flex-end;
     display: flex;
+    border-radius: 25px;
 }
 
 .score {
     display: flex;
     margin-right: 20px;
-    font-size: large;
-    font-weight: 500px;
+    font-size:small;
+    font-weight: 100px;
     color: #393939;
 }
 

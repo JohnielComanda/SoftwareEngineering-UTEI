@@ -10,8 +10,6 @@ const HeaderBar = () => {
             </div>
             <div class="profile">
                 <img src="user.png" alt="Profile Picture"/>
-                <p>John Doe</p>
-                <button class="logout">Logout</button>
             </div>
         </header>
     )

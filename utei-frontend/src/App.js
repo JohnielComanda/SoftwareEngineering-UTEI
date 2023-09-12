@@ -12,6 +12,7 @@ import ResultContext from './ResultContext';
 
 function App() {
   const [resultId, setResultId] = useState("");
+  const [testResult, setTestResult] = useState({});
   const isFirstRender = useRef(true);
 
   return (
@@ -19,8 +20,15 @@ function App() {
       <HeaderBar/>
       <SideBar/>
       <ResultContext.Provider value={resultId}>
-        <InputSpace setResultId={setResultId} />
-        <OutputSpace resultId={resultId} />
+        <InputSpace 
+          setResultId={setResultId}
+          setTestResult={setTestResult}
+        />
+        <OutputSpace 
+          resultId={resultId}
+          testResult={testResult}
+          setTestResult={setTestResult}
+        />
       </ResultContext.Provider>
       <Routes>
         <Route path='/summary' element={<StandardOutput/>}></Route>
