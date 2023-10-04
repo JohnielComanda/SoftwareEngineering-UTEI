@@ -1,4 +1,4 @@
-﻿namespace UTEI.GPTManager
+﻿namespace UTEI.GPTManager.EnhanceUnitTest
 {
     public interface IAnalyzer
     {

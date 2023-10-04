@@ -1,12 +1,13 @@
 .drop-down {
-    display: flex;
-    position: fixed;
-    margin: 14px 0 0 15px;
-    height: 25px;
-    width: 150px;
-    border-radius: 8px;
-    background-color: #124365;
-    border-color: #124365;
-    color: #E1E1E1;
-    padding-left: 7px;
+  display: flex;
+  position: fixed;
+  margin: 14px 0 0 15px;
+  height: 25px;
+  width: 150px;
+  border-radius: 8px;
+  background-color: #124365;
+  border-color: #124365;
+  color: #e1e1e1;
+  padding-left: 7px;
+  cursor: pointer;
 }

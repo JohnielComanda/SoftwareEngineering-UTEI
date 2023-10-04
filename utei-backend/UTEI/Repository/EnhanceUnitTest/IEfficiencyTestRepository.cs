@@ -1,6 +1,6 @@
 ﻿using UTEI.Models;
 
-namespace UTEI.Repository
+namespace UTEI.Repository.EnhanceUnitTest
 {
     public interface IEfficiencyTestRepository
     {
@@ -8,6 +8,6 @@ namespace UTEI.Repository
         Task<EfficiencyTest> GetSavedTest(string id);
         Task<IEnumerable<EfficiencyTest>> GetAllSavedTest();
         Task<bool> DeleteAllTests();
-        Task<bool> DeleteTestById(int id);
+        Task<bool> DeleteTestById(string id);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using UTEI.Models;
 
-namespace UTEI.GPTManager
+namespace UTEI.GPTManager.EnhanceUnitTest
 {
     public class EfficiencyTestEnhancer : IEfficiencyTestEnhancer
     {

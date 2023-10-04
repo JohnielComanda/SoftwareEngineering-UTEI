@@ -1,7 +1,7 @@
 ﻿using UTEI.Dtos;
 using UTEI.Models;
 
-namespace UTEI.Service
+namespace UTEI.Service.EnhanceUnitTest
 {
     public interface IEfficiencyTestService
     {

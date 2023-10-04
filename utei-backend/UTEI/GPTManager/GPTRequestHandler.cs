@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Text.Json;
-using UTEI.Models;
+﻿using System.Text.Json;
+using UTEI.Models.OpenAIModel;
 
 namespace UTEI.GPTManager
 {
@@ -22,8 +21,17 @@ namespace UTEI.GPTManager
 
             using (var httpClient = new HttpClient())
             {
+                //string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+
+                //// Check if the API key is not null or empty
+                //if (string.IsNullOrEmpty(apiKey))
+                //{
+                //    Console.WriteLine("API key not found in environment variable OPENAI_API_KEY.");
+                //    //return;
+                //}   
+
                 var apiUrl = "https://api.openai.com/v1/engines/text-davinci-003/completions";
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer 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");
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer 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");
 
                 try
                 {

@@ -3,7 +3,7 @@ using MongoDB.Driver;
 using UTEI.DatabaseSetting;
 using UTEI.Models;
 
-namespace UTEI.Repository
+namespace UTEI.Repository.EnhanceUnitTest
 {
     public class EfficiencyTestRepository : IEfficiencyTestRepository
     {
@@ -26,7 +26,7 @@ namespace UTEI.Repository
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteTestById(int id)
+        public Task<bool> DeleteTestById(string id)
         {
             throw new NotImplementedException();
         }
