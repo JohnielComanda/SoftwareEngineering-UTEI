@@ -1,4 +1,4 @@
-﻿namespace UTEI.Models
+﻿namespace UTEI.Models.OpenAIModel
 {
     public class OpenAIChoice
     {

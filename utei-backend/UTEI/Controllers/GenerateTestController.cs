@@ -1,34 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UTEI.Dtos;
-using UTEI.Service.EnhanceUnitTest;
+using UTEI.Service.GenerateUnitTest;
 
 namespace UTEI.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class EfficiencyTestController : ControllerBase
+    public class GenerateTestController : ControllerBase
     {
-        private readonly IEfficiencyTestService _efficiencyService;
-        private readonly ILogger _logger;
-        public EfficiencyTestController(IEfficiencyTestService efficiencyService, ILogger<EfficiencyTestController> logger)
+        private readonly IGenerateTestService _generateService;
+        private readonly ILogger<GenerateTestController> _logger;
+        public GenerateTestController(IGenerateTestService generateService, ILogger<GenerateTestController> logger)
         {
-            _efficiencyService = efficiencyService;
-            _logger = logger;       
+            _generateService = generateService;
+            _logger = logger;
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEfficiencyTest([FromBody]EfficiencyTestCreationDto unitTest)
+        public async Task<ActionResult> PostGenerateTest([FromBody] GenerateTestCreationDto generateTestCreationDto)
         {
             try
             {
-                var newTest = await _efficiencyService.CreateTest(unitTest);
-                return StatusCode(201, newTest);
+                var generateTest = await _generateService.CreateTest(generateTestCreationDto);
+                return StatusCode(201, generateTest);
             }
             catch (Exception e)
             {
                 _logger.LogError(e.Message);
                 return StatusCode(500, "Something went wrong!");
             }
+
         }
 
         [HttpGet]
@@ -36,7 +37,7 @@ namespace UTEI.Controllers
         {
             try
             {
-                var test = await _efficiencyService.GetSavedTest(id);
+                var test = await _generateService.GetSavedTest(id);
                 if (test == null)
                 {
                     _logger.LogInformation("No test found");

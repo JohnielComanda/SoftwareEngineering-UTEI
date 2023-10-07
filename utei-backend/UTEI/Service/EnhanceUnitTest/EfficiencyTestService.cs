@@ -1,7 +1,8 @@
 ﻿using UTEI.Dtos;
-using UTEI.GPTManager;
+using UTEI.GPTManager.EnhanceUnitTest;
 using UTEI.Models;
-using UTEI.Repository;
+using UTEI.Repository.EnhanceUnitTest;
+using UTEI.Service.EnhanceUnitTest;
 
 namespace UTEI.Service
 {

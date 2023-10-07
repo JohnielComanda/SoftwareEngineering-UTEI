@@ -6,5 +6,6 @@
         public string? DatabaseName { get; set; }
         public string? UsersCollectionName { get; set; }
         public string? EfficiencyTestsCollectionName { get; set; } 
+        public string? GenerateTestsCollectionName { get; set; }
     }
 }

@@ -1,12 +1,18 @@
 using UTEI.DatabaseSetting;
-using UTEI.GPTManager;
-using UTEI.Repository;
+using UTEI.GPTManager.EnhanceUnitTest;
+using UTEI.GPTManager.GenerateUnitTest;
+using UTEI.Repository.EnhanceUnitTest;
+using UTEI.Repository.GenerateUnitTest;
 using UTEI.Service;
+using UTEI.Service.EnhanceUnitTest;
+using UTEI.Service.GenerateUnitTest;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddScoped<IGenerateTestRepository, GenerateTestRepository>();
+builder.Services.AddScoped<IGenerateTestService, GenerateTestService>();
+builder.Services.AddScoped<IUnitTestGenerator, UnitTestGenerator>();
 builder.Services.AddScoped<IEfficiencyTestRepository, EfficiencyTestRepository>();
 builder.Services.AddScoped<IEfficiencyTestService, EfficiencyTestService>();
 builder.Services.AddScoped<IAnalyzer, Analyzer>();
