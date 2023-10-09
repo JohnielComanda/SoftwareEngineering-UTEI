@@ -12,8 +12,8 @@
 }
 
 .input-space {
-  height: 100%;
-  width: 100%;
+  height: auto;
+  width: 600px;
   background-color: #2f3139;
   overflow-y: auto;
   border-color: #2f3139;

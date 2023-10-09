@@ -7,5 +7,6 @@ namespace UTEI.Service.GenerateUnitTest
     {
         Task<string> CreateTest(GenerateTestCreationDto generateTest);
         Task<GenerateTest> GetSavedTest(string id);
+        Task<IEnumerable<GenerateTest>> GetAllSavedTest();
     }
 }

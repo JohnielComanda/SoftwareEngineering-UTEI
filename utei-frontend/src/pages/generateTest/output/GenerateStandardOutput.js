@@ -1,4 +1,4 @@
-import React from "react";
+import { React } from "react";
 import "../../../css/OutputSpace.css";
 
 const GenerateStandardOutput = ({ testResult }) => {
