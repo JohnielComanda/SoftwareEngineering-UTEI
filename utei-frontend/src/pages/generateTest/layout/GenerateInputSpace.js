@@ -6,7 +6,12 @@ import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import "../../../css/InputSpace.css";
 
-const GenerateInputSpace = ({ setResultId, setTestResult }) => {
+const GenerateInputSpace = ({
+  setResultId,
+  selectedResult,
+  setSelectedResult,
+  setTestResult,
+}) => {
   const temp = {
     baseMethod: "",
     programmingLanguage: "",
@@ -55,6 +60,7 @@ const GenerateInputSpace = ({ setResultId, setTestResult }) => {
       baseMethod: `${baseMethod}`,
       programmingLanguage: `${selectedLanguage}`,
     }));
+    setSelectedResult({});
     setTestResult({});
     setAction((prev) => prev + 1);
   };
@@ -75,13 +81,18 @@ const GenerateInputSpace = ({ setResultId, setTestResult }) => {
         <div className="input-header">
           <SelectProgLang
             onSelectedLanguageChange={handleSelectedLanguageChange}
+            selectedResult={selectedResult}
           />
         </div>
         <CodeMirror
           name="unitTest"
           className="input-space"
           placeholder={"Paste your unit test method here!"}
-          value={baseInput.baseMethod}
+          value={
+            Object.keys(selectedResult).length === 0
+              ? baseInput.baseMethod
+              : selectedResult.baseMethod
+          }
           height="555px"
           extensions={[javascript({ jsx: true })]}
           onChange={onChange}

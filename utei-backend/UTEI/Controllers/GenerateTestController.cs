@@ -32,7 +32,28 @@ namespace UTEI.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("all")]
+        public async Task<ActionResult> GetAllSavedTest()
+        {
+            try
+            {
+                var test = await _generateService.GetAllSavedTest();
+                if(test == null)
+                {
+                    _logger.LogInformation("No test found");
+                    return NotFound();
+                }
+                return Ok(test);
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{id}")]
         public async Task<ActionResult> GetSavedTest(string id)
         {
             try
