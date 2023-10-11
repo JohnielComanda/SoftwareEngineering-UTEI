@@ -5,15 +5,16 @@ import "../../../css/OutputSpace.css";
 
 const GenerateOutputSpace = ({ resultId, testResult, setTestResult }) => {
   const isFirstRender = useRef(true);
+  console.log("GenerateOutputSpace testResult:", testResult);
 
-  // This is for getting the result from the database by fetching using axioss
+  // This is for getting the result from the database by fetching using axios
   // This will trigger everytime resultId is being updated
   useEffect(() => {
     // This method is for the fetching
     const fetchTestResult = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:7070/api/GenerateTest?id=${resultId}`
+          `https://localhost:7070/api/GenerateTest/${resultId}`
         );
         setTestResult(response.data);
       } catch (error) {

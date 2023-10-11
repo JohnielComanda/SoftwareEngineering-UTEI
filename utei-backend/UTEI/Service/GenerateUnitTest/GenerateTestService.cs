@@ -29,6 +29,11 @@ namespace UTEI.Service.GenerateUnitTest
             return await _repository.CreateTest(generateUnitTest);
         }
 
+        public async Task<IEnumerable<GenerateTest>> GetAllSavedTest()
+        {
+            return await _repository.GetAllSavedTest();
+        }
+
         public async Task<GenerateTest> GetSavedTest(string id)
         {
             return await _repository.GetSavedTest(id);
