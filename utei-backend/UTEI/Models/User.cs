@@ -1,8 +1,12 @@
-﻿namespace UTEI.Models
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace UTEI.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+        public string? Id { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }

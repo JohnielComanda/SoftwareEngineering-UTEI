@@ -1,0 +1,95 @@
+.login-container {
+  display: flex;
+  width: 55vw;
+  height: 80vh;
+  margin-left: 22.5%;
+  margin-top: 5%;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+.info-container::after {
+  border-radius: 10px 0px 0px 10px;
+  content: "";
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-image: url("../../public/login_background.png");
+  background-size: cover; /* Adjust to your preference */
+  background-repeat: no-repeat; /* Adjust to your preference */
+}
+
+.info-container h1 {
+  margin-left: 2.5rem;
+  margin-top: 2.5rem;
+  color: white;
+}
+
+.info-container ul {
+  list-style: none;
+  margin-top: -1.5rem;
+  margin-left: 0.5rem;
+}
+
+.info-container h6 {
+  font-size: 24px;
+  font-weight: 500;
+  color: white;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px 10px 10px 0px;
+  width: 50%;
+  height: 100%;
+  background-color: #0b314c;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-top: 8rem;
+  margin-left: 15%;
+}
+
+.input-field input {
+  padding: 0.8rem;
+  margin-bottom: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.login-button {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  margin-left: 17.5%;
+  margin-top: 3.5rem;
+}
+
+.login-button button {
+  padding: 0.3rem;
+  margin-bottom: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.login-button text {
+  margin-top: -1.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 45%;
+}
