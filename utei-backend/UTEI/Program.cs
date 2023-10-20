@@ -3,13 +3,19 @@ using UTEI.GPTManager.EnhanceUnitTest;
 using UTEI.GPTManager.GenerateUnitTest;
 using UTEI.Repository.EnhanceUnitTest;
 using UTEI.Repository.GenerateUnitTest;
+using UTEI.Repository.User;
 using UTEI.Service;
 using UTEI.Service.EnhanceUnitTest;
 using UTEI.Service.GenerateUnitTest;
+using UTEI.Service.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IUserLoginRepository, UserLoginRepository>();
+builder.Services.AddScoped<IUserLoginService, UserLoginService>();
+builder.Services.AddScoped<IUserRegisterRepository, UserRegisterRepository>();
+builder.Services.AddScoped<IUserRegisterService, UserRegisterService>();
 builder.Services.AddScoped<IGenerateTestRepository, GenerateTestRepository>();
 builder.Services.AddScoped<IGenerateTestService, GenerateTestService>();
 builder.Services.AddScoped<IUnitTestGenerator, UnitTestGenerator>();
