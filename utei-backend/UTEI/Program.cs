@@ -1,9 +1,11 @@
 using UTEI.DatabaseSetting;
+using UTEI.GPTManager.AccuracyUnitTest;
 using UTEI.GPTManager.EnhanceUnitTest;
 using UTEI.GPTManager.GenerateUnitTest;
 using UTEI.Repository.EnhanceUnitTest;
 using UTEI.Repository.GenerateUnitTest;
 using UTEI.Service;
+using UTEI.Service.AccuracyUnitTest;
 using UTEI.Service.EnhanceUnitTest;
 using UTEI.Service.GenerateUnitTest;
 
@@ -14,6 +16,8 @@ builder.Services.AddScoped<IGenerateTestRepository, GenerateTestRepository>();
 builder.Services.AddScoped<IGenerateTestService, GenerateTestService>();
 builder.Services.AddScoped<IUnitTestGenerator, UnitTestGenerator>();
 builder.Services.AddScoped<IEfficiencyTestRepository, EfficiencyTestRepository>();
+builder.Services.AddScoped<IAccuracyTestService, AccuracyTestService>();
+builder.Services.AddScoped<IAccuracyTest, AccuracyTest>();
 builder.Services.AddScoped<IEfficiencyTestService, EfficiencyTestService>();
 builder.Services.AddScoped<IAnalyzer, Analyzer>();
 builder.Services.AddScoped<IEfficiencyTestEnhancer, EfficiencyTestEnhancer>();
