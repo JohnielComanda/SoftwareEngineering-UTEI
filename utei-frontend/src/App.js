@@ -1,8 +1,9 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import ResultContext from "./ResultContext";
 import EfficiencyTest from "./pages/efficiencyTest/layout/EfficiencyTest";
 import GenerateTest from "./pages/generateTest/layout/GenerateTest";
+import AccuracyTest from "./AccuracyTest";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import "./css/App.css";
@@ -61,6 +62,7 @@ function App() {
               />
             }
           />
+          <Route path="accuracy" element={<AccuracyTest />} />
           <Route
             path="efficiency_test"
             element={
@@ -83,6 +85,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="generate_test"
             element={
@@ -103,6 +106,7 @@ function App() {
               />
             }
           />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </ResultContext.Provider>
     </div>
