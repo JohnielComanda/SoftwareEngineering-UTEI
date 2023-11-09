@@ -25,7 +25,7 @@ namespace UTEI.GPTManager.AccuracyUnitTest
 
         public async Task<string> Summary(string unitTest)
         {
-            var prompt = $"Write a detailed summary of the unit test method depending on it's estimated performance including it's runtime, compile time, unit test code efficiency, and adherence to writing of a proper unit test```\n{unitTest}\n```. return also a detailed summary of each criteria";
+            var prompt = $"Given this unit test```\n{unitTest}\n```. Measure the performance of unit test in terms of: \r\n\r\nExecution Time: \"Answer this in number\"\r\nIsolated: \"Answer this in percentage\"\r\nCode Coverage: \"Answer this in percentage\"\r\nMaintainability: \"Answer this in percentage\"\r\nTest Data: \"give a brief explanation here\"\r\nMemory Usage: \"Answer this in numbers\"\r\n\r\nConclusion: \"If it is already efficient and accurate. Just brief\" ";
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }
 

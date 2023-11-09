@@ -6,6 +6,7 @@ import SideBar from "./components/SideBar";
 import EfficiencyTest from "./pages/efficiencyTest/layout/EfficiencyTest";
 import GenerateTest from "./pages/generateTest/layout/GenerateTest";
 import AccuracyTest from "./AccuracyTest";
+import Login from "./components/Login"
 import "./css/App.css";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
               />
             }
           />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </ResultContext.Provider>
     </div>
