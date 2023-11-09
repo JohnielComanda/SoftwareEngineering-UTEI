@@ -22,8 +22,11 @@ namespace UTEI.Service
         {
             var resultSummary = await _analyzer.Analyze(testEfficiency.UnitTest!);
             var efficiencyScore = await _analyzer.EvaluateTest(testEfficiency.UnitTest!);
-            var testSuggestion = await _enhancer.SuggestionGenerator(testEfficiency.UnitTest!);
-            var enhancedVersion = await _enhancer.Enhancer(testEfficiency.ProgrammingLanguage!, testEfficiency.UnitTest!);
+            var testSuggestionTemp = await _enhancer.SuggestionGenerator(testEfficiency.UnitTest!);
+            //var enhancedVersion = await _enhancer.Enhancer(testEfficiency.ProgrammingLanguage!, testEfficiency.UnitTest!);
+            var enhancedVersionTemp = testSuggestionTemp.Split("Improved version:");
+            var testSuggestion = enhancedVersionTemp[0];
+            var enhancedVersion = enhancedVersionTemp[1];
 
             var efficiencyTest = new EfficiencyTest()
             {
