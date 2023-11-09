@@ -10,15 +10,15 @@ const GenerateInputSpace = ({
   setResultId,
   selectedResult,
   setSelectedResult,
-  setTestResult,
+  setGenerateResult,
+  genereateBaseInput,
+  setGenerateBaseInput,
+  generateBaseMethod,
+  setGenerateBaseMethod,
+  generateSelectedLanguage,
+  setGenerateSelectedLanguage,
+  setNewDataAction,
 }) => {
-  const temp = {
-    baseMethod: "",
-    programmingLanguage: "",
-  };
-  const [baseInput, setBaseInput] = useState(temp);
-  const [baseMethod, setBaseMethod] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
   const [action, setAction] = useState(0);
   const resultId = useContext(ResultContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,9 +39,10 @@ const GenerateInputSpace = ({
       try {
         const response = await axios.post(
           `https://localhost:7070/api/GenerateTest`,
-          baseInput
+          genereateBaseInput
         );
         setResultId(response.data);
+        setNewDataAction((prev) => prev + 1);
         alert("Successfully created a test.");
       } catch (error) {
         console.error(error);
@@ -56,32 +57,30 @@ const GenerateInputSpace = ({
 
   // For submiting test, setAction will be updated and will trigger the useEffect for POST
   const onClickSubmit = () => {
-    setBaseInput((prevData) => ({
-      baseMethod: `${baseMethod}`,
-      programmingLanguage: `${selectedLanguage}`,
+    setGenerateBaseInput((prevData) => ({
+      baseMethod: `${generateBaseMethod}`,
+      programmingLanguage: `${generateSelectedLanguage}`,
     }));
     setSelectedResult({});
-    setTestResult({});
+    setGenerateResult({});
     setAction((prev) => prev + 1);
   };
 
   // For selected prog languange onChange
-  const handleSelectedLanguageChange = (selectedValue) => {
-    setSelectedLanguage(selectedValue);
-  };
 
   // For text editor onChange
   const onChange = React.useCallback((value, viewUpdate) => {
     console.log("value:", value);
-    setBaseMethod(value);
+    setGenerateBaseMethod(value);
   }, []);
   return (
     <>
       <div className="input">
         <div className="input-header">
           <SelectProgLang
-            onSelectedLanguageChange={handleSelectedLanguageChange}
+            setSelectedLanguage={setGenerateSelectedLanguage}
             selectedResult={selectedResult}
+            selectedLanguage={generateSelectedLanguage}
           />
         </div>
         <CodeMirror
@@ -90,7 +89,7 @@ const GenerateInputSpace = ({
           placeholder={"Paste your unit test method here!"}
           value={
             Object.keys(selectedResult).length === 0
-              ? baseInput.baseMethod
+              ? genereateBaseInput.baseMethod
               : selectedResult.baseMethod
           }
           height="555px"

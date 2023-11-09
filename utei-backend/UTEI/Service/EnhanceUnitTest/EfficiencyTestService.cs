@@ -39,6 +39,11 @@ namespace UTEI.Service
             return await _repository.CreateTest(efficiencyTest);
         }
 
+        public async Task<IEnumerable<EfficiencyTest>> GetAllSavedTest()
+        {
+            return await _repository.GetAllSavedTest();
+        }
+
         public async Task<EfficiencyTest> GetSavedTest(string id)
         {
             return await _repository.GetSavedTest(id);

@@ -30,7 +30,8 @@ namespace UTEI.GPTManager
                 //    //return;
                 //}
 
-                var apiUrl = "https://api.openai.com/v1/engines/text-davinci-003/completions";
+                //var apiUrl = "https://api.openai.com/v1/engines/text-davinci-003/completions";
+                var apiUrl = "https://api.openai.com/v1/chat/completions";
                 httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer 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");
 
                 try

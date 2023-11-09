@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import ResultContext from "../ResultContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/SideBar.css";
 
-const SideBar = ({ setSelectedResult, setTestResult }) => {
-  const [activeTab, setActiveTab] = useState(0);
+const SideBar = ({
+  testType,
+  activeTab,
+  setSelectedResult,
+  setTestResult,
+  setActiveTab,
+  newDataAction,
+}) => {
   const [tests, setTests] = useState([]);
-
+  const navigate = useNavigate(); // Use useNavigate from re-navigate
   const handleTabClick = (tabIndex) => {
     setActiveTab(tabIndex);
   };
@@ -17,7 +22,9 @@ const SideBar = ({ setSelectedResult, setTestResult }) => {
     const fetchTestResult = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:7070/api/GenerateTest/all`
+          testType === "efficiencyTest"
+            ? `https://localhost:7070/api/EfficiencyTest/all`
+            : `https://localhost:7070/api/GenerateTest/all`
         );
         const reversedData = [...response.data].reverse();
 
@@ -27,40 +34,40 @@ const SideBar = ({ setSelectedResult, setTestResult }) => {
       }
     };
     fetchTestResult();
-  }, []);
+  }, [newDataAction]);
 
   const handleViewHistory = (test) => {
     setTestResult({});
     setSelectedResult(test);
   };
 
+  const tabs = [
+    {
+      to: "/efficiency_test",
+      text: "Identify Efficiency",
+      className: "efficiency",
+    },
+    { to: "/accuracy", text: "Identify Accuracy", className: "accuracy" },
+    { to: "/generate_test", text: "Generate Unit Test", className: "generate" },
+  ];
+
   return (
     <div className="sidebar">
       <div className="buttons">
-        <Link
-          to="/efficiency_test"
-          className={activeTab === 0 ? "active-efficiency" : "efficiency"}
-          onClick={() => handleTabClick(0)}
-        >
-          {" "}
-          Identify Efficiency
-        </Link>
-        <Link
-          to="/accuracy"
-          className={activeTab === 1 ? "active-accuracy" : "accuracy"}
-          onClick={() => handleTabClick(1)}
-        >
-          {" "}
-          Identify Accuracy
-        </Link>
-        <Link
-          to="/generate_test"
-          className={activeTab === 2 ? "active-generate" : "generate"}
-          onClick={() => handleTabClick(2)}
-        >
-          {" "}
-          Generate Unit Test
-        </Link>
+        {tabs.map((tab, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              handleTabClick(index);
+              navigate(tab.to); // Use navigate to switch routes
+            }}
+            className={
+              activeTab === index ? `active-${tab.className}` : tab.className
+            }
+          >
+            {tab.text}
+          </button>
+        ))}
       </div>
 
       <div className="saved-test">

@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
   display: flex;
   width: 55vw;
   height: 80vh;
@@ -7,16 +7,18 @@
   font: 1em sans-serif;
 }
 
-.info-container {
+.reginfo-container {
   display: flex;
   flex-direction: column;
   width: 50%;
   height: 100%;
   position: relative;
+  justify-content: center;
+  text-align: center;
 }
 
-.info-container::after {
-  border-radius: 10px 0px 0px 10px;
+.reginfo-container::after {
+  border-radius: 0px 10px 10px 0px;
   content: "";
   opacity: 0.3;
   position: absolute;
@@ -30,90 +32,74 @@
   background-repeat: no-repeat; /* Adjust to your preference */
 }
 
-.info-container h1 {
-  margin-left: 2.7rem;
-  margin-top: 2.5rem;
+.reginfo-container h1 {
   color: white;
+  font-size: 80px;
+  align-content: center;
 }
 
-.highlight2 {
-  color: #f83d3d; /* Set the color to your desired value */
+.highlight {
+  color: #f92e2e; /* Set the color to your desired value */
 }
 
-.highlight1 {
-  color: rgb(31, 97, 249); /* Set the color to your desired value */
-}
-
-.info-container ul {
-  list-style: none;
-  margin-top: -1.5rem;
-}
-
-.info-container h6 {
-  font-size: 24px;
-  font-weight: 500;
-  color: white;
-}
-
-.input-container {
+.rinput-container {
   display: flex;
   flex-direction: column;
-  border-radius: 0px 10px 10px 0px;
+  border-radius: 10px 0px 0px 10px;
   width: 50%;
   height: 100%;
   background-color: #222931;
   align-items: center;
 }
 
-.input-field {
+.reginput-field {
   display: flex;
   flex-direction: column;
   width: 70%;
-  margin-top: 8rem;
+  margin-top: 6rem;
 }
 
-.input-field input {
+.reginput-field input {
   padding: 0.8rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
 }
 
-.login-button {
+.signup-button {
   display: flex;
   flex-direction: column;
   width: 60%;
-  margin-top: 5rem;
   font: 1em sans-serif;
   font-size: small;
+  margin-top: 5rem;
 }
 
-.login-button button:hover {
+.signup-button img {
+  width: 14px;
+  margin-right: 10px;
+}
+
+.signup-button button:hover {
   cursor: pointer;
 }
 
-.login-button button {
-  padding: 0.5rem;
-  margin-bottom: 2rem;
+.signup-button button {
+  padding: 0.3rem;
   border: 1px solid #ccc;
   border-radius: 20px;
   font-size: 14px;
   color: #303030;
 }
 
-.login-button img {
-  width: 14px;
-  margin-right: 10px;
-}
-
-.login-button text {
-  margin-top: -1.5rem;
-  margin-bottom: 0.5rem;
+.signup-button text {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
   color: #dddddd;
   align-self: center;
 }
 
-.login-button text a {
+.signup-button text a {
   color: rgb(95, 136, 193);
 }
