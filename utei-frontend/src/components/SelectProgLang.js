@@ -1,13 +1,19 @@
 import { React, useState } from "react";
 import "../css/Dropdown.css";
 
-function SelectProgLang({ onSelectedLanguageChange, selectedResult }) {
+function SelectProgLang({
+  onSelectedLanguageChange,
+  selectedResult,
+  selectedLanguage,
+  setSelectedLanguage,
+}) {
   const [selectedItem, setSelectedItem] = useState("");
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
     setSelectedItem(selectedValue);
-    onSelectedLanguageChange(selectedValue);
+    setSelectedLanguage(selectedValue);
+    console.log("SELECTED VALUE: ", selectedLanguage);
   };
 
   return (
@@ -18,6 +24,8 @@ function SelectProgLang({ onSelectedLanguageChange, selectedResult }) {
         value={
           selectedResult && selectedResult.programmingLanguage
             ? selectedResult.programmingLanguage
+              ? selectedResult.programmingLanguage
+              : selectedLanguage
             : selectedItem
         }
         onChange={handleSelectChange}

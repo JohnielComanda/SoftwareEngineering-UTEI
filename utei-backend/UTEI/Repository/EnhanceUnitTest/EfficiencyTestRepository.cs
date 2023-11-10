@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using UTEI.DatabaseSetting;
 using UTEI.Models;
@@ -31,9 +32,12 @@ namespace UTEI.Repository.EnhanceUnitTest
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<EfficiencyTest>> GetAllSavedTest()
+        public async Task<IEnumerable<EfficiencyTest>> GetAllSavedTest()
         {
-            throw new NotImplementedException();
+            var filter = new BsonDocument();
+            var cursor = await _efficiencyTest.FindAsync(filter);
+
+            return await cursor.ToListAsync();
         }
 
         public async Task<EfficiencyTest> GetSavedTest(string id)
