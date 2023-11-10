@@ -53,6 +53,7 @@ const GenerateTest = ({
           //output
           generateResult={generateResult}
           setGenerateResult={setGenerateResult}
+          setSelectedResult={setSelectedResult}
           //result
           resultId={resultId}
           testResult={
