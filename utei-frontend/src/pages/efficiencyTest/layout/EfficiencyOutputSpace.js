@@ -6,7 +6,12 @@ import StandardOutput from "../output/StandardOutput";
 import SuggestionOutput from "../output/SuggestionOutput";
 import EnhancedOutput from "../output/EnhancedOutput";
 
-const EfficiencyOutputSpace = ({ resultId, testResult, setTestResult }) => {
+const EfficiencyOutputSpace = ({
+  resultId,
+  testResult,
+  setEfficiencyResult,
+  setSelectedResult,
+}) => {
   const [activeTab, setActiveTab] = useState(0);
   const isFirstRender = useRef(true);
 
@@ -19,7 +24,8 @@ const EfficiencyOutputSpace = ({ resultId, testResult, setTestResult }) => {
         const response = await axios.get(
           `https://localhost:7070/api/EfficiencyTest?id=${resultId}`
         );
-        setTestResult(response.data);
+        setEfficiencyResult(response.data);
+        setSelectedResult({});
       } catch (error) {
         console.log(error);
       }

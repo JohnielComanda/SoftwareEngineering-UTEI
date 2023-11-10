@@ -57,6 +57,7 @@ const EfficiencyTest = ({
             //output
             efficiencyResult={efficiencyResult}
             setEfficiencyResult={setEfficiencyResult}
+            setSelectedResult={setSelectedResult}
             //result
             resultId={resultId}
             testResult={
