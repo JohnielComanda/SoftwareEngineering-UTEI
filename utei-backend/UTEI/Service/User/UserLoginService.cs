@@ -10,6 +10,7 @@ namespace UTEI.Service.User
         {
             _repository = repository;   
         }
+
         public async Task<Models.User> GetUserByEmail(string userEmail)
         {
             return await _repository.GetUserByEmail(userEmail);

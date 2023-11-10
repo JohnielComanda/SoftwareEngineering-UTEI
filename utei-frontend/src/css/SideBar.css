@@ -8,6 +8,10 @@
   overflow-x: hidden;
 }
 
+.sidebar::-webkit-scrollbar {
+  width: 0px;
+}
+
 .saved-test {
   position: absolute;
   justify-content: space-between;
@@ -67,6 +71,7 @@ li {
   padding-top: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1.5px solid #474e6a;
+  transition: none !important;
 }
 
 .efficiency {

@@ -6,18 +6,24 @@ import "../../../css/InputSpace.css";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 
-const EfficiencyInputSpace = ({ setResultId, setTestResult }) => {
-  const temp = {
-    unitTest: "",
-    programmingLanguage: "",
-  };
-  const [testInput, setTestInput] = useState(temp);
-  const [unitTest, setUnitTest] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+const EfficiencyInputSpace = ({
+  setResultId,
+  selectedResult,
+  setSelectedResult,
+  setEfficiencyResult,
+  efficiencyInput,
+  setEfficiencyInput,
+  unitTest,
+  setUnitTest,
+  efficiencySelectedLanguage,
+  setEfficiencySelectedLanguage,
+  setNewDataAction,
+}) => {
   const isFirstRender = useRef(true);
   const [action, setAction] = useState(0);
   const resultId = useContext(ResultContext);
   const [isLoading, setIsLoading] = useState(true);
+  console.log("EfficiencyInput1: ", efficiencyInput);
 
   // This is for passing the parameters to the backend to generate unit test
   // This useEffect will trigger when submit button will click as the action trigger is being updated
@@ -35,9 +41,10 @@ const EfficiencyInputSpace = ({ setResultId, setTestResult }) => {
       try {
         const response = await axios.post(
           `https://localhost:7070/api/EfficiencyTest`,
-          testInput
+          efficiencyInput
         );
         setResultId(response.data);
+        setNewDataAction((prev) => prev + 1);
         alert("Successfully created a test.");
       } catch (error) {
         console.error(error);
@@ -52,17 +59,14 @@ const EfficiencyInputSpace = ({ setResultId, setTestResult }) => {
 
   // For submiting test, setAction will be updated and will trigger the useEffect for POST
   const onClickSubmit = () => {
-    setTestInput((prevData) => ({
+    setEfficiencyInput((prevData) => ({
       unitTest: `${unitTest}`,
-      programmingLanguage: `${selectedLanguage}`,
+      programmingLanguage: `${efficiencySelectedLanguage}`,
     }));
-    setTestResult({});
+    console.log("EfficiencyInput2: ", efficiencyInput);
+    setSelectedResult({});
+    setEfficiencyResult({});
     setAction((prev) => prev + 1);
-  };
-
-  // For selected prog languange onChange
-  const handleSelectedLanguageChange = (selectedValue) => {
-    setSelectedLanguage(selectedValue);
   };
 
   // For text editor onChange
@@ -76,14 +80,20 @@ const EfficiencyInputSpace = ({ setResultId, setTestResult }) => {
       <div className="input">
         <div className="input-header">
           <SelectProgLang
-            onSelectedLanguageChange={handleSelectedLanguageChange}
+            setSelectedLanguage={setEfficiencySelectedLanguage}
+            selectedResult={selectedResult}
+            selectedLanguage={efficiencySelectedLanguage}
           />
         </div>
         <CodeMirror
           name="unitTest"
           className="input-space"
           placeholder={"Paste your unit test method here!"}
-          value={testInput.unitTest}
+          value={
+            Object.keys(selectedResult).length === 0
+              ? unitTest
+              : selectedResult.unitTest
+          }
           height="555px"
           extensions={[javascript({ jsx: true })]}
           onChange={onChange}

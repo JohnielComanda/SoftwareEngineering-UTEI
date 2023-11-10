@@ -7,5 +7,6 @@ namespace UTEI.Service.EnhanceUnitTest
     {
         Task<string> CreateTest(EfficiencyTestCreationDto testEfficiency);
         Task<EfficiencyTest> GetSavedTest(string id);
+        Task<IEnumerable<EfficiencyTest>> GetAllSavedTest( );
     }
 }
