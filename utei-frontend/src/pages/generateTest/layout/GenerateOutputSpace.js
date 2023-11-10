@@ -17,6 +17,9 @@ const GenerateOutputSpace = ({ resultId, testResult, setTestResult }) => {
           `https://localhost:7070/api/GenerateTest/${resultId}`
         );
         setTestResult(response.data);
+        console.log("hahahahhaa");
+        console.log(response.data);
+        console.log("heheheeheh");
       } catch (error) {
         console.log(error);
       }

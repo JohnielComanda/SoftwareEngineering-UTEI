@@ -25,6 +25,8 @@ class AccuracyTest extends Component {
             dependency1: '',
             dependency2: '',
             outputText: '',
+            showContainerTest: false,
+            activeButton: null,
         };
     }
 
@@ -52,6 +54,7 @@ class AccuracyTest extends Component {
                     TestSuggestions: res.testSuggestions,
                     EnhancedVersion: res.enhancedVersion,
                 },
+                showContainerTest: true,
             });
             alert('Successfully created a test.');
         } catch (error) {
@@ -60,20 +63,31 @@ class AccuracyTest extends Component {
         }
     };
 
+
     testCasesBtn = () => {
-        this.setState({ outputText: this.state.responseData.TestResult });
+        this.setState({
+            outputText: this.state.responseData.TestResult,
+            activeButton: 'testCases',
+        });
         console.log(this.state.outputText);
     };
 
     summaryBtn = () => {
-        this.setState({ outputText: this.state.responseData.ResultSummary });
+        this.setState({
+            outputText: this.state.responseData.ResultSummary,
+            activeButton: 'summary',
+        });
         console.log(this.state.outputText);
     };
 
     recommendationsBtn = () => {
-        this.setState({ outputText: this.state.responseData.TestSuggestions });
+        this.setState({
+            outputText: this.state.responseData.TestSuggestions,
+            activeButton: 'recommendations',
+        });
         console.log(this.state.outputText);
     };
+
 
     enhanceVersionBtn = () => {
         this.setState({ outputText: this.state.responseData.EnhancedVersion });
@@ -202,11 +216,7 @@ class AccuracyTest extends Component {
                             <button className="outputBtn" onClick={this.recommendationsBtn}>Recommendations</button>
                         </div>
                         <div className="output-space" id='output-space-accuracy'>
-                            <pre className="output-text">
-                                {this.state.outputText}
-                            </pre>
-                            <div className="output-space" id='output-space-accuracy'>
-                                <pre className="output-text">{this.state.outputText}</pre>
+                            {this.state.activeButton === 'testCases' && (
                                 <div id="containerTest">
                                     <p>Expected Value</p>
                                     <div class="resValue">
@@ -221,9 +231,15 @@ class AccuracyTest extends Component {
                                         {result}
                                     </div>
                                 </div>
-                            </div>
+                            )}
+                            {this.state.activeButton !== 'testCases' && (
+                                <div className="output-text">
+                                    {this.state.outputText}
+                                </div>
+                            )}
                         </div>
                     </div>
+
                 </div>
             </div>
         );
