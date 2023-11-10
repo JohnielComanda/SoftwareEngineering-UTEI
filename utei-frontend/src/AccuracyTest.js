@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import './css/accuracy.css';
 import axios from "axios";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import "./css/OutputSpace.css";
-import TestCases from './TestCases.js'
+import HeaderBar from "./components/HeaderBar.js";
+import SideBar from "./components/SideBar.js";
+import './css/accuracy.css';
 
 class AccuracyTest extends Component {
     constructor() {
@@ -108,89 +109,120 @@ class AccuracyTest extends Component {
     };
 
     render() {
+        // Access the prop value using props.result
+        var resultArray = this.state.outputText.split('+');
+
+        // Assuming you want to display the individual parts separately
+        var result = resultArray[0];
+        var expectedValue = resultArray[1];
+        var actualValue = resultArray[2];
         return (
-            <div id="container">
-                <div id="inputSpace">
-                    <div id="inputSelectionSpace">
-                        <div className='selections'>
-                            <select value={this.state.programmingLanguage} onChange={this.handleLanguageChange} id="selectLanguage">
-                                <option defaultValue="Select a language">Select a language</option>
-                                <option value="javascript">JavaScript</option>
-                                <option value="python">Python</option>
-                                <option value="java">Java</option>
-                                <option value="csharp">C#</option>
-                                <option value="ruby">Ruby</option>
-                            </select>
+            <div>
+                <HeaderBar />
+                <SideBar
+                />
+                <div id="container">
+                    <div id="inputSpace">
+                        <div id="inputSelectionSpace">
+                            <div className='selections'>
+                                <select value={this.state.programmingLanguage} onChange={this.handleLanguageChange} id="selectLanguage">
+                                    <option defaultValue="Select a language">Select a language</option>
+                                    <option value="javascript">JavaScript</option>
+                                    <option value="python">Python</option>
+                                    <option value="java">Java</option>
+                                    <option value="csharp">C#</option>
+                                    <option value="ruby">Ruby</option>
+                                </select>
+                            </div>
+                            <div className='selections'>
+                                <select value={this.state.unitTestType} onChange={this.handleUnitTestTypeSelectionChange} id="selectedUnitTestType">
+                                    <option defaultValue="Select what type of unit test">Select what type of unit test</option>
+                                    <option value="Simple">Simple</option>
+                                    <option value="Parameterized">Parameterized</option>
+                                    <option value="Multi Dependency">Multi Dependency</option>
+                                </select>
+                            </div>
                         </div>
-                        <div className='selections'>
-                            <select value={this.state.unitTestType} onChange={this.handleUnitTestTypeSelectionChange} id="selectedUnitTestType">
-                                <option defaultValue="Select what type of unit test">Select what type of unit test</option>
-                                <option value="Simple">Simple</option>
-                                <option value="Parameterized">Parameterized</option>
-                                <option value="Multi Dependency">Multi Dependency</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="unitAndBasedSpace">
-                        <CodeMirror
-                            name="unitTest"
-                            placeholder={"Paste Unit test here!!!"}
-                            height='170px'
-                            value={this.state.unitTest}
-                            extensions={[javascript({ jsx: true })]}
-                            onChange={this.onChangeUnitTest}
-                            theme="dark"
-                        ></CodeMirror>
-                        <CodeMirror
-                            name="basedMethod"
-                            placeholder={"Paste Based method here!!!"}
-                            height='170px'
-                            value={this.state.basedMethod}
-                            extensions={[javascript({ jsx: true })]}
-                            onChange={this.onChangeBasedMethod}
-                            theme="dark"
-                        ></CodeMirror>
-                        <CodeMirror
-                            name="description"
-                            placeholder={"Input description (Optional)"}
-                            height='70px'
-                            value={this.state.description}
-                            extensions={[javascript({ jsx: true })]}
-                            onChange={this.onChangeDescription}
-                            theme="dark"
-                        ></CodeMirror>
-                        <div id="dependencyText">
+                        <div id="unitAndBasedSpace">
                             <CodeMirror
-                                name="dependency1"
-                                placeholder="Dependency 1 (Optional)"
-                                height='74px'
-                                value={this.state.dependency1}
+                                name="unitTest"
+                                placeholder={"Paste Unit test here!!!"}
+                                height='170px'
+                                value={this.state.unitTest}
                                 extensions={[javascript({ jsx: true })]}
-                                onChange={this.onChangeDependency1}
+                                onChange={this.onChangeUnitTest}
                                 theme="dark"
                             ></CodeMirror>
                             <CodeMirror
-                                name="dependency2"
-                                placeholder="Dependency 2 (Optional)"
-                                height='74px'
-                                value={this.state.dependency2}
+                                name="basedMethod"
+                                placeholder={"Paste Based method here!!!"}
+                                height='170px'
+                                value={this.state.basedMethod}
                                 extensions={[javascript({ jsx: true })]}
-                                onChange={this.onChangeDependency2}
+                                onChange={this.onChangeBasedMethod}
                                 theme="dark"
                             ></CodeMirror>
+                            <CodeMirror
+                                name="description"
+                                placeholder={"Input description (Optional)"}
+                                height='70px'
+                                value={this.state.description}
+                                extensions={[javascript({ jsx: true })]}
+                                onChange={this.onChangeDescription}
+                                theme="dark"
+                            ></CodeMirror>
+                            <div id="dependencyText">
+                                <CodeMirror
+                                    name="dependency1"
+                                    placeholder="Dependency 1 (Optional)"
+                                    height='74px'
+                                    value={this.state.dependency1}
+                                    extensions={[javascript({ jsx: true })]}
+                                    onChange={this.onChangeDependency1}
+                                    theme="dark"
+                                ></CodeMirror>
+                                <CodeMirror
+                                    name="dependency2"
+                                    placeholder="Dependency 2 (Optional)"
+                                    height='74px'
+                                    value={this.state.dependency2}
+                                    extensions={[javascript({ jsx: true })]}
+                                    onChange={this.onChangeDependency2}
+                                    theme="dark"
+                                ></CodeMirror>
+                            </div>
                         </div>
+                        <button className='btn' id="savebtn">Save</button>
+                        <button className='btn' onClick={this.onClickSubmit}>Submit</button>
                     </div>
-                    <button className='btn' id="savebtn">Save</button>
-                    <button className='btn' onClick={this.onClickSubmit}>Submit</button>
-                </div>
-                <div id="outputSpace">
-                    <div id="outputMenu">
-                        <button className="outputBtn" onClick={this.testCasesBtn}>Test Cases</button>
-                        <button className="outputBtn" onClick={this.summaryBtn}>Performance</button>
-                        <button className="outputBtn" onClick={this.recommendationsBtn}>Recommendations</button>
-                    </div>
-                    <div className="output-space" id='output-space-accuracy'>
-                        <pre className="output-text">{this.state.outputText}</pre>
+                    <div id="outputSpace">
+                        <div id="outputMenu">
+                            <button className="outputBtn" onClick={this.testCasesBtn}>Test Cases</button>
+                            <button className="outputBtn" onClick={this.summaryBtn}>Performance</button>
+                            <button className="outputBtn" onClick={this.recommendationsBtn}>Recommendations</button>
+                        </div>
+                        <div className="output-space" id='output-space-accuracy'>
+                            <pre className="output-text">
+                                {this.state.outputText}
+                            </pre>
+                            <div className="output-space" id='output-space-accuracy'>
+                                <pre className="output-text">{this.state.outputText}</pre>
+                                <div id="containerTest">
+                                    <p>Expected Value</p>
+                                    <div class="resValue">
+                                        {expectedValue}
+                                    </div>
+                                    <p>Actual Value</p>
+                                    <div class="resValue">
+                                        {actualValue}
+                                    </div>
+                                    <p>Result</p>
+                                    <div class="resValue">
+                                        {result}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

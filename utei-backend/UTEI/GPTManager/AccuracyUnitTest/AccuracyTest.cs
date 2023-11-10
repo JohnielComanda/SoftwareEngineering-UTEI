@@ -35,11 +35,11 @@ namespace UTEI.GPTManager.AccuracyUnitTest
             if(accuInfo.UnitTestType.Equals("Multi Dependency"))
             {
                 string depen = accuInfo.Dependency1 + accuInfo.Dependency2;
-                prompt = $"1 word pass or fail given this {accuInfo.ProgrammingLanguage}:'''\n{accuInfo.UnitTest}\n''' and the based method: '''\n{accuInfo.BaseMethod}\n''' and these dependencies: '''\n{depen}\n''' only return one word pass or fail";
+                prompt = $"Given this {accuInfo.ProgrammingLanguage}:'''\n{accuInfo.UnitTest}\n''' and the based method: '''\n{accuInfo.BaseMethod}\n''' and these dependencies: '''\n{depen}\n''' only return pass or fail, expected output, actual result. The output should look like this Pass or Fail + Expected Output Value Only + Actual Output Value Only";
             }
             else
             {
-                prompt = $"1 word pass or fail given this {accuInfo.ProgrammingLanguage}:'''\n{accuInfo.UnitTest}\n''' and the based method: '''\n{accuInfo.BaseMethod}\n'''";
+                prompt = $"Given this {accuInfo.ProgrammingLanguage}:'''\n{accuInfo.UnitTest}\n''' and the based method: '''\n{accuInfo.BaseMethod}\n''' only return pass or fail, expected output, actual result. The output should look like this Pass or Fail + Expected Output Value Only + Actual Output Value Only";
             }
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }
