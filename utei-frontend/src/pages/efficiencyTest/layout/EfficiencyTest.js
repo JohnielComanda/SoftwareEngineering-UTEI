@@ -7,6 +7,7 @@ import SideBar from "../../../components/SideBar";
 import Login from "../../../components/Login";
 
 const EfficiencyTest = ({
+  userId,
   selectedResult,
   setSelectedResult,
   efficiencyInput,
@@ -17,8 +18,6 @@ const EfficiencyTest = ({
   setEfficiencySelectedLanguage,
   efficiencyResult,
   setEfficiencyResult,
-  isAuthenticated,
-  setIsAuthenticated,
   newDataAction,
   setNewDataAction,
 }) => {
@@ -29,44 +28,45 @@ const EfficiencyTest = ({
   return (
     <>
       <ResultContext.Provider value={resultId}>
-        <>
-          <HeaderBar />
-          <SideBar
-            testType={"efficiencyTest"}
-            setSelectedResult={setSelectedResult}
-            setTestResult={setEfficiencyResult}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            newDataAction={newDataAction}
-          />
-          <EfficiencyInputSpace
-            efficiencyInput={efficiencyInput}
-            setEfficiencyInput={setEfficiencyInput}
-            unitTest={unitTest}
-            setUnitTest={setUnitTest}
-            efficiencySelectedLanguage={efficiencySelectedLanguage}
-            setEfficiencySelectedLanguage={setEfficiencySelectedLanguage}
-            setNewDataAction={setNewDataAction}
-            //result
-            setResultId={setResultId}
-            setEfficiencyResult={setEfficiencyResult}
-            selectedResult={selectedResult}
-            setSelectedResult={setSelectedResult}
-          />
-          <EfficiencyOutputSpace
-            //output
-            efficiencyResult={efficiencyResult}
-            setEfficiencyResult={setEfficiencyResult}
-            setSelectedResult={setSelectedResult}
-            //result
-            resultId={resultId}
-            testResult={
-              Object.keys(selectedResult).length === 0
-                ? efficiencyResult
-                : selectedResult
-            }
-          />
-        </>
+        <SideBar
+          //input props
+          userId={userId}
+          testType={"efficiencyTest"}
+          setSelectedResult={setSelectedResult}
+          setTestResult={setEfficiencyResult}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          newDataAction={newDataAction}
+        />
+        <EfficiencyInputSpace
+          //input props
+          userId={userId}
+          efficiencyInput={efficiencyInput}
+          setEfficiencyInput={setEfficiencyInput}
+          unitTest={unitTest}
+          setUnitTest={setUnitTest}
+          efficiencySelectedLanguage={efficiencySelectedLanguage}
+          setEfficiencySelectedLanguage={setEfficiencySelectedLanguage}
+          setNewDataAction={setNewDataAction}
+          //result props
+          setResultId={setResultId}
+          setEfficiencyResult={setEfficiencyResult}
+          selectedResult={selectedResult}
+          setSelectedResult={setSelectedResult}
+        />
+        <EfficiencyOutputSpace
+          //output props
+          efficiencyResult={efficiencyResult}
+          setEfficiencyResult={setEfficiencyResult}
+          setSelectedResult={setSelectedResult}
+          //result props
+          resultId={resultId}
+          testResult={
+            Object.keys(selectedResult).length === 0
+              ? efficiencyResult
+              : selectedResult
+          }
+        />
       </ResultContext.Provider>
     </>
   );

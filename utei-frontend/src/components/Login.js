@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/Login.css";
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
   const initialUserDetails = {
     email: "",
     password: "",
@@ -11,6 +11,7 @@ const Login = ({ setIsAuthenticated }) => {
   const [userDetails, setUserDetails] = useState(initialUserDetails);
   const isFirstRender = useRef(true);
   const navigate = useNavigate();
+  const [goResponse, setGoResponse] = useState("");
 
   useEffect(() => {
     //This method is for the Post and uses axios to pass on the parameters to the backend side
@@ -22,14 +23,18 @@ const Login = ({ setIsAuthenticated }) => {
   const loginUser = async () => {
     try {
       const response = await axios.post(
-        `https://localhost:7070/api/UserLogin`,
+        `https://localhost:7070/api/authenticate/login`,
         userDetails
       );
+      console.log("Loggedin user: ", response.data);
       if (response.data) setIsAuthenticated(true);
+      setUserName(userDetails.name);
+      console.log("LOG: ", response.data.name);
+      setUserId(response.data.id);
       navigate("/efficiency_test");
     } catch (error) {
       console.error(error);
-      alert("Wrong Credentials");
+      setGoResponse("Incorrect email or password.");
     }
   };
 
@@ -63,15 +68,11 @@ const Login = ({ setIsAuthenticated }) => {
           </div>
           <div className="login-button">
             <button onClick={onClickSubmit}>Sign In</button>
-            <text>or</text>
-            <button>
-              {" "}
-              <img src="google.png"></img>Sign in with Google
-            </button>
             <text>
               Don't have an account? <a href="/signup"> Sign Up</a>
             </text>
           </div>
+          <div className="loginFail">{goResponse ? goResponse : ""}</div>
         </div>
       </div>
     </>

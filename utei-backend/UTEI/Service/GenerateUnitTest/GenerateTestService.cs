@@ -14,12 +14,19 @@ namespace UTEI.Service.GenerateUnitTest
             _repository = repository;
             _unitTestGenerator = unitTestGenerator;
         }
+
+        /// <summary>
+        /// This is for calling a test using a method from GPTManager classes and mapping the result to EfficiencyTest model
+        /// </summary>
+        /// <param name="generateTest">Necessary parameters for generate test</param>
+        /// <returns>Returns the generate test result id</returns>
         public async Task<string> CreateTest(GenerateTestCreationDto generateTest)
         {
             var unitTestResult = await _unitTestGenerator.Generator(generateTest.ProgrammingLanguage!, generateTest.BaseMethod!);
 
             var generateUnitTest = new GenerateTest()
             {
+                UserId = generateTest.UserId,
                 BaseMethod = generateTest.BaseMethod,
                 ProgrammingLanguage = generateTest.ProgrammingLanguage,
                 Date = DateTime.Today,
@@ -29,11 +36,23 @@ namespace UTEI.Service.GenerateUnitTest
             return await _repository.CreateTest(generateUnitTest);
         }
 
-        public async Task<IEnumerable<GenerateTest>> GetAllSavedTest()
+        /// <summary>
+        /// This is for getting all the saved generate test
+        /// </summary>
+        /// <param name="id">Id of the currently logged in user</param>
+        /// <returns>Returns all the tests that was done by the specific user</returns>
+        public async Task<IEnumerable<GenerateTest>> GetAllSavedTest(string id)
         {
-            return await _repository.GetAllSavedTest();
+            var allTests = await _repository.GetAllSavedTest();
+            var testsWithSameUserId = allTests.Where(test => test.UserId == id);
+            return testsWithSameUserId;
         }
 
+        /// <summary>
+        /// This is for getting a saved test given by it's id
+        /// </summary>
+        /// <param name="id">Id of the test to retrieve</param>
+        /// <returns>Returns the result of the test being retrieved</returns>
         public async Task<GenerateTest> GetSavedTest(string id)
         {
             return await _repository.GetSavedTest(id);
