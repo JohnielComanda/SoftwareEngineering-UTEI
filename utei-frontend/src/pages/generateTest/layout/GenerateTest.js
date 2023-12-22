@@ -6,6 +6,7 @@ import HeaderBar from "../../../components/HeaderBar";
 import SideBar from "../../../components/SideBar";
 
 const GenerateTest = ({
+  userId,
   genereateBaseInput,
   setGenerateBaseInput,
   generateBaseMethod,
@@ -25,8 +26,9 @@ const GenerateTest = ({
   return (
     <div>
       <ResultContext.Provider value={resultId}>
-        <HeaderBar />
         <SideBar
+          //input props
+          userId={userId}
           testType={"generateTest"}
           setSelectedResult={setSelectedResult}
           setTestResult={setGenerateResult}
@@ -35,7 +37,8 @@ const GenerateTest = ({
           newDataAction={newDataAction}
         />
         <GenerateInputSpace
-          //inputs
+          //input props
+          userId={userId}
           genereateBaseInput={genereateBaseInput}
           setGenerateBaseInput={setGenerateBaseInput}
           generateBaseMethod={generateBaseMethod}
@@ -43,18 +46,18 @@ const GenerateTest = ({
           generateSelectedLanguage={generateSelectedLanguage}
           setGenerateSelectedLanguage={setGenerateSelectedLanguage}
           setNewDataAction={setNewDataAction}
-          //result
+          //result props
           setResultId={setResultId}
           setGenerateResult={setGenerateResult}
           selectedResult={selectedResult}
           setSelectedResult={setSelectedResult}
         />
         <GenerateOutputSpace
-          //output
+          //output props
           generateResult={generateResult}
           setGenerateResult={setGenerateResult}
           setSelectedResult={setSelectedResult}
-          //result
+          //result props
           resultId={resultId}
           testResult={
             Object.keys(selectedResult).length === 0

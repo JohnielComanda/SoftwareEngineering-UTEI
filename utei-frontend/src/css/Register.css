@@ -67,13 +67,31 @@
   font-size: 16px;
 }
 
+.regSuccess {
+  color: rgb(69, 163, 69);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.regSuccess a {
+  color: rgb(71, 112, 169);
+}
+
+.regFail {
+  color: rgb(243, 89, 89);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
 .signup-button {
   display: flex;
   flex-direction: column;
   width: 60%;
   font: 1em sans-serif;
   font-size: small;
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
 .signup-button img {
@@ -81,12 +99,46 @@
   margin-right: 10px;
 }
 
+.show-hide-btn {
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  margin: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  outline: none;
+  background-color: #e3e3e3;
+  padding: 0.3rem;
+  border-radius: 5px;
+  font-size: 12px;
+  width: 57px;
+  margin-top: -1rem;
+}
+
+.show-hide-btn .btn-content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.show-hide-btn img {
+  width: 15px;
+  padding-right: 3px;
+}
+
+.show-hide-btn:hover {
+  cursor: pointer;
+}
+
 .signup-button button:hover {
   cursor: pointer;
 }
 
 .signup-button button {
-  padding: 0.3rem;
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 20px;
   font-size: 14px;

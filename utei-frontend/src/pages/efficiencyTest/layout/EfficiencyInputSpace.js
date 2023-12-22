@@ -7,6 +7,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 
 const EfficiencyInputSpace = ({
+  userId,
   setResultId,
   selectedResult,
   setSelectedResult,
@@ -60,6 +61,7 @@ const EfficiencyInputSpace = ({
   // For submiting test, setAction will be updated and will trigger the useEffect for POST
   const onClickSubmit = () => {
     setEfficiencyInput((prevData) => ({
+      userId,
       unitTest: `${unitTest}`,
       programmingLanguage: `${efficiencySelectedLanguage}`,
     }));
@@ -101,7 +103,6 @@ const EfficiencyInputSpace = ({
         ></CodeMirror>
       </div>
       <div>
-        <button className="btn-save">Save</button>
         <button className="btn-identify" onClick={onClickSubmit}>
           Submit
         </button>

@@ -32,7 +32,7 @@ namespace UTEI.GPTManager.AccuracyUnitTest
         public async Task<string> TestCases(AccuracyTestDto accuInfo)
         {
             string prompt;
-            if(accuInfo.UnitTestType.Equals("Multi Dependency"))
+            if(accuInfo.UnitTestType!.Equals("Multi Dependency"))
             {
                 string depen = accuInfo.Dependency1 + accuInfo.Dependency2;
                 prompt = $"Given this {accuInfo.ProgrammingLanguage}:'''\n{accuInfo.UnitTest}\n''' and the based method: '''\n{accuInfo.BaseMethod}\n''' and these dependencies: '''\n{depen}\n''' only return pass or fail, expected output, actual result. The output should look like this Pass or Fail + Expected Output Value Only + Actual Output Value Only";

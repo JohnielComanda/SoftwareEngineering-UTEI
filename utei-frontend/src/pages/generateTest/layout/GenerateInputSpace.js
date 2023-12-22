@@ -7,6 +7,7 @@ import { javascript } from "@codemirror/lang-javascript";
 import "../../../css/InputSpace.css";
 
 const GenerateInputSpace = ({
+  userId,
   setResultId,
   selectedResult,
   setSelectedResult,
@@ -58,6 +59,7 @@ const GenerateInputSpace = ({
   // For submiting test, setAction will be updated and will trigger the useEffect for POST
   const onClickSubmit = () => {
     setGenerateBaseInput((prevData) => ({
+      userId,
       baseMethod: `${generateBaseMethod}`,
       programmingLanguage: `${generateSelectedLanguage}`,
     }));
@@ -99,7 +101,6 @@ const GenerateInputSpace = ({
         ></CodeMirror>
       </div>
       <div>
-        <button className="btn-save">Save</button>
         <button className="btn-identify" onClick={onClickSubmit}>
           Submit
         </button>

@@ -5,6 +5,12 @@ namespace UTEI.GPTManager
 {
     public static class GPTRequestHandler
     {
+        /// <summary>
+        /// This is for setting up the handler for the communication to OpenAI API
+        /// </summary>
+        /// <param name="prompt">Prompt that will be sent to the OpenAI API</param>
+        /// <param name="httpClientFactory">Client for sending http request</param>
+        /// <returns>Returns the response coming from OpenAI</returns>
         public static async Task<string> RequestHandler(string prompt, IHttpClientFactory httpClientFactory)
         {
             IHttpClientFactory _httpClientFactory = httpClientFactory;
@@ -12,8 +18,8 @@ namespace UTEI.GPTManager
             var requestPayload = new
             {
                 prompt = prompt,
-                temperature = 0.5,
-                max_tokens = 256,
+                temperature = 0.25,
+                max_tokens = 2048,
                 top_p = 1.0,
                 frequency_penalty = 0.0,
                 presence_penalty = 0.0
@@ -29,9 +35,14 @@ namespace UTEI.GPTManager
                 //    Console.WriteLine("API key not found in environment variable OPENAI_API_KEY.");
                 //    //return;
                 //}
+<<<<<<< HEAD
 
                 var apiUrl = "https://api.openai.com/v1/engines/text-davinci-003/completions";
                 httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer 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");
+=======
+                var apiUrl = "https://api.openai.com/v1/engines/text-davinci-003/completions";
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer /OpenAI ApiKey/");
+>>>>>>> 41b168642f05c61d99b676bea017ff8e5dba166b
 
                 try
                 {

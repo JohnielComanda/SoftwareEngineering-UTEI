@@ -11,15 +11,35 @@ namespace UTEI.GPTManager.EnhanceUnitTest
             _httpClientFactory = httpClientFactory;
         }
 
+        /// <summary>
+        /// This is for requesting a response from OpenAI to Analyze a unit test 
+        /// </summary>
+        /// <param name="unitTest">Unit test to analyze</param>
+        /// <returns>Returns the response from OpenAI given the prompt for analyzing unit test</returns>
         public async Task<string> Analyze(string unitTest)
         {
-            var prompt = $"Write a detailed summary of the unit test method depending on it's estimated performance including it's runtime, compile time, unit test code efficiency, and adherence to writing of a proper unit test```\n{unitTest}\n```. return also a detailed summary of each criteria";
+            string prompt = "respond with: Cannot Analyze unit test with the given input!";
+            if (unitTest.Length > 20)
+            {
+                prompt = $"Write a detailed summary and suggestion of the unit test method depending on it's estimated performance including it's runtime, compile time, unit test code efficiency, and adherence to writing of a proper unit test```\n{unitTest}\n```. return also a detailed summary of each criteria and separate the summary and suggestion using $ between the two before the suggestion output";
+
+            }
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }
 
+        /// <summary>
+        /// This is for requesting a response from OpenAI to Evaluate a unit test 
+        /// </summary>
+        /// <param name="unitTest">Unit test to evaluate</param>
+        /// <returns>Returns the response from OpenAI given the prompt for evaluating unit test</returns>
         public async Task<string> EvaluateTest(string unitTest)
         {
-            var prompt = $"Rate this unit test :```\n{unitTest}\n``` very strictly on a scale of 5 where 5 means very high performing, 4 means high, 3 means has room for improvement, 2 means low, and 1 very low. The criteria is it's estimated runtime, compile time, unit test code efficiency, and adherence to writing of a proper unit test. reply with just number 1 to 5 and nothing else";
+            string prompt = "respond with: Cannot Evaluate unit test with the given input!";
+            if (unitTest.Length > 20)
+            {
+                prompt = $"Rate this unit test :```\n{unitTest}\n``` very strictly on a scale of 5 where 5 means very high performing, 4 means high, 3 means has room for improvement, 2 means low, and 1 very low. The criteria is it's estimated runtime, compile time, unit test code efficiency, and adherence to writing of a proper unit test. reply with just number 1 to 5 and nothing else";
+
+            }
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }
     }
