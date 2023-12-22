@@ -1,7 +1,11 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDbGenericRepository.Attributes;
 
 namespace UTEI.Models
 {
+    /// <summary>
+    /// Model used for user sign in / sign up
+    /// </summary>
     public class User
     {
         [BsonId]

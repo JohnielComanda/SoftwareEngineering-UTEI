@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/SideBar.css";
 
 const SideBar = ({
+  userId,
   testType,
   activeTab,
   setSelectedResult,
@@ -15,6 +16,7 @@ const SideBar = ({
   const navigate = useNavigate(); // Use useNavigate from re-navigate
   const handleTabClick = (tabIndex) => {
     setActiveTab(tabIndex);
+    console.log("Active Tab: ", activeTab);
   };
 
   useEffect(() => {
@@ -23,12 +25,17 @@ const SideBar = ({
       try {
         const response = await axios.get(
           testType === "efficiencyTest"
-            ? `https://localhost:7070/api/EfficiencyTest/all`
-            : `https://localhost:7070/api/GenerateTest/all`
+            ? `https://localhost:7070/api/EfficiencyTest/all/${userId}`
+            : testType === "generateTest"
+            ? `https://localhost:7070/api/GenerateTest/all/${userId}`
+            : testType === "accuracyTest"
+            ? `https://localhost:7070/api/AccuracyTest/all/${userId}`
+            : ""
         );
         const reversedData = [...response.data].reverse();
 
         setTests(reversedData);
+        console.log("Tests: ", tests);
       } catch (error) {
         console.log(error);
       }

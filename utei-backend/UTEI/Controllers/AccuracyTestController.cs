@@ -10,10 +10,10 @@ namespace UTEI.Controllers
     [ApiController]
     public class AccuracyTestController : ControllerBase
     {
-        private readonly IAccuracyTestService accuService;
-        public AccuracyTestController(IAccuracyTestService acc)
+        private readonly IAccuracyTestService _accuService;
+        public AccuracyTestController(IAccuracyTestService accuService)
         {
-            accuService = acc;
+            _accuService = accuService;
         }
 
         [HttpPost]
@@ -21,12 +21,49 @@ namespace UTEI.Controllers
         {
             try
             {
-                var res = await accuService.TestAccuracy(info);
+                var res = await _accuService.TestAccuracy(info);
                 return StatusCode(201, res);
             }
             catch (Exception e)
             {
                 return StatusCode(500, "Something went wrong!");
+            }
+        }
+
+        [HttpGet("all/{id}")]
+        public async Task<ActionResult> GetAllSavedTest(string id)
+        {
+            try
+            {
+                var test = await _accuService.GetAllSavedTest(id);
+                if (test == null)
+                {
+                    return NotFound();
+                }
+                return Ok(test);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetSavedTest(string id)
+        {
+            try
+            {
+                var test = await _accuService.GetSavedTest(id);
+                if (test == null)
+                {
+                    return NotFound();
+                }
+                return Ok(test);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
             }
         }
     }

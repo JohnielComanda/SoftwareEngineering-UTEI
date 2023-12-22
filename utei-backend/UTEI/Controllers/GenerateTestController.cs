@@ -32,12 +32,12 @@ namespace UTEI.Controllers
 
         }
 
-        [HttpGet("all")]
-        public async Task<ActionResult> GetAllSavedTest()
+        [HttpGet("all/{id}")]
+        public async Task<ActionResult> GetAllSavedTest(string id)
         {
             try
             {
-                var test = await _generateService.GetAllSavedTest();
+                var test = await _generateService.GetAllSavedTest(id);
                 if(test == null)
                 {
                     _logger.LogInformation("No test found");

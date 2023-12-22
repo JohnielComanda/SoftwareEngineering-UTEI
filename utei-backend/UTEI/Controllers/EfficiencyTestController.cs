@@ -17,11 +17,11 @@ namespace UTEI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateEfficiencyTest([FromBody]EfficiencyTestCreationDto unitTest)
+        public async Task<ActionResult> CreateEfficiencyTest([FromBody]EfficiencyTestCreationDto efficiencyTest)
         {
             try
             {
-                var newTest = await _efficiencyService.CreateTest(unitTest);
+                var newTest = await _efficiencyService.CreateTest(efficiencyTest);
                 return StatusCode(201, newTest);
             }
             catch (Exception e)
@@ -31,12 +31,12 @@ namespace UTEI.Controllers
             }
         }
 
-        [HttpGet("all")]
-        public async Task<ActionResult> GetAllSavedTest()
+        [HttpGet("all/{id}")]
+        public async Task<ActionResult> GetAllSavedTest(string id)
         {
             try
             {
-                var test = await _efficiencyService.GetAllSavedTest();
+                var test = await _efficiencyService.GetAllSavedTest(id);
                 if (test == null)
                 {
                     _logger.LogInformation("No test found");
