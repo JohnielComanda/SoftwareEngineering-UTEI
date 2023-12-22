@@ -19,7 +19,7 @@ namespace UTEI.Service.AccuracyUnitTest
             res.TestResult = await _accuTest.TestCases(accuInfo);
             //res.EnhancedVersion = await _accuTest.Enhancer(accuInfo.ProgrammingLanguage, accuInfo.UnitTest);
             res.ResultSummary = await _accuTest.Summary(accuInfo.UnitTest);
-            res.TestSuggestions = await _accuTest.Recommendations(accuInfo.UnitTest);
+            //res.TestSuggestions = await _accuTest.Recommendations(accuInfo.UnitTest);
             //res.TestResult = "Pass";
             //res.EnhancedVersion = "Enhance Version";
             //res.ResultSummary = "Summary";

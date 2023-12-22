@@ -213,7 +213,6 @@ class AccuracyTest extends Component {
                         <div id="outputMenu">
                             <button className="outputBtn" onClick={this.testCasesBtn}>Test Cases</button>
                             <button className="outputBtn" onClick={this.summaryBtn}>Performance</button>
-                            <button className="outputBtn" onClick={this.recommendationsBtn}>Recommendations</button>
                         </div>
                         <div className="output-space" id='output-space-accuracy'>
                             {this.state.activeButton === 'testCases' && (

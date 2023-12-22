@@ -24,7 +24,7 @@ namespace UTEI.Service
             var efficiencyScore = await _analyzer.EvaluateTest(testEfficiency.UnitTest!);
             var testSuggestionTemp = await _enhancer.SuggestionGenerator(testEfficiency.UnitTest!);
             //var enhancedVersion = await _enhancer.Enhancer(testEfficiency.ProgrammingLanguage!, testEfficiency.UnitTest!);
-            var enhancedVersionTemp = testSuggestionTemp.Split("Improved version:");
+            var enhancedVersionTemp = testSuggestionTemp.Split("Improved Version:");
             var testSuggestion = enhancedVersionTemp[0];
             var enhancedVersion = enhancedVersionTemp[1];
 

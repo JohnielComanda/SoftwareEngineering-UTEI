@@ -19,7 +19,7 @@ namespace UTEI.GPTManager.EnhanceUnitTest
 
         public async Task<string> SuggestionGenerator(string unitTest)
         {
-            var prompt = $"Write a detailed list of recommendations regarding the unit test input: ```\n{unitTest}\n``` on how to improve if there's a lacking in it's runtime/compiletime, unit test code efficiency, and how to make it follow the conventions of writing proper unit test. return just the list. And write an improved version of the following unit test```\n{unitTest}\n``` that adheres to the proper conventions of writing proper unit test. Concatenate the two output using '+'";
+            var prompt = $"Write a detailed list of recommendations regarding the unit test input: ```\n{unitTest}\n``` on how to improve if there's a lacking in it's runtime/compiletime, unit test code efficiency, and how to make it follow the conventions of writing proper unit test. return just the list. And write an improved version of the following unit test```\n{unitTest}\n``` that adheres to the proper conventions of writing proper unit test.";
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }
     }

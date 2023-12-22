@@ -21,16 +21,9 @@ const GenerateOutputSpace = ({
         const response = await axios.get(
           `https://localhost:7070/api/GenerateTest/${resultId}`
         );
-<<<<<<< HEAD
-        setTestResult(response.data);
-        console.log("hahahahhaa");
-        console.log(response.data);
-        console.log("heheheeheh");
-=======
         setGenerateResult(response.data);
         setSelectedResult({});
         console.log("TestResult: ", testResult);
->>>>>>> db4005fd3943dc299dafa48b66a18d6893018074
       } catch (error) {
         console.log(error);
       }
