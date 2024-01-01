@@ -26,12 +26,12 @@ env:
   AZURE_FUNCTIONAPP_NAME: 'utei'   # set this to your function app name on Azure
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'utei-backend/UTEI'       # set this to the path to your function app project, defaults to the repository root
   DOTNET_VERSION: '7.0.x'                   # set this to the dotnet version to use (e.g. '2.1.x', '3.1.x', '5.0.x')
-  MONGODB_CONNECTION: ${{ env.MONGODB_CONNECTIONSTRING }}
-  DATABASE_NAME: ${{ env.DATABASE_NAME }}
-  OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
-  EMAIL: ${{ env.UTEI_MAILER_EMAIL }}
-  EMAIL_PASSWORD: ${{ env.UTEI_MAILER_PASSWORD }}
-  ISSUER_SIGNING_KEY: ${{ env.ISSUER_SIGNING_KEY }}
+  MONGODB_CONNECTION: ${{ vars.MONGODB_CONNECTIONSTRING }}
+  DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+  OPENAI_API_KEY: ${{ vars.OPENAI_API_KEY }}
+  EMAIL: ${{ vars.UTEI_MAILER_EMAIL }}
+  EMAIL_PASSWORD: ${{ vars.UTEI_MAILER_PASSWORD }}
+  ISSUER_SIGNING_KEY: ${{ vars.ISSUER_SIGNING_KEY }}
 
 jobs:
   build-and-deploy:
