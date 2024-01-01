@@ -31,13 +31,15 @@ BsonSerializer.RegisterSerializer(new DateTimeSerializer(MongoDB.Bson.BsonType.S
 BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(MongoDB.Bson.BsonType.String));
 
 
+DotNetEnv.Env.Load();
+
 //add mongoIdentityConfiguration...
 var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
 {
     MongoDbSettings = new MongoDbSettings
     {
-        ConnectionString = "mongodb://localhost:27017/",
-        DatabaseName = "UTEIDb"
+        ConnectionString = Environment.GetEnvironmentVariable("MongoDBConnection"),
+        DatabaseName = "UTEI"
     },
     IdentityOptionsAction = options =>
     {
@@ -53,8 +55,8 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
         options.User.RequireUniqueEmail = true;
 
     }
-
 };
+
 
 builder.Services.ConfigureMongoDbIdentity<ApplicationUser, ApplicationRole, Guid>(mongoDbIdentityConfig)
     .AddUserManager<UserManager<ApplicationUser>>()
@@ -78,11 +80,10 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
-        ValidIssuer = "https://localhost:5001",
-        ValidAudience = "https://localhost:5001",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1swek3u4uo2u4a6e")),
+        ValidIssuer = "https://utei.azurewebsites.net",
+        ValidAudience = "https://utei.azurewebsites.net",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("IssuerSigningKey")),
         ClockSkew = TimeSpan.Zero
-
     };
 });
 
@@ -117,6 +118,7 @@ void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services.AddAuthorization();
     builder.Services.AddCors(options =>
     {
         options.AddDefaultPolicy(builder =>
@@ -139,11 +141,11 @@ void ConfigurePipeline(WebApplication app)
 
     app.UseCors();
     app.UseHttpsRedirection();
-    app.UseAuthorization();
     app.UseRouting();
+    app.UseAuthentication();
+    app.UseAuthorization();
     app.UseEndpoints(endpoints =>
     {
         endpoints.MapControllers();
     });
 }
-

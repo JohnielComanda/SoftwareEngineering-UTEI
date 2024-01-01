@@ -24,9 +24,6 @@
 .profile {
   position: relative;
   display: inline-block;
-  border: 0.5px solid #000;
-  border-radius: 50%;
-  background-color: #555e7f;
   padding: 7px;
   cursor: pointer;
   font-size: large;

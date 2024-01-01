@@ -19,9 +19,13 @@ namespace UTEI.Repository.GenerateUnitTest
         /// <param name="options"></param>
         public GenerateTestRepository(IOptions<DatabaseSettings> options)
         {
-            var mongoClient = new MongoClient(options.Value.ConnectionString);
-            _generateTest = mongoClient.GetDatabase(options.Value.DatabaseName)
-                .GetCollection<GenerateTest>(options.Value.GenerateTestsCollectionName);
+            var connectionUri = Environment.GetEnvironmentVariable("MongoDBConnection");
+            var settings = MongoClientSettings.FromConnectionString(connectionUri);
+            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+
+            var mongoClient = new MongoClient(settings);
+            _generateTest = mongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName"))
+                .GetCollection<GenerateTest>("GenerateTest");
         }
 
         /// <summary>

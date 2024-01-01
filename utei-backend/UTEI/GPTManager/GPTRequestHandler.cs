@@ -27,16 +27,9 @@ namespace UTEI.GPTManager
 
             using (var httpClient = new HttpClient())
             {
-                //string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
-
-                //// Check if the API key is not null or empty
-                //if (string.IsNullOrEmpty(apiKey))
-                //{
-                //    Console.WriteLine("API key not found in environment variable OPENAI_API_KEY.");
-                //    //return;
-                //}
+                var openAIApiKey = Environment.GetEnvironmentVariable("OpenAIApiKey");
                 var apiUrl = "https://api.openai.com/v1/engines/text-davinci-003/completions";
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer /OpenAI ApiKey/");
+                httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {openAIApiKey}");
 
                 try
                 {
