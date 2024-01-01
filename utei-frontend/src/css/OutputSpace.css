@@ -1,102 +1,160 @@
 .output {
-    position: fixed;
-    margin: 50px 50px 10px 1001px;
-}
-
-.output-space-bg { 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 0 0 8px 8px;
+  position: fixed;
+  margin: 50px 50px 10px 1001px;
 }
 
 .output-header {
-    border-radius: 8px 8px 0 0;
-    height: 50px;
-    width: 600.5px;
-    background-color: transparent;
+  border-radius: 8px 8px 0 0;
+  height: 50px;
+  width: 600.5px;
+  background-color: #0b314c;
+  color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .output-space {
-    height: 555px;
-    width: 600px;
-    background-color: #2F3139;
-    overflow-y: auto;
-    border-color: #2F3139;
-    font-size:medium;
-    color: #e4e4e4;
-    border-radius: 0 0 8px 8px;
+  top: 100%;
+  left: 0%;
+  bottom: 0;
+  position: absolute;
+  max-height: 100vh;
+  height: 555px;
+  width: 600px;
+  background-color: #282c34;
+  border-color: #282c34;
+  color: #e4e4e4;
+  border-radius: 0 0 8px 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.default-space {
+  position: absolute;
+  height: 555px;
+  width: 600px;
+  background-color: #2f3139;
+  border-color: #2f3139;
+  color: #e4e4e4;
+  border-radius: 0 0 8px 8px;
+}
+
+.output-text {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-top: 30px;
+  margin-left: 55px;
+  margin-right: 45px;
+}
+
+.bar-container {
+  position: fixed;
+  top: 90vh;
+  margin-left: 0.8rem;
+  width: 580px;
+  height: 20px;
+  background-color: #e4e4e4;
+  border-radius: 25px;
+}
+
+.bar {
+  position: fixed;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+  width: 180px;
+  height: 20px;
+  background-color: #6a9f82;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  display: flex;
+  border-radius: 25px;
+}
+
+.score {
+  display: flex;
+  margin-right: 20px;
+  font-size: small;
+  font-weight: 100px;
+  color: #393939;
 }
 
 .standard {
-    align-self: auto;
-    height: 100%;
-    width: 33.3%;
-    border-radius: 8px 0 8px 0;
-    background-color: #0B314C;
-    color: #ffffff;
-    cursor: pointer;
-    border: 2px solid #0B314C;
+  height: 100%;
+  width: 33.3%;
+  border-radius: 8px 0 8px 0;
+  background-color: #0b314c;
+  color: #ffffff;
+  cursor: pointer;
+  border: 2px solid #0b314c;
+}
+
+.standard2 {
+  height: 100%;
+  margin-left: 10px;
+  background-color: transparent;
+  color: #e4e4e4;
+  cursor: pointer;
+  border: 2px solid transparent;
+  cursor: default;
 }
 
 .suggestion {
-    align-self: auto;
-    height: 100%;
-    width: 33.4%;
-    border-radius: 8px 0 8px 0;
-    background-color: #0B314C;
-    color: #ffffff;
-    cursor: pointer;
-    border: 2px solid #0B314C;
+  height: 100%;
+  width: 33.4%;
+  border-radius: 8px 0 8px 0;
+  background-color: #0b314c;
+  color: #ffffff;
+  cursor: pointer;
+  border: 2px solid #0b314c;
 }
 
 .enhance {
-    align-self: auto;
-    height: 100%;
-    width: 33.3%;
-    border-radius: 8px 8px 0 0;
-    background-color: #0B314C;
-    color: #ffffff;
-    cursor: pointer;
-    border: 2px solid #0B314C;
+  height: 100%;
+  width: 33.3%;
+  border-radius: 8px 8px 0 0;
+  background-color: #0b314c;
+  color: #ffffff;
+  cursor: pointer;
+  border: 2px solid #0b314c;
 }
 
 .active-standard {
-    align-self: auto;
-    height: 100%;
-    width: 33.3%;
-    border-radius: 8px 0 8px 0;
-    background-color: #0B314C;
-    color: #e4e4e4;
-    border: 2px solid #0B314C;
-    border-bottom-color: #ffffff;
-    pointer-events: none;
-    cursor: pointer;
+  height: 100%;
+  width: 33.3%;
+  border-radius: 8px 0 8px 0;
+  background-color: #0b314c;
+  color: #e4e4e4;
+  border: 2px solid #0b314c;
+  border-bottom-color: #ffffff;
+  pointer-events: none;
+  cursor: pointer;
 }
 
 .active-suggestion {
-    align-self: auto;
-    height: 100%;
-    width: 33.4%;
-    border-radius: 8px 0 8px 0;
-    background-color: #0B314C;
-    color: #e4e4e4;
-    border: 2px solid #0B314C;
-    border-bottom-color: #ffffff;
-    pointer-events: none;
-    cursor: pointer;   
+  height: 100%;
+  width: 33.4%;
+  border-radius: 8px 0 8px 0;
+  background-color: #0b314c;
+  color: #e4e4e4;
+  border: 2px solid #0b314c;
+  border-bottom-color: #ffffff;
+  pointer-events: none;
+  cursor: pointer;
 }
 
 .active-enhance {
-    align-self: auto;
-    height: 100%;
-    width: 33.3%;
-    border-radius: 8px 8px 0 0;
-    background-color: #0B314C;
-    color: #e4e4e4;
-    border: 2px solid #0B314C;
-    border-bottom-color: #ffffff;
-    pointer-events: none;
-    cursor: pointer;
+  height: 100%;
+  width: 33.3%;
+  border-radius: 8px 8px 0 0;
+  background-color: #0b314c;
+  color: #e4e4e4;
+  border: 2px solid #0b314c;
+  border-bottom-color: #ffffff;
+  pointer-events: none;
+  cursor: pointer;
 }

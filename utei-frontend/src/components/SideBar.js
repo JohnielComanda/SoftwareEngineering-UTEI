@@ -1,45 +1,100 @@
-import React, {useState} from 'react';
-import '../css/SideBar.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "../css/SideBar.css";
 
-const SideBar = () => {
-  const [activeTab, setActiveTab] = useState(0);
-
+const SideBar = ({
+  userId,
+  testType,
+  activeTab,
+  setSelectedResult,
+  setTestResult,
+  setActiveTab,
+  newDataAction,
+}) => {
+  const [tests, setTests] = useState([]);
+  const navigate = useNavigate(); // Use useNavigate from re-navigate
   const handleTabClick = (tabIndex) => {
     setActiveTab(tabIndex);
+    console.log("Active Tab: ", activeTab);
   };
+
+  useEffect(() => {
+    // This method is for the fetching
+    const fetchTestResult = async () => {
+      try {
+        const response = await axios.get(
+          testType === "efficiencyTest"
+            ? `https://localhost:7070/api/EfficiencyTest/all/${userId}`
+            : testType === "generateTest"
+            ? `https://localhost:7070/api/GenerateTest/all/${userId}`
+            : testType === "accuracyTest"
+            ? `https://localhost:7070/api/AccuracyTest/all/${userId}`
+            : ""
+        );
+        const reversedData = [...response.data].reverse();
+
+        setTests(reversedData);
+        console.log("Tests: ", tests);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchTestResult();
+  }, [newDataAction]);
+
+  const handleViewHistory = (test) => {
+    setTestResult({});
+    setSelectedResult(test);
+  };
+
+  const tabs = [
+    {
+      to: "/efficiency_test",
+      text: "Identify Efficiency",
+      className: "efficiency",
+    },
+    { to: "/accuracy", text: "Identify Accuracy", className: "accuracy" },
+    { to: "/generate_test", text: "Generate Unit Test", className: "generate" },
+  ];
 
   return (
     <div className="sidebar">
-      <div className='buttons'>
-        <button 
-            a href="/" 
-            className={activeTab === 0 ? 'active-efficiency' : 'efficiency'}
-            onClick={() => handleTabClick(0)}
-        > Identify Efficiency 
-        </button>
-        <button 
-            a href="/accuracy" 
-            className={activeTab === 1 ? 'active-accuracy' : 'accuracy'}
-            onClick={() => handleTabClick(1)}
-        > Identify Accuracy
-        </button>
-        <button 
-            a href="#"  
-            className={activeTab === 2 ? 'active-generate' : 'generate'}
-            onClick={() => handleTabClick(2)}
-        > Generate Unit Test
-        </button>
+      <div className="buttons">
+        {tabs.map((tab, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              handleTabClick(index);
+              navigate(tab.to); // Use navigate to switch routes
+            }}
+            className={
+              activeTab === index ? `active-${tab.className}` : tab.className
+            }
+          >
+            {tab.text}
+          </button>
+        ))}
       </div>
 
-      <div className='saved-test'>
-        <ul>
-          <li>
-            <button className='btn-test'> saved test</button>
-          </li>
-        </ul>
+      <div className="saved-test">
+        {tests.map((test, index) => {
+          return (
+            <ul>
+              <li>
+                <button
+                  onClick={() => handleViewHistory(test)}
+                  className="btn-test"
+                >
+                  {test.programmingLanguage + "   " + test.date}
+                </button>
+              </li>
+            </ul>
+          );
+        })}
       </div>
 
-      <button className='clear-history'> Clear History</button>
+      {/* <button className="clear-history"> Clear History</button> */}
     </div>
   );
 };
