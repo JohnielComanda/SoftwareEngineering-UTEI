@@ -135,12 +135,12 @@ namespace UTEI.Controllers
             {
                 client.Port = 587; // Specify the SMTP port
                 client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential(Environment.GetEnvironmentVariable("Email"), Environment.GetEnvironmentVariable("EmailPassword"));
+                client.Credentials = new NetworkCredential(Environment.GetEnvironmentVariable("UTEI_MAILER_EMAIL"), Environment.GetEnvironmentVariable("UTEI_MAILER_PASSWORD"));
                 client.EnableSsl = true; // Enable SSL if required
 
                 // Create and configure the email message
                 var mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(Environment.GetEnvironmentVariable("Email")!, "UTEI");
+                mailMessage.From = new MailAddress(Environment.GetEnvironmentVariable("UTEI_MAILER_EMAIL")!, "UTEI");
                 mailMessage.To.Add(email);
 
                 string htmlBody = @"
@@ -247,19 +247,19 @@ namespace UTEI.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Name, user.UserName!),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 };
 
                 // Create JWT token and return login response
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1swek3u4uo2u4a6e"));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("ISSUER_SIGNING_KEY")!));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                 var expires = DateTime.Now.AddMinutes(30);
 
                 var token = new JwtSecurityToken(
-                    issuer: "https://localhost:5001",
-                    audience: "https://localhost:5001",
+                    issuer: "https://utei.azurewebsites.net",
+                    audience: "https://utei.azurewebsites.net",
                     claims: claims,
                     expires: expires,
                     signingCredentials: creds

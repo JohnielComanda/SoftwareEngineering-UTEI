@@ -14,12 +14,10 @@ using UTEI.Models.AuthenticationModel;
 using UTEI.Repository.AccuracyUnitTest;
 using UTEI.Repository.EnhanceUnitTest;
 using UTEI.Repository.GenerateUnitTest;
-using UTEI.Repository.User;
 using UTEI.Service;
 using UTEI.Service.AccuracyUnitTest;
 using UTEI.Service.EnhanceUnitTest;
 using UTEI.Service.GenerateUnitTest;
-using UTEI.Service.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,7 +36,7 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
 {
     MongoDbSettings = new MongoDbSettings
     {
-        ConnectionString = Environment.GetEnvironmentVariable("MongoDBConnection"),
+        ConnectionString = Environment.GetEnvironmentVariable("MONGODB_CONNECTIONSTRING"),
         DatabaseName = "UTEI"
     },
     IdentityOptionsAction = options =>
@@ -82,7 +80,7 @@ builder.Services.AddAuthentication(x =>
         ValidateLifetime = true,
         ValidIssuer = "https://utei.azurewebsites.net",
         ValidAudience = "https://utei.azurewebsites.net",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("IssuerSigningKey")),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ISSUER_SIGNING_KEY")),
         ClockSkew = TimeSpan.Zero
     };
 });
@@ -99,10 +97,6 @@ app.Run();
 void ConfigureServices(WebApplicationBuilder builder)
 {
     // Register repositories and services
-    builder.Services.AddScoped<IUserLoginRepository, UserLoginRepository>();
-    builder.Services.AddScoped<IUserLoginService, UserLoginService>();
-    builder.Services.AddScoped<IUserRegisterRepository, UserRegisterRepository>();
-    builder.Services.AddScoped<IUserRegisterService, UserRegisterService>();
     builder.Services.AddScoped<IGenerateTestRepository, GenerateTestRepository>();
     builder.Services.AddScoped<IGenerateTestService, GenerateTestService>();
     builder.Services.AddScoped<IUnitTestGenerator, UnitTestGenerator>();

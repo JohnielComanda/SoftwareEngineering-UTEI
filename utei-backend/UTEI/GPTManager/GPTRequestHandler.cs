@@ -27,7 +27,7 @@ namespace UTEI.GPTManager
 
             using (var httpClient = new HttpClient())
             {
-                var openAIApiKey = Environment.GetEnvironmentVariable("OpenAIApiKey");
+                var openAIApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
                 var apiUrl = "https://api.openai.com/v1/engines/text-davinci-003/completions";
                 httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {openAIApiKey}");
 

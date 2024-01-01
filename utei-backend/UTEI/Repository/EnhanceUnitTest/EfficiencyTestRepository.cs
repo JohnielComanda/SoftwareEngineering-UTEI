@@ -19,12 +19,12 @@ namespace UTEI.Repository.EnhanceUnitTest
         /// <param name="options"></param>
         public EfficiencyTestRepository(IOptions<DatabaseSettings> options)
         {
-            var connectionUri = Environment.GetEnvironmentVariable("MongoDBConnection");
+            var connectionUri = Environment.GetEnvironmentVariable("MONGODB_CONNECTIONSTRING");
             var settings = MongoClientSettings.FromConnectionString(connectionUri);
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
 
             var mongoClient = new MongoClient(settings);
-            _efficiencyTest = mongoClient.GetDatabase(Environment.GetEnvironmentVariable("DatabaseName"))
+            _efficiencyTest = mongoClient.GetDatabase(Environment.GetEnvironmentVariable("DATABASE_NAME"))
                 .GetCollection<EfficiencyTest>("EfficiencyTest");
         }
 
