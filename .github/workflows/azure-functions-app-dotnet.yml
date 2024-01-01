@@ -26,12 +26,12 @@ env:
   AZURE_FUNCTIONAPP_NAME: 'utei'   # set this to your function app name on Azure
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'utei-backend/UTEI'       # set this to the path to your function app project, defaults to the repository root
   DOTNET_VERSION: '7.0.x'                   # set this to the dotnet version to use (e.g. '2.1.x', '3.1.x', '5.0.x')
-  MONGODB_CONNECTION: ${{ secrets.MONGODB_CONNECTIONSTRING }}
-  DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-  EMAIL: ${{ secrets.UTEI_MAILER_EMAIL }}
-  EMAIL_PASSWORD: ${{ secrets.UTEI_MAILER_PASSWORD }}
-  ISSUER_SIGNING_KEY: ${{ secrets.ISSUER_SIGNING_KEY }}
+  MONGODB_CONNECTION: ${{ env.MONGODB_CONNECTIONSTRING }}
+  DATABASE_NAME: ${{ env.DATABASE_NAME }}
+  OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
+  EMAIL: ${{ env.UTEI_MAILER_EMAIL }}
+  EMAIL_PASSWORD: ${{ env.UTEI_MAILER_PASSWORD }}
+  ISSUER_SIGNING_KEY: ${{ env.ISSUER_SIGNING_KEY }}
 
 jobs:
   build-and-deploy:
@@ -65,4 +65,4 @@ jobs:
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-        publish-profile: ${{ secrets.UTEI_BACKEND_SECRET}} # Remove publish-profile to use Azure RBAC
+        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE}} # Remove publish-profile to use Azure RBAC
