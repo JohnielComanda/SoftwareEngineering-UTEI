@@ -8,42 +8,33 @@ const HeaderBar = ({
   setUserId,
   setUserName,
 }) => {
-  // const getInitials = (name) => {
-  //   const initials = name
-  //     .replace(/([A-Z])/g, " $1")
-  //     .trim()
-  //     .split(" ")
-  //     .map((word) => word.charAt(0))
-  //     .join("");
-  //   return initials;
-  // };
-
-  // const initials = getInitials(userName);
+  const initials = userName.split("@")[0];
   const navigate = useNavigate();
-  // const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // const handleMouseEnter = () => {
-  //   setIsHovered(true);
-  // };
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
 
-  // const handleMouseLeave = () => {
-  //   setIsHovered(false);
-  // };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
-  // const handleLogout = () => {
-  //   setIsAuthenticated(false);
-  //   setUserId("");
-  //   setUserName("");
-  //   setIsHovered(false);
-  //   navigate("/login");
-  // };
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setIsAuthenticated(false);
+    setUserId("");
+    setUserName("");
+    setIsHovered(false);
+    navigate("/login");
+  };
 
   return (
     <header className="header-bar">
       <div className="logo">
         <img src="UTEI_Logo_v1.png" alt="Logo" />
       </div>
-      {/* {userName ? (
+      {userName ? (
         <div
           className="profile"
           onMouseEnter={handleMouseEnter}
@@ -59,7 +50,7 @@ const HeaderBar = ({
         </div>
       ) : (
         ""
-      )} */}
+      )}
     </header>
   );
 };

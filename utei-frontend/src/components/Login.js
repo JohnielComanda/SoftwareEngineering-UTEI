@@ -4,14 +4,15 @@ import axios from "axios";
 import "../css/Login.css";
 
 const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
+  const isFirstRender = useRef(true);
+  const navigate = useNavigate();
+  const signupButtonRef = useRef(null);
+  const [goResponse, setGoResponse] = useState("");
   const initialUserDetails = {
     email: "",
     password: "",
   };
   const [userDetails, setUserDetails] = useState(initialUserDetails);
-  const isFirstRender = useRef(true);
-  const navigate = useNavigate();
-  const [goResponse, setGoResponse] = useState("");
 
   useEffect(() => {
     //This method is for the Post and uses axios to pass on the parameters to the backend side
@@ -21,21 +22,23 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
   }, [userDetails]);
 
   const loginUser = async () => {
-    try {
-      const response = await axios.post(
-        `https://localhost:7070/api/authenticate/login`,
-        userDetails
-      );
-      console.log("Loggedin user: ", response.data);
-      if (response.data) setIsAuthenticated(true);
-      setUserName(userDetails.name);
-      console.log("LOG: ", response.data.name);
-      setUserId(response.data.id);
-      navigate("/efficiency_test");
-    } catch (error) {
-      console.error(error);
-      setGoResponse("Incorrect email or password.");
-    }
+    await axios
+      .post(`https://localhost:7070/api/authenticate/login`, userDetails)
+      .then((response) => {
+        console.log("login response: ", response);
+        setUserId(response.data.userId);
+        setUserName(response.data.email);
+        setIsAuthenticated(true);
+        localStorage.setItem("authToken", response.data.accessToken);
+        navigate("/efficiency_test");
+      })
+      .catch((error) => {
+        if (error.response && error.response.data) {
+          // Handle error
+          console.error("login failed:", error.response.data);
+          setGoResponse(error.response.data);
+        }
+      });
   };
 
   const onClickSubmit = () => {
@@ -43,6 +46,13 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
       email: document.querySelector('input[name="email"]').value,
       password: document.querySelector('input[name="password"]').value,
     }));
+  };
+
+  const handleEnterKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Prevent default form submission behavior
+      signupButtonRef.current.click(); // Simulate click on the signup button
+    }
   };
 
   return (
@@ -64,10 +74,17 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
         <div className="input-container">
           <div className="input-field">
             <input name="email" type="email" placeholder="Email" />
-            <input name="password" type="password" placeholder="Password" />
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              onKeyPress={handleEnterKeyPress}
+            />
           </div>
           <div className="login-button">
-            <button onClick={onClickSubmit}>Sign In</button>
+            <button ref={signupButtonRef} onClick={onClickSubmit}>
+              Sign In
+            </button>
             <text>
               Don't have an account? <a href="/signup"> Sign Up</a>
             </text>
