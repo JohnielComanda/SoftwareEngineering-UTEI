@@ -30,13 +30,13 @@ jobs:
           dotnet-version: '7.0.x'
           
       - name: Restore
-        run: dotnet restore ./utei-backend/UTEI.sln
+        run: dotnet restore ./utei-backend/UTEI
         
       - name: Build
-        run: dotnet build ./utei-backend/UTEI.sln --configuration Release --no-restore
+        run: dotnet build ./utei-backend/UTEI --configuration Release --no-restore
         
       - name: Publish
-        run: dotnet publish ./utei-backend/UTEI.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        run: dotnet publish ./utei-backend/UTEI --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
         
       - name: Deployment
         uses: azure/webapps-deploy@v2
