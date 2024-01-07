@@ -36,7 +36,7 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
 {
     MongoDbSettings = new MongoDbSettings
     {
-        ConnectionString = Environment.GetEnvironmentVariable("MONGODB_CONNECTIONSTRING"),
+        ConnectionString = "mongodb+srv://JohnielComanda:FYsVjt5pqg3bJCA2@cluster0.hg9di7y.mongodb.net/?retryWrites=true&w=majority",
         DatabaseName = "UTEI"
     },
     IdentityOptionsAction = options =>
@@ -78,9 +78,9 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
-        ValidIssuer = "https://utei.azurewebsites.net",
-        ValidAudience = "https://utei.azurewebsites.net",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ISSUER_SIGNING_KEY")),
+        ValidIssuer = "https://unit-test-function.azurewebsites.net",
+        ValidAudience = "https://unit-test-function.azurewebsites.net",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1swek3u4uo2u4a6e")),
         ClockSkew = TimeSpan.Zero
     };
 });
