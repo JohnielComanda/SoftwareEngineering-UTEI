@@ -4,7 +4,6 @@ import ResultContext from "./ResultContext";
 import EfficiencyTest from "./pages/efficiencyTest/layout/EfficiencyTest";
 import GenerateTest from "./pages/generateTest/layout/GenerateTest";
 import AccuracyTest from "./pages/accuracyTest/layout/TempTest";
-// import AccuracyTest from "./";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import HeaderBar from "./components/HeaderBar";
@@ -133,6 +132,7 @@ function App() {
   const [generateSelectedLanguage, setGenerateSelectedLanguage] = useState("");
   const [generateResult, setGenerateResult] = useState({});
   const [generateSelectedResult, setGenerateSelectedResult] = useState({});
+
   return (
     <div className="background">
       <HeaderBar
@@ -202,7 +202,7 @@ function App() {
             }
           />
           <Route
-            path="efficiency_test"
+            path="/efficiency_test"
             element={
               isAuthenticated ? (
                 <EfficiencyTest
@@ -229,7 +229,7 @@ function App() {
             }
           />
           <Route
-            path="generate_test"
+            path="/generate_test"
             element={
               isAuthenticated ? (
                 <GenerateTest
