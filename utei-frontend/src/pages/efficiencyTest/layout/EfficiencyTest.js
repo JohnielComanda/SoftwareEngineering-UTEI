@@ -2,9 +2,7 @@ import { React, useState } from "react";
 import ResultContext from "../../../ResultContext";
 import EfficiencyInputSpace from "./EfficiencyInputSpace";
 import EfficiencyOutputSpace from "./EfficiencyOutputSpace";
-import HeaderBar from "../../../components/HeaderBar";
 import SideBar from "../../../components/SideBar";
-import Login from "../../../components/Login";
 
 const EfficiencyTest = ({
   userId,
@@ -22,7 +20,6 @@ const EfficiencyTest = ({
   setNewDataAction,
 }) => {
   const [resultId, setResultId] = useState("");
-  const [testResult, setTestResult] = useState({});
   const [activeTab, setActiveTab] = useState(0);
 
   return (

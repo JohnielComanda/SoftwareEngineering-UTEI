@@ -1,4 +1,4 @@
-import { React, useRef, useState, useEffect, useContext } from "react";
+import { React, useRef, useState, useEffect } from "react";
 import EffiencyBar from "../output/EfficiencyBar";
 import axios from "axios";
 import "../../../css/OutputSpace.css";
@@ -13,7 +13,6 @@ const EfficiencyOutputSpace = ({
   setSelectedResult,
 }) => {
   const [activeTab, setActiveTab] = useState(0);
-  const isFirstRender = useRef(true);
 
   // This is for getting the result from the database by fetching using axios
   // This will trigger everytime resultId is being updated
@@ -31,11 +30,13 @@ const EfficiencyOutputSpace = ({
       }
     };
     fetchTestResult();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resultId]);
 
   // This useEffect is for the tabs to dynamically change every re-render
   useEffect(() => {
     handleTabClick(activeTab);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleTabClick = (tabIndex) => {
