@@ -6,6 +6,6 @@ namespace UTEI.Dtos.AuthenticationDtos
     {
         public string Message { get; set; } = string.Empty;
         public bool Success { get; set; }
-        public ApplicationUser User { get; set; }
+        public ApplicationUser? User { get; set; }
     }
 }
