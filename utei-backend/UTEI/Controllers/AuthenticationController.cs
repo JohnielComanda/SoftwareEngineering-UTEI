@@ -46,10 +46,10 @@ namespace UTEI.Controllers
                 if (result.Success)
                 {
                     // Generate verification token
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(result.User);
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(result.User!);
 
                     // Send verification email
-                    await SendVerificationEmail(result.User.Email, token);
+                    await SendVerificationEmail(result.User!.Email!, token);
 
                     return Ok(result);
                 }
@@ -269,9 +269,9 @@ namespace UTEI.Controllers
                 {
                     AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
                     Message = "Login Successful",
-                    Email = user?.Email,
+                    Email = user?.Email!,
                     Success = true,
-                    UserId = user?.Id.ToString()
+                    UserId = user?.Id.ToString()!
                 };
             }
             catch (Exception ex)

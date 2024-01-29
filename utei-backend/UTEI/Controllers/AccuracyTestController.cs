@@ -24,7 +24,7 @@ namespace UTEI.Controllers
                 var res = await _accuService.TestAccuracy(info);
                 return StatusCode(201, res);
             }
-            catch (Exception e)
+            catch
             {
                 return StatusCode(500, "Something went wrong!");
             }
@@ -43,7 +43,7 @@ namespace UTEI.Controllers
                 return Ok(test);
 
             }
-            catch (Exception e)
+            catch
             {
                 return BadRequest();
             }
@@ -61,7 +61,7 @@ namespace UTEI.Controllers
                 }
                 return Ok(test);
             }
-            catch (Exception e)
+            catch 
             {
                 return BadRequest();
             }
