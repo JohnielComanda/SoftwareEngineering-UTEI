@@ -1,4 +1,4 @@
-import { React, useRef, useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import EffiencyBar from "../output/EfficiencyBar";
 import axios from "axios";
 import "../../../css/OutputSpace.css";
