@@ -2,7 +2,6 @@ import { React, useState } from "react";
 import ResultContext from "../../../ResultContext";
 import GenerateInputSpace from "./GenerateInputSpace";
 import GenerateOutputSpace from "./GenerateOutputSpace";
-import HeaderBar from "../../../components/HeaderBar";
 import SideBar from "../../../components/SideBar";
 
 const GenerateTest = ({

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SelectProgLang from "../../../components/SelectProgLang";
-import ResultContext from "../../../ResultContext";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import "../../../css/InputSpace.css";
@@ -21,7 +20,6 @@ const GenerateInputSpace = ({
   setNewDataAction,
 }) => {
   const [action, setAction] = useState(0);
-  const resultId = useContext(ResultContext);
   const [isLoading, setIsLoading] = useState(true);
 
   // This is for passing the parameters to the backend to generate unit test
@@ -54,6 +52,7 @@ const GenerateInputSpace = ({
     };
 
     createTest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [action]);
 
   // For submiting test, setAction will be updated and will trigger the useEffect for POST
@@ -74,6 +73,7 @@ const GenerateInputSpace = ({
   const onChange = React.useCallback((value, viewUpdate) => {
     console.log("value:", value);
     setGenerateBaseMethod(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

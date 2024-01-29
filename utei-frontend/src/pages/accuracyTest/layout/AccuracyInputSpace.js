@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import SelectProgLang from "../../../components/SelectProgLang";
-import ResultContext from "../../../ResultContext";
 import "../../../css/InputSpace.css";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
@@ -29,9 +27,7 @@ const AccuracyInputSpace = ({
   setAccuracyResult,
   setNewDataAction,
 }) => {
-  const isFirstRender = useRef(true);
   const [action, setAction] = useState(0);
-  const resultId = useContext(ResultContext);
   const [isLoading, setIsLoading] = useState(true);
 
   // This is for passing the parameters to the backend to generate unit test
@@ -66,11 +62,12 @@ const AccuracyInputSpace = ({
     };
 
     createTest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [action]);
 
   // For submiting test, setAction will be updated and will trigger the useEffect for POST
   const onClickSubmit = () => {
-    setAccuracyInput((prevData) => ({
+    setAccuracyInput(() => ({
       userId: userId,
       baseMethod: accuracyBaseMethod,
       programmingLanguage: accuracySelectedLanguage,
@@ -86,24 +83,29 @@ const AccuracyInputSpace = ({
   };
 
   // For text editor onChange
-  const onChangeUnitTest = React.useCallback((value, viewUpdate) => {
+  const onChangeUnitTest = React.useCallback((value) => {
     setAccuracyUnitTest(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onChangeBaseMethod = React.useCallback((value, viewUpdate) => {
+  const onChangeBaseMethod = React.useCallback((value) => {
     setAccuracyBaseMethod(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onChangeDescription = React.useCallback((value, viewUpdate) => {
+  const onChangeDescription = React.useCallback((value) => {
     setAccuracyDescription(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onChangeDependency1 = React.useCallback((value, viewUpdate) => {
+  const onChangeDependency1 = React.useCallback((value) => {
     setAccuracyDependency1(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onChangeDependency2 = React.useCallback((value, viewUpdate) => {
+  const onChangeDependency2 = React.useCallback((value) => {
     setAccuracyDependency2(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSelectChange = (event) => {

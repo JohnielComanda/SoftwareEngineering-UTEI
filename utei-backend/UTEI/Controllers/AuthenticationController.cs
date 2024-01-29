@@ -135,12 +135,12 @@ namespace UTEI.Controllers
             {
                 client.Port = 587; // Specify the SMTP port
                 client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential(Environment.GetEnvironmentVariable("UTEI_MAILER_EMAIL"), Environment.GetEnvironmentVariable("UTEI_MAILER_PASSWORD"));
+                client.Credentials = new NetworkCredential("UTEI2223@gmail.com", "khhktfdydhxvdooi");
                 client.EnableSsl = true; // Enable SSL if required
 
                 // Create and configure the email message
                 var mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(Environment.GetEnvironmentVariable("UTEI_MAILER_EMAIL")!, "UTEI");
+                mailMessage.From = new MailAddress("UTEI2223@gmail.com"!, "UTEI");
                 mailMessage.To.Add(email);
 
                 string htmlBody = @"
@@ -253,7 +253,7 @@ namespace UTEI.Controllers
                 };
 
                 // Create JWT token and return login response
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("ISSUER_SIGNING_KEY")!));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1swek3u4uo2u4a6e")!);
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                 var expires = DateTime.Now.AddMinutes(30);
 

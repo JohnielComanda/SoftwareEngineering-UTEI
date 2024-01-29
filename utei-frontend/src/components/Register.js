@@ -72,6 +72,7 @@ const Register = () => {
     if (userDetails.name) {
       registerUser();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails]);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -122,6 +123,7 @@ const Register = () => {
             >
               <img
                 type="button"
+                alt="show password"
                 src={showPassword ? "hide.png" : "show.png"}
               ></img>
               {showPassword ? "Hide" : "Show"}

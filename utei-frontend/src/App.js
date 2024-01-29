@@ -23,7 +23,7 @@ function App() {
     return !!token;
   });
   const [newDataAction, setNewDataAction] = useState(0);
-  const [decodeToken, setDecodeToken] = useState({});
+  const [, setDecodeToken] = useState({});
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
