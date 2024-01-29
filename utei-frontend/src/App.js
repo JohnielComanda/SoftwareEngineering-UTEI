@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ResultContext from "./ResultContext";
 import EfficiencyTest from "./pages/efficiencyTest/layout/EfficiencyTest";
 import GenerateTest from "./pages/generateTest/layout/GenerateTest";
 import AccuracyTest from "./pages/accuracyTest/layout/TempTest";
-// import AccuracyTest from "./";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import HeaderBar from "./components/HeaderBar";
@@ -133,6 +132,7 @@ function App() {
   const [generateSelectedLanguage, setGenerateSelectedLanguage] = useState("");
   const [generateResult, setGenerateResult] = useState({});
   const [generateSelectedResult, setGenerateSelectedResult] = useState({});
+
   return (
     <div className="background">
       <HeaderBar
@@ -142,122 +142,118 @@ function App() {
         setUserName={setUserName}
       />
       <ResultContext.Provider>
-        <Router>
-          <Routes>
-            <Route
-              path="/login"
-              element={
-                <Login
-                  setUserName={setUserName}
-                  setUserId={setUserId}
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              <Login
+                setUserName={setUserName}
+                setUserId={setUserId}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+              />
+            }
+          />
+          <Route path="/signup" element={<Register />} />
+          <Route
+            path="/"
+            element={
+              <Login
+                setUserName={setUserName}
+                setUserId={setUserId}
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+              />
+            }
+          />
+          <Route
+            path="/accuracy"
+            element={
+              isAuthenticated ? (
+                <AccuracyTest
+                  userId={userId}
+                  testType={""}
+                  accuracyInput={accuracyInput}
+                  setAccuracyInput={setAccuracyInput}
+                  accuracyUnitTest={accuracyUnitTest}
+                  setAccuracyUnitTest={setAccuracyUnitTest}
+                  accuracyBaseMethod={accuracyBaseMethod}
+                  setAccuracyBaseMethod={setAccuracyBaseMethod}
+                  accuracyDescription={accuracyDescription}
+                  setAccuracyDescription={setAccuracyDescription}
+                  accuracyDependency1={accuracyDependency1}
+                  setAccuracyDependency1={setAccuracyDependency1}
+                  accuracyDependency2={accuracyDependency2}
+                  setAccuracyDependency2={setAccuracyDependency2}
+                  accuracySelectedLanguage={accuracySelectedLanguage}
+                  setAccuracySelectedLanguage={setAccuracySelectedLanguage}
+                  accuracyTestType={accuracyTestType}
+                  setAccuracyTestType={setAccuracyTestType}
+                  accuracyResult={accuracyResult}
+                  setAccuracyResult={setAccuracyResult}
+                  selectedResult={accuracySelectedResult}
+                  setSelectedResult={setAccuracySelectedResult}
+                  newDataAction={newDataAction}
+                  setNewDataAction={setNewDataAction}
+                />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          <Route
+            path="/efficiency_test"
+            element={
+              isAuthenticated ? (
+                <EfficiencyTest
+                  userId={userId}
+                  testType={""}
+                  selectedResult={efficiencySelectedResult}
+                  setSelectedResult={setEfficiencySelectedResult}
+                  efficiencyInput={efficiencyInput}
+                  setEfficiencyInput={setEfficiencyInput}
+                  unitTest={unitTest}
+                  setUnitTest={setUnitTest}
+                  efficiencySelectedLanguage={efficiencySelectedLanguage}
+                  setEfficiencySelectedLanguage={setEfficiencySelectedLanguage}
+                  efficiencyResult={efficiencyResult}
+                  setEfficiencyResult={setEfficiencyResult}
                   isAuthenticated={isAuthenticated}
                   setIsAuthenticated={setIsAuthenticated}
+                  newDataAction={newDataAction}
+                  setNewDataAction={setNewDataAction}
                 />
-              }
-            />
-            <Route path="/signup" element={<Register />} />
-            <Route
-              path="/"
-              element={
-                <Login
-                  setUserName={setUserName}
-                  setUserId={setUserId}
-                  isAuthenticated={isAuthenticated}
-                  setIsAuthenticated={setIsAuthenticated}
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          <Route
+            path="/generate_test"
+            element={
+              isAuthenticated ? (
+                <GenerateTest
+                  userId={userId}
+                  testType={""}
+                  selectedResult={generateSelectedResult}
+                  setSelectedResult={setGenerateSelectedResult}
+                  genereateBaseInput={genereateBaseInput}
+                  setGenerateBaseInput={setGenerateBaseInput}
+                  generateBaseMethod={generateBaseMethod}
+                  setGenerateBaseMethod={setGenerateBaseMethod}
+                  generateSelectedLanguage={generateSelectedLanguage}
+                  setGenerateSelectedLanguage={setGenerateSelectedLanguage}
+                  generateResult={generateResult}
+                  setGenerateResult={setGenerateResult}
+                  newDataAction={newDataAction}
+                  setNewDataAction={setNewDataAction}
                 />
-              }
-            />
-            <Route
-              path="/accuracy"
-              element={
-                isAuthenticated ? (
-                  <AccuracyTest
-                    userId={userId}
-                    testType={""}
-                    accuracyInput={accuracyInput}
-                    setAccuracyInput={setAccuracyInput}
-                    accuracyUnitTest={accuracyUnitTest}
-                    setAccuracyUnitTest={setAccuracyUnitTest}
-                    accuracyBaseMethod={accuracyBaseMethod}
-                    setAccuracyBaseMethod={setAccuracyBaseMethod}
-                    accuracyDescription={accuracyDescription}
-                    setAccuracyDescription={setAccuracyDescription}
-                    accuracyDependency1={accuracyDependency1}
-                    setAccuracyDependency1={setAccuracyDependency1}
-                    accuracyDependency2={accuracyDependency2}
-                    setAccuracyDependency2={setAccuracyDependency2}
-                    accuracySelectedLanguage={accuracySelectedLanguage}
-                    setAccuracySelectedLanguage={setAccuracySelectedLanguage}
-                    accuracyTestType={accuracyTestType}
-                    setAccuracyTestType={setAccuracyTestType}
-                    accuracyResult={accuracyResult}
-                    setAccuracyResult={setAccuracyResult}
-                    selectedResult={accuracySelectedResult}
-                    setSelectedResult={setAccuracySelectedResult}
-                    newDataAction={newDataAction}
-                    setNewDataAction={setNewDataAction}
-                  />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/efficiency_test"
-              element={
-                isAuthenticated ? (
-                  <EfficiencyTest
-                    userId={userId}
-                    testType={""}
-                    selectedResult={efficiencySelectedResult}
-                    setSelectedResult={setEfficiencySelectedResult}
-                    efficiencyInput={efficiencyInput}
-                    setEfficiencyInput={setEfficiencyInput}
-                    unitTest={unitTest}
-                    setUnitTest={setUnitTest}
-                    efficiencySelectedLanguage={efficiencySelectedLanguage}
-                    setEfficiencySelectedLanguage={
-                      setEfficiencySelectedLanguage
-                    }
-                    efficiencyResult={efficiencyResult}
-                    setEfficiencyResult={setEfficiencyResult}
-                    isAuthenticated={isAuthenticated}
-                    setIsAuthenticated={setIsAuthenticated}
-                    newDataAction={newDataAction}
-                    setNewDataAction={setNewDataAction}
-                  />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/generate_test"
-              element={
-                isAuthenticated ? (
-                  <GenerateTest
-                    userId={userId}
-                    testType={""}
-                    selectedResult={generateSelectedResult}
-                    setSelectedResult={setGenerateSelectedResult}
-                    genereateBaseInput={genereateBaseInput}
-                    setGenerateBaseInput={setGenerateBaseInput}
-                    generateBaseMethod={generateBaseMethod}
-                    setGenerateBaseMethod={setGenerateBaseMethod}
-                    generateSelectedLanguage={generateSelectedLanguage}
-                    setGenerateSelectedLanguage={setGenerateSelectedLanguage}
-                    generateResult={generateResult}
-                    setGenerateResult={setGenerateResult}
-                    newDataAction={newDataAction}
-                    setNewDataAction={setNewDataAction}
-                  />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-          </Routes>
-        </Router>
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+        </Routes>
       </ResultContext.Provider>
     </div>
   );
