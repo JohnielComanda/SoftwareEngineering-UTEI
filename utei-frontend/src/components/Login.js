@@ -4,7 +4,6 @@ import axios from "axios";
 import "../css/Login.css";
 
 const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
-  const isFirstRender = useRef(true);
   const navigate = useNavigate();
   const signupButtonRef = useRef(null);
   const [goResponse, setGoResponse] = useState("");
@@ -19,6 +18,7 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
     if (userDetails.email) {
       loginUser();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails]);
 
   const loginUser = async () => {
