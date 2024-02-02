@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UTEI.Dtos;
-using UTEI.Models;
 using UTEI.Service.AccuracyUnitTest;
-using UTEI.Service.EnhanceUnitTest;
 
 namespace UTEI.Controllers
 {
-    [Route("api/[Controller]")]
     [ApiController]
+    [Route("api/accuracy")]
     public class AccuracyTestController : ControllerBase
     {
         private readonly IAccuracyTestService _accuService;

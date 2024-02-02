@@ -4,8 +4,8 @@ using UTEI.Service.EnhanceUnitTest;
 
 namespace UTEI.Controllers
 {
-    [Route("api/[Controller]")]
     [ApiController]
+    [Route("api/efficiency")]
     public class EfficiencyTestController : ControllerBase
     {
         private readonly IEfficiencyTestService _efficiencyService;
