@@ -19,9 +19,13 @@ namespace UTEI.Repository.EnhanceUnitTest
         /// <param name="options"></param>
         public EfficiencyTestRepository(IOptions<DatabaseSettings> options)
         {
-            var mongoClient = new MongoClient(options.Value.ConnectionString);
-            _efficiencyTest = mongoClient.GetDatabase(options.Value.DatabaseName)
-                .GetCollection<EfficiencyTest>(options.Value.EfficiencyTestsCollectionName);
+            var connectionUri = "mongodb+srv://JohnielComanda:FYsVjt5pqg3bJCA2@cluster0.hg9di7y.mongodb.net/?retryWrites=true&w=majority";
+            var settings = MongoClientSettings.FromConnectionString(connectionUri);
+            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+
+            var mongoClient = new MongoClient(settings);
+            _efficiencyTest = mongoClient.GetDatabase("UTEI")
+                .GetCollection<EfficiencyTest>("EfficiencyTest");
         }
 
         /// <summary>

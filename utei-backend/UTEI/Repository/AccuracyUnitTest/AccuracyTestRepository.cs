@@ -11,9 +11,13 @@ namespace UTEI.Repository.AccuracyUnitTest
         private readonly IMongoCollection<AccuracyTestModel> _accuracyTest;
         public AccuracyTestRepository(IOptions<DatabaseSettings> options)
         {
-            var mongoClient = new MongoClient(options.Value.ConnectionString);
-            _accuracyTest = mongoClient.GetDatabase(options.Value.DatabaseName)
-                .GetCollection<AccuracyTestModel>(options.Value.AccuracyTestsCollectionName);
+            var connectionUri = "mongodb+srv://JohnielComanda:FYsVjt5pqg3bJCA2@cluster0.hg9di7y.mongodb.net/?retryWrites=true&w=majority";
+            var settings = MongoClientSettings.FromConnectionString(connectionUri);
+            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+
+            var mongoClient = new MongoClient(settings);
+            _accuracyTest = mongoClient.GetDatabase("UTEI")
+                .GetCollection<AccuracyTestModel>("AccuracyTest");
         }
 
         public async Task<string> CreateTest(AccuracyTestModel testAccuracy)

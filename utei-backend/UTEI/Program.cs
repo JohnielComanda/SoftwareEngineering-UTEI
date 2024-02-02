@@ -14,12 +14,10 @@ using UTEI.Models.AuthenticationModel;
 using UTEI.Repository.AccuracyUnitTest;
 using UTEI.Repository.EnhanceUnitTest;
 using UTEI.Repository.GenerateUnitTest;
-using UTEI.Repository.User;
 using UTEI.Service;
 using UTEI.Service.AccuracyUnitTest;
 using UTEI.Service.EnhanceUnitTest;
 using UTEI.Service.GenerateUnitTest;
-using UTEI.Service.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,13 +29,15 @@ BsonSerializer.RegisterSerializer(new DateTimeSerializer(MongoDB.Bson.BsonType.S
 BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(MongoDB.Bson.BsonType.String));
 
 
+DotNetEnv.Env.Load();
+
 //add mongoIdentityConfiguration...
 var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
 {
     MongoDbSettings = new MongoDbSettings
     {
-        ConnectionString = "mongodb://localhost:27017/",
-        DatabaseName = "UTEIDb"
+        ConnectionString = "mongodb+srv://JohnielComanda:FYsVjt5pqg3bJCA2@cluster0.hg9di7y.mongodb.net/?retryWrites=true&w=majority",
+        DatabaseName = "UTEI"
     },
     IdentityOptionsAction = options =>
     {
@@ -53,8 +53,8 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
         options.User.RequireUniqueEmail = true;
 
     }
-
 };
+
 
 builder.Services.ConfigureMongoDbIdentity<ApplicationUser, ApplicationRole, Guid>(mongoDbIdentityConfig)
     .AddUserManager<UserManager<ApplicationUser>>()
@@ -78,11 +78,10 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
-        ValidIssuer = "https://localhost:5001",
-        ValidAudience = "https://localhost:5001",
+        ValidIssuer = "https://unit-test-function.azurewebsites.net",
+        ValidAudience = "https://unit-test-function.azurewebsites.net",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1swek3u4uo2u4a6e")),
         ClockSkew = TimeSpan.Zero
-
     };
 });
 
@@ -98,10 +97,6 @@ app.Run();
 void ConfigureServices(WebApplicationBuilder builder)
 {
     // Register repositories and services
-    builder.Services.AddScoped<IUserLoginRepository, UserLoginRepository>();
-    builder.Services.AddScoped<IUserLoginService, UserLoginService>();
-    builder.Services.AddScoped<IUserRegisterRepository, UserRegisterRepository>();
-    builder.Services.AddScoped<IUserRegisterService, UserRegisterService>();
     builder.Services.AddScoped<IGenerateTestRepository, GenerateTestRepository>();
     builder.Services.AddScoped<IGenerateTestService, GenerateTestService>();
     builder.Services.AddScoped<IUnitTestGenerator, UnitTestGenerator>();
@@ -117,6 +112,7 @@ void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services.AddAuthorization();
     builder.Services.AddCors(options =>
     {
         options.AddDefaultPolicy(builder =>
@@ -139,11 +135,8 @@ void ConfigurePipeline(WebApplication app)
 
     app.UseCors();
     app.UseHttpsRedirection();
-    app.UseAuthorization();
     app.UseRouting();
-    app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapControllers();
-    });
+    app.UseAuthentication();
+    app.UseAuthorization();
+    app.MapControllers();
 }
-

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -45,10 +46,10 @@ namespace UTEI.Controllers
                 if (result.Success)
                 {
                     // Generate verification token
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(result.User);
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(result.User!);
 
                     // Send verification email
-                    await SendVerificationEmail(result.User.Email, token);
+                    await SendVerificationEmail(result.User!.Email!, token);
 
                     return Ok(result);
                 }
@@ -69,7 +70,6 @@ namespace UTEI.Controllers
             try
             {
                 var userExists = await _userManager.FindByEmailAsync(request.Email);
-                Console.WriteLine("HERE", userExists);
                 if (userExists != null) return new RegisterResponse { Message = "User already exists", Success = false };
                 //if we get here, no user with this email..
 
@@ -98,7 +98,6 @@ namespace UTEI.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine("OR HERE");
                 return new RegisterResponse { Message = ex.Message, Success = false };
             }
         }
@@ -118,11 +117,11 @@ namespace UTEI.Controllers
 
             if (result.Succeeded)
             {
-                return Redirect("http://localhost:3000/login");
+                return Redirect("https://utei.azurewebsites.net/login");
             }
             else
             {
-                return Redirect("http://localhost:3000/signup");
+                return Redirect("https://utei.azurewebsites.net/signup");
             }
         }
 
@@ -136,15 +135,65 @@ namespace UTEI.Controllers
             {
                 client.Port = 587; // Specify the SMTP port
                 client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential("3jandeco3@gmail.com", "iajbdwiioujjroca");
+                client.Credentials = new NetworkCredential("UTEI2223@gmail.com", "khhktfdydhxvdooi");
                 client.EnableSsl = true; // Enable SSL if required
 
                 // Create and configure the email message
                 var mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("3jandeco3@gmail.com", "UTEI");
+                mailMessage.From = new MailAddress("UTEI2223@gmail.com"!, "UTEI");
                 mailMessage.To.Add(email);
-                mailMessage.Subject = "Verify your email address";
-                mailMessage.Body = $"Please <a href='{verificationLink}'>click here</a> to verify your email.";
+
+                string htmlBody = @"
+                    <html>
+                    <head>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                line-height: 1.6;
+                            }
+                            .container {
+                                max-width: 600px;
+                                margin: 0 auto;
+                                padding: 20px;
+                                border: 1px solid #ccc;
+                                border-radius: 5px;
+                                background-color: #f9f9f9;
+                            }
+                            .header {
+                                text-align: center;
+                                margin-bottom: 20px;
+                            }
+                            .button {
+                                display: inline-block;
+                                padding: 10px 20px;
+                                font-size: 16px;
+                                text-decoration: none;
+                                color: #fff;
+                                background-color: #007bff;
+                                border-radius: 5px;
+                            }
+                            .button:hover {
+                                background-color: #0056b3;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class='container'>
+                            <div class='header'>
+                                <h2>Verify your email address</h2>
+                            </div>
+                            <p>Please click the link below to verify your email address:</p>
+                            <p>
+                                <a href='" + verificationLink + @"'>Verify Email</a>
+                            </p>
+                            <p>If the link doesn't work, you can also copy and paste this URL into your browser:</p>
+                            <p>" + verificationLink + @"</p>
+                            <p>Thank you!</p>
+                        </div>
+                    </body>
+                    </html>
+                ";
+                mailMessage.Body = htmlBody;
                 mailMessage.IsBodyHtml = true;
 
                 // Send the email
@@ -152,6 +201,12 @@ namespace UTEI.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPost("verifyToken")]
+        public IActionResult VerifyToken()
+        {
+            return Ok();
+        }
 
         [HttpPost]
         [Route("login")]
@@ -192,19 +247,19 @@ namespace UTEI.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Name, user.UserName!),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 };
 
                 // Create JWT token and return login response
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1swek3u4uo2u4a6e"));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1swek3u4uo2u4a6e")!);
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                 var expires = DateTime.Now.AddMinutes(30);
 
                 var token = new JwtSecurityToken(
-                    issuer: "https://localhost:5001",
-                    audience: "https://localhost:5001",
+                    issuer: "https://utei.azurewebsites.net",
+                    audience: "https://utei.azurewebsites.net",
                     claims: claims,
                     expires: expires,
                     signingCredentials: creds
@@ -214,9 +269,9 @@ namespace UTEI.Controllers
                 {
                     AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
                     Message = "Login Successful",
-                    Email = user?.Email,
+                    Email = user?.Email!,
                     Success = true,
-                    UserId = user?.Id.ToString()
+                    UserId = user?.Id.ToString()!
                 };
             }
             catch (Exception ex)

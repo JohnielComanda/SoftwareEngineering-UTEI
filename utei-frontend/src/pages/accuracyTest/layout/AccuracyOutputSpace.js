@@ -1,9 +1,8 @@
-import { React, useRef, useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import axios from "axios";
 import "../../../css/OutputSpace.css";
 import TestCase from "../output/TestCase";
 import Performance from "../output/Performance";
-import Recommendation from "../output/Recommendation";
 
 const AccuracyOutputSpace = ({
   resultId,
@@ -12,7 +11,6 @@ const AccuracyOutputSpace = ({
   setSelectedResult,
 }) => {
   const [activeTab, setActiveTab] = useState(0);
-  const isFirstRender = useRef(true);
 
   // This is for getting the result from the database by fetching using axios
   // This will trigger everytime resultId is being updated
@@ -32,11 +30,13 @@ const AccuracyOutputSpace = ({
       }
     };
     fetchTestResult();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resultId]);
 
   // This useEffect is for the tabs to dynamically change every re-render
   useEffect(() => {
     handleTabClick(activeTab);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleTabClick = (tabIndex) => {

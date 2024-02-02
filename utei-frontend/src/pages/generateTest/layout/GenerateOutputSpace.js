@@ -1,4 +1,4 @@
-import { React, useRef, useEffect } from "react";
+import { React, useEffect } from "react";
 import GenerateStandardOutput from "../output/GenerateStandardOutput";
 import axios from "axios";
 import "../../../css/OutputSpace.css";
@@ -9,7 +9,6 @@ const GenerateOutputSpace = ({
   setGenerateResult,
   setSelectedResult,
 }) => {
-  const isFirstRender = useRef(true);
   console.log("GenerateOutputSpace testResult:", testResult);
 
   // This is for getting the result from the database by fetching using axios
@@ -29,6 +28,7 @@ const GenerateOutputSpace = ({
       }
     };
     fetchTestResult();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resultId]);
 
   return (

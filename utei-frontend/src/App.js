@@ -1,19 +1,79 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import ResultContext from "./ResultContext";
 import EfficiencyTest from "./pages/efficiencyTest/layout/EfficiencyTest";
 import GenerateTest from "./pages/generateTest/layout/GenerateTest";
 import AccuracyTest from "./pages/accuracyTest/layout/TempTest";
-// import AccuracyTest from "./";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import HeaderBar from "./components/HeaderBar";
+import { jwtDecode } from "jwt-decode";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
 import "./css/App.css";
 
 function App() {
+  // navigation
+
   // For login authentication
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const token = localStorage.getItem("authToken");
+    console.log(!!token);
+    return !!token;
+  });
   const [newDataAction, setNewDataAction] = useState(0);
+  const [, setDecodeToken] = useState({});
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+
+    async function checkAuthentication() {
+      if (!token) {
+        setIsAuthenticated(false); // No token found, user not authenticated
+        return false;
+      }
+
+      try {
+        const response = await axios.post(
+          "https://localhost:7070/api/authenticate/verifyToken",
+          null,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const isAuthenticated = response.status === 200; // Check if response status is OK (200)
+        setIsAuthenticated(isAuthenticated);
+
+        if (isAuthenticated) {
+          const decodedToken = jwtDecode(token);
+          setDecodeToken(decodedToken);
+          setUserId(
+            decodedToken[
+              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+            ]
+          ); // Accessing the 'sub' claim for user ID
+          setUserName(
+            decodedToken[
+              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+            ]
+          );
+          setNewDataAction((prev) => prev + 1);
+        }
+
+        return isAuthenticated;
+      } catch (error) {
+        console.error("Verification error:", error);
+        setIsAuthenticated(false);
+        return false;
+      }
+    }
+
+    checkAuthentication();
+  }, []);
 
   // For currently logged in User (UserId)
   const [userId, setUserId] = useState("");
@@ -72,6 +132,7 @@ function App() {
   const [generateSelectedLanguage, setGenerateSelectedLanguage] = useState("");
   const [generateResult, setGenerateResult] = useState({});
   const [generateSelectedResult, setGenerateSelectedResult] = useState({});
+
   return (
     <div className="background">
       <HeaderBar
@@ -108,76 +169,88 @@ function App() {
           <Route
             path="/accuracy"
             element={
-              <AccuracyTest
-                userId={userId}
-                testType={""}
-                accuracyInput={accuracyInput}
-                setAccuracyInput={setAccuracyInput}
-                accuracyUnitTest={accuracyUnitTest}
-                setAccuracyUnitTest={setAccuracyUnitTest}
-                accuracyBaseMethod={accuracyBaseMethod}
-                setAccuracyBaseMethod={setAccuracyBaseMethod}
-                accuracyDescription={accuracyDescription}
-                setAccuracyDescription={setAccuracyDescription}
-                accuracyDependency1={accuracyDependency1}
-                setAccuracyDependency1={setAccuracyDependency1}
-                accuracyDependency2={accuracyDependency2}
-                setAccuracyDependency2={setAccuracyDependency2}
-                accuracySelectedLanguage={accuracySelectedLanguage}
-                setAccuracySelectedLanguage={setAccuracySelectedLanguage}
-                accuracyTestType={accuracyTestType}
-                setAccuracyTestType={setAccuracyTestType}
-                accuracyResult={accuracyResult}
-                setAccuracyResult={setAccuracyResult}
-                selectedResult={accuracySelectedResult}
-                setSelectedResult={setAccuracySelectedResult}
-                newDataAction={newDataAction}
-                setNewDataAction={setNewDataAction}
-              />
+              isAuthenticated ? (
+                <AccuracyTest
+                  userId={userId}
+                  testType={""}
+                  accuracyInput={accuracyInput}
+                  setAccuracyInput={setAccuracyInput}
+                  accuracyUnitTest={accuracyUnitTest}
+                  setAccuracyUnitTest={setAccuracyUnitTest}
+                  accuracyBaseMethod={accuracyBaseMethod}
+                  setAccuracyBaseMethod={setAccuracyBaseMethod}
+                  accuracyDescription={accuracyDescription}
+                  setAccuracyDescription={setAccuracyDescription}
+                  accuracyDependency1={accuracyDependency1}
+                  setAccuracyDependency1={setAccuracyDependency1}
+                  accuracyDependency2={accuracyDependency2}
+                  setAccuracyDependency2={setAccuracyDependency2}
+                  accuracySelectedLanguage={accuracySelectedLanguage}
+                  setAccuracySelectedLanguage={setAccuracySelectedLanguage}
+                  accuracyTestType={accuracyTestType}
+                  setAccuracyTestType={setAccuracyTestType}
+                  accuracyResult={accuracyResult}
+                  setAccuracyResult={setAccuracyResult}
+                  selectedResult={accuracySelectedResult}
+                  setSelectedResult={setAccuracySelectedResult}
+                  newDataAction={newDataAction}
+                  setNewDataAction={setNewDataAction}
+                />
+              ) : (
+                <Navigate to="/login" replace />
+              )
             }
           />
           <Route
-            path="efficiency_test"
+            path="/efficiency_test"
             element={
-              <EfficiencyTest
-                userId={userId}
-                testType={""}
-                selectedResult={efficiencySelectedResult}
-                setSelectedResult={setEfficiencySelectedResult}
-                efficiencyInput={efficiencyInput}
-                setEfficiencyInput={setEfficiencyInput}
-                unitTest={unitTest}
-                setUnitTest={setUnitTest}
-                efficiencySelectedLanguage={efficiencySelectedLanguage}
-                setEfficiencySelectedLanguage={setEfficiencySelectedLanguage}
-                efficiencyResult={efficiencyResult}
-                setEfficiencyResult={setEfficiencyResult}
-                isAuthenticated={isAuthenticated}
-                setIsAuthenticated={setIsAuthenticated}
-                newDataAction={newDataAction}
-                setNewDataAction={setNewDataAction}
-              />
+              isAuthenticated ? (
+                <EfficiencyTest
+                  userId={userId}
+                  testType={""}
+                  selectedResult={efficiencySelectedResult}
+                  setSelectedResult={setEfficiencySelectedResult}
+                  efficiencyInput={efficiencyInput}
+                  setEfficiencyInput={setEfficiencyInput}
+                  unitTest={unitTest}
+                  setUnitTest={setUnitTest}
+                  efficiencySelectedLanguage={efficiencySelectedLanguage}
+                  setEfficiencySelectedLanguage={setEfficiencySelectedLanguage}
+                  efficiencyResult={efficiencyResult}
+                  setEfficiencyResult={setEfficiencyResult}
+                  isAuthenticated={isAuthenticated}
+                  setIsAuthenticated={setIsAuthenticated}
+                  newDataAction={newDataAction}
+                  setNewDataAction={setNewDataAction}
+                />
+              ) : (
+                <Navigate to="/login" replace />
+              )
             }
           />
           <Route
-            path="generate_test"
+            path="/generate_test"
             element={
-              <GenerateTest
-                userId={userId}
-                testType={""}
-                selectedResult={generateSelectedResult}
-                setSelectedResult={setGenerateSelectedResult}
-                genereateBaseInput={genereateBaseInput}
-                setGenerateBaseInput={setGenerateBaseInput}
-                generateBaseMethod={generateBaseMethod}
-                setGenerateBaseMethod={setGenerateBaseMethod}
-                generateSelectedLanguage={generateSelectedLanguage}
-                setGenerateSelectedLanguage={setGenerateSelectedLanguage}
-                generateResult={generateResult}
-                setGenerateResult={setGenerateResult}
-                newDataAction={newDataAction}
-                setNewDataAction={setNewDataAction}
-              />
+              isAuthenticated ? (
+                <GenerateTest
+                  userId={userId}
+                  testType={""}
+                  selectedResult={generateSelectedResult}
+                  setSelectedResult={setGenerateSelectedResult}
+                  genereateBaseInput={genereateBaseInput}
+                  setGenerateBaseInput={setGenerateBaseInput}
+                  generateBaseMethod={generateBaseMethod}
+                  setGenerateBaseMethod={setGenerateBaseMethod}
+                  generateSelectedLanguage={generateSelectedLanguage}
+                  setGenerateSelectedLanguage={setGenerateSelectedLanguage}
+                  generateResult={generateResult}
+                  setGenerateResult={setGenerateResult}
+                  newDataAction={newDataAction}
+                  setNewDataAction={setNewDataAction}
+                />
+              ) : (
+                <Navigate to="/login" replace />
+              )
             }
           />
         </Routes>

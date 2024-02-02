@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ResultContext from "../../../ResultContext";
 import AccuracyOutputSpace from "./AccuracyOutputSpace";
 import SideBar from "../../../components/SideBar";
-import HeaderBar from "../../../components/HeaderBar";
 import AccuracyInputSpace from "./AccuracyInputSpace";
 
 const TempTest = ({
@@ -32,7 +31,6 @@ const TempTest = ({
   setNewDataAction,
 }) => {
   const [resultId, setResultId] = useState("");
-  const [testResult, setTestResult] = useState({});
   const [activeTab, setActiveTab] = useState(1);
   console.log("TempTest TO VIEW: ", accuracyInput);
   return (
