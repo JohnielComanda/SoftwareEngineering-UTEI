@@ -18,7 +18,7 @@ const GenerateOutputSpace = ({
     const fetchTestResult = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:7070/api/GenerateTest/${resultId}`
+          `https://localhost:7070/api/generate/${resultId}`
         );
         setGenerateResult(response.data);
         setSelectedResult({});

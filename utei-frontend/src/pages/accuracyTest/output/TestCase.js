@@ -5,7 +5,14 @@ const TestCase = ({ testResult }) => {
   return (
     <>
       <div className="output-space">
-        <pre className="output-text">{testResult.testResult}</pre>
+        <div className="containerTest">
+          <p>Expected Value</p>
+          <div className="resValue">{1}</div>
+          <p>Actual Value</p>
+          <div className="resValue">{1}</div>
+          <p>Result</p>
+          <div className="resValue">{1}</div>
+        </div>
       </div>
     </>
   );

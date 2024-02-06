@@ -30,7 +30,7 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
         setUserName(response.data.email);
         setIsAuthenticated(true);
         localStorage.setItem("authToken", response.data.accessToken);
-        navigate("/efficiency_test");
+        navigate("/efficiency-test");
       })
       .catch((error) => {
         if (error.response && error.response.data) {

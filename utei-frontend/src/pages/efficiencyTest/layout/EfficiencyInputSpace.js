@@ -4,6 +4,9 @@ import SelectProgLang from "../../../components/SelectProgLang";
 import "../../../css/InputSpace.css";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
+import { java } from "@codemirror/lang-java";
+import { python } from "@codemirror/lang-python";
+import { cpp } from "@codemirror/lang-cpp";
 
 const EfficiencyInputSpace = ({
   userId,
@@ -38,7 +41,7 @@ const EfficiencyInputSpace = ({
       setIsLoading(true);
       try {
         const response = await axios.post(
-          `https://localhost:7070/api/EfficiencyTest`,
+          `https://localhost:7070/api/efficiency`,
           efficiencyInput
         );
         setResultId(response.data);
@@ -76,6 +79,42 @@ const EfficiencyInputSpace = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  let extensions;
+  let options;
+
+  if (efficiencySelectedLanguage === "Java") {
+    extensions = [java()];
+    options = {
+      mode: "text/x-java",
+      // other options for Java...
+    };
+  } else if (efficiencySelectedLanguage === "C++") {
+    extensions = [cpp()];
+    options = {
+      mode: "text/x-c++src",
+      // other options for C++...
+    };
+  } else if (efficiencySelectedLanguage === "Python") {
+    extensions = [python()];
+    options = {
+      mode: "text/x-python",
+      // other options for Python...
+    };
+  } else if (efficiencySelectedLanguage === "JavaScript") {
+    extensions = [javascript()];
+    options = {
+      mode: "text/javascript",
+      // other options for JavaScript...
+    };
+  } else {
+    // Default to JavaScript if the language is not recognized
+    extensions = [javascript()];
+    options = {
+      mode: "text/javascript",
+      // other default options...
+    };
+  }
+
   return (
     <>
       <div className="input">
@@ -96,7 +135,8 @@ const EfficiencyInputSpace = ({
               : selectedResult.unitTest
           }
           height="555px"
-          extensions={[javascript({ jsx: true })]}
+          extensions={extensions}
+          options={options}
           onChange={onChange}
           theme="dark"
         ></CodeMirror>

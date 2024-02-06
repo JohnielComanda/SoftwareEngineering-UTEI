@@ -51,12 +51,12 @@ const SideBar = ({
 
   const tabs = [
     {
-      to: "/efficiency_test",
+      to: "/efficiency-test",
       text: "Identify Efficiency",
       className: "efficiency",
     },
-    { to: "/accuracy", text: "Identify Accuracy", className: "accuracy" },
-    { to: "/generate_test", text: "Generate Unit Test", className: "generate" },
+    { to: "/accuracy-test", text: "Identify Accuracy", className: "accuracy" },
+    { to: "/generate-test", text: "Generate Unit Test", className: "generate" },
   ];
 
   return (

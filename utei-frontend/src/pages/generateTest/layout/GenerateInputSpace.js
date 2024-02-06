@@ -3,6 +3,9 @@ import axios from "axios";
 import SelectProgLang from "../../../components/SelectProgLang";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
+import { java } from "@codemirror/lang-java";
+import { python } from "@codemirror/lang-python";
+import { cpp } from "@codemirror/lang-cpp";
 import "../../../css/InputSpace.css";
 
 const GenerateInputSpace = ({
@@ -35,9 +38,10 @@ const GenerateInputSpace = ({
     //This method is for the Post and uses axios to pass on the parameters to the backend side
     const createTest = async () => {
       setIsLoading(true);
+      console.log("Temp", genereateBaseInput);
       try {
         const response = await axios.post(
-          `https://localhost:7070/api/GenerateTest`,
+          `https://localhost:7070/api/generate`,
           genereateBaseInput
         );
         setResultId(response.data);
@@ -75,6 +79,43 @@ const GenerateInputSpace = ({
     setGenerateBaseMethod(value);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  let extensions;
+  let options;
+
+  if (generateSelectedLanguage === "Java") {
+    extensions = [java()];
+    options = {
+      mode: "text/x-java",
+      // other options for Java...
+    };
+  } else if (generateSelectedLanguage === "C++") {
+    extensions = [cpp()];
+    options = {
+      mode: "text/x-c++src",
+      // other options for C++...
+    };
+  } else if (generateSelectedLanguage === "Python") {
+    extensions = [python()];
+    options = {
+      mode: "text/x-python",
+      // other options for Python...
+    };
+  } else if (generateSelectedLanguage === "JavaScript") {
+    extensions = [javascript()];
+    options = {
+      mode: "text/javascript",
+      // other options for JavaScript...
+    };
+  } else {
+    // Default to JavaScript if the language is not recognized
+    extensions = [javascript()];
+    options = {
+      mode: "text/javascript",
+      // other default options...
+    };
+  }
+
   return (
     <>
       <div className="input">
@@ -95,7 +136,8 @@ const GenerateInputSpace = ({
               : selectedResult.baseMethod
           }
           height="555px"
-          extensions={[javascript({ jsx: true })]}
+          extensions={extensions}
+          options={options}
           onChange={onChange}
           theme="dark"
         ></CodeMirror>
