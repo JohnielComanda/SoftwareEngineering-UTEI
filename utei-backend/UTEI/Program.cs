@@ -126,9 +126,10 @@ void ConfigureServices(WebApplicationBuilder builder)
 // Configure HTTP request pipeline method
 void ConfigurePipeline(WebApplication app)
 {
+    app.UseSwagger();
     if (app.Environment.IsDevelopment())
     {
-        app.UseSwagger();
+        
         app.UseSwaggerUI();
     }
 

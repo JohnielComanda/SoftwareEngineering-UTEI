@@ -167,7 +167,7 @@ function App() {
             }
           />
           <Route
-            path="/accuracy"
+            path="/accuracy-test"
             element={
               isAuthenticated ? (
                 <AccuracyTest
@@ -202,7 +202,7 @@ function App() {
             }
           />
           <Route
-            path="/efficiency_test"
+            path="/efficiency-test"
             element={
               isAuthenticated ? (
                 <EfficiencyTest
@@ -229,7 +229,7 @@ function App() {
             }
           />
           <Route
-            path="/generate_test"
+            path="/generate-test"
             element={
               isAuthenticated ? (
                 <GenerateTest
