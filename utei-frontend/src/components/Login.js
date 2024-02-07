@@ -23,7 +23,10 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
 
   const loginUser = async () => {
     await axios
-      .post(`https://localhost:7070/api/authenticate/login`, userDetails)
+      .post(
+        `https://utei20240206153836.azurewebsites.net/api/authenticate/login`,
+        userDetails
+      )
       .then((response) => {
         console.log("login response: ", response);
         setUserId(response.data.userId);

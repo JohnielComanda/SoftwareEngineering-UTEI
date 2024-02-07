@@ -41,7 +41,7 @@ const GenerateInputSpace = ({
       console.log("Temp", genereateBaseInput);
       try {
         const response = await axios.post(
-          `https://localhost:7070/api/generate`,
+          `https://utei20240206153836.azurewebsites.net/api/generate`,
           genereateBaseInput
         );
         setResultId(response.data);

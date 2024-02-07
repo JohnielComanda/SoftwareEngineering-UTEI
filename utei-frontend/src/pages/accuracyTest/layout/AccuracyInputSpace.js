@@ -49,7 +49,7 @@ const AccuracyInputSpace = ({
       setIsLoading(true);
       try {
         const response = await axios.post(
-          `https://localhost:7070/api/AccuracyTest`,
+          `https://utei20240206153836.azurewebsites.net/api/accuracy`,
           accuracyInput
         );
         setResultId(response.data);

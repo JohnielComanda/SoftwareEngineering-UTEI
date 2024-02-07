@@ -35,7 +35,7 @@ function App() {
 
       try {
         const response = await axios.post(
-          "https://localhost:7070/api/authenticate/verifyToken",
+          "https://utei20240206153836.azurewebsites.net/api/authenticate/verifyToken",
           null,
           {
             headers: {

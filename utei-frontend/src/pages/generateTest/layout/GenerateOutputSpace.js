@@ -18,7 +18,7 @@ const GenerateOutputSpace = ({
     const fetchTestResult = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:7070/api/generate/${resultId}`
+          `https://utei20240206153836.azurewebsites.net/api/generate${resultId}`
         );
         setGenerateResult(response.data);
         setSelectedResult({});

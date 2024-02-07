@@ -25,11 +25,11 @@ const SideBar = ({
       try {
         const response = await axios.get(
           testType === "efficiencyTest"
-            ? `https://localhost:7070/api/EfficiencyTest/all/${userId}`
+            ? `https://utei20240206153836.azurewebsites.net/api/efficiency/all/${userId}`
             : testType === "generateTest"
-            ? `https://localhost:7070/api/GenerateTest/all/${userId}`
+            ? `https://utei20240206153836.azurewebsites.net/api/generate/all/${userId}`
             : testType === "accuracyTest"
-            ? `https://localhost:7070/api/AccuracyTest/all/${userId}`
+            ? `https://utei20240206153836.azurewebsites.net/api/accuracy/all/${userId}`
             : ""
         );
         const reversedData = [...response.data].reverse();

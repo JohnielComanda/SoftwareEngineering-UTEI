@@ -41,7 +41,7 @@ const EfficiencyInputSpace = ({
       setIsLoading(true);
       try {
         const response = await axios.post(
-          `https://localhost:7070/api/efficiency`,
+          `https://utei20240206153836.azurewebsites.net/api/efficiency`,
           efficiencyInput
         );
         setResultId(response.data);

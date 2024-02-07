@@ -17,7 +17,10 @@ const Register = () => {
   const registerUser = () => {
     setIsLoading(true);
     axios
-      .post(`https://localhost:7070/api/authenticate/register`, userDetails)
+      .post(
+        `https://utei20240206153836.azurewebsites.net/api/authenticate/register`,
+        userDetails
+      )
       .then((response) => {
         // Handle success
         console.log("Registration successful:", response.data);
