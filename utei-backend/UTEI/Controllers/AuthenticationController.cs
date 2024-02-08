@@ -117,11 +117,11 @@ namespace UTEI.Controllers
 
             if (result.Succeeded)
             {
-                return Redirect("https://localhost:3000/login");
+                return Redirect("https://white-flower-0e30acc00.4.azurestaticapps.net/login");
             }
             else
             {
-                return Redirect("https://localhost:3000/signup");
+                return Redirect("https://white-flower-0e30acc00.4.azurestaticapps.net/signup");
             }
         }
 

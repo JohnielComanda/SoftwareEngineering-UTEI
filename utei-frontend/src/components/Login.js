@@ -58,6 +58,12 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <>
       <div className="login-container">
@@ -79,10 +85,22 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
             <input name="email" type="email" placeholder="Email" />
             <input
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               onKeyPress={handleEnterKeyPress}
             />
+            <button
+              className="show-hide-btn"
+              type="button"
+              onClick={togglePasswordVisibility}
+            >
+              <img
+                type="button"
+                alt="show password"
+                src={showPassword ? "hide.png" : "show.png"}
+              ></img>
+              {showPassword ? "Hide" : "Show"}
+            </button>
           </div>
           <div className="login-button">
             <button ref={signupButtonRef} onClick={onClickSubmit}>
