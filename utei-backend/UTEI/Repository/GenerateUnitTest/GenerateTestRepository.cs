@@ -19,7 +19,7 @@ namespace UTEI.Repository.GenerateUnitTest
         /// <param name="options"></param>
         public GenerateTestRepository(IOptions<DatabaseSettings> options)
         {
-            var connectionUri = "mongodb+srv://JohnielComanda:FYsVjt5pqg3bJCA2@cluster0.hg9di7y.mongodb.net/?retryWrites=true&w=majority";
+            var connectionUri = Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING");
             var settings = MongoClientSettings.FromConnectionString(connectionUri);
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
 

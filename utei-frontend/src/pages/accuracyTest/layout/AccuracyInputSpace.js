@@ -3,6 +3,9 @@ import axios from "axios";
 import "../../../css/InputSpace.css";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
+import { java } from "@codemirror/lang-java";
+import { python } from "@codemirror/lang-python";
+import { cpp } from "@codemirror/lang-cpp";
 
 const AccuracyInputSpace = ({
   userId,
@@ -46,7 +49,7 @@ const AccuracyInputSpace = ({
       setIsLoading(true);
       try {
         const response = await axios.post(
-          `https://localhost:7070/api/AccuracyTest`,
+          `https://utei20240206153836.azurewebsites.net/api/accuracy`,
           accuracyInput
         );
         setResultId(response.data);
@@ -118,6 +121,42 @@ const AccuracyInputSpace = ({
     setAccuracyTestType(selectedValue);
   };
 
+  let extensions;
+  let options;
+
+  if (accuracySelectedLanguage === "Java") {
+    extensions = [java()];
+    options = {
+      mode: "text/x-java",
+      // other options for Java...
+    };
+  } else if (accuracySelectedLanguage === "C++") {
+    extensions = [cpp()];
+    options = {
+      mode: "text/x-c++src",
+      // other options for C++...
+    };
+  } else if (accuracySelectedLanguage === "Python") {
+    extensions = [python()];
+    options = {
+      mode: "text/x-python",
+      // other options for Python...
+    };
+  } else if (accuracySelectedLanguage === "JavaScript") {
+    extensions = [javascript()];
+    options = {
+      mode: "text/javascript",
+      // other options for JavaScript...
+    };
+  } else {
+    // Default to JavaScript if the language is not recognized
+    extensions = [javascript()];
+    options = {
+      mode: "text/javascript",
+      // other default options...
+    };
+  }
+
   return (
     <>
       <div className="input">
@@ -156,7 +195,8 @@ const AccuracyInputSpace = ({
             name="unitTest"
             placeholder={"Paste Unit test here!!!"}
             height="170px"
-            extensions={[javascript({ jsx: true })]}
+            extensions={extensions}
+            options={options}
             theme="dark"
             value={accuracyUnitTest}
             onChange={onChangeUnitTest}
@@ -165,7 +205,8 @@ const AccuracyInputSpace = ({
             name="basedMethod"
             placeholder={"Paste Based method here!!!"}
             height="170px"
-            extensions={[javascript({ jsx: true })]}
+            extensions={extensions}
+            options={options}
             theme="dark"
             value={accuracyBaseMethod}
             onChange={onChangeBaseMethod}
@@ -174,7 +215,8 @@ const AccuracyInputSpace = ({
             name="description"
             placeholder={"Input description (Optional)"}
             height="70px"
-            extensions={[javascript({ jsx: true })]}
+            extensions={extensions}
+            options={options}
             theme="dark"
             value={accuracyDescription}
             onChange={onChangeDescription}
@@ -184,7 +226,8 @@ const AccuracyInputSpace = ({
               name="dependency1"
               placeholder="Dependency 1 (Optional)"
               height="74px"
-              extensions={[javascript({ jsx: true })]}
+              extensions={extensions}
+              options={options}
               theme="dark"
               value={accuracyDependency1}
               onChange={onChangeDependency1}
@@ -193,7 +236,8 @@ const AccuracyInputSpace = ({
               name="dependency2"
               placeholder="Dependency 2 (Optional)"
               height="74px"
-              extensions={[javascript({ jsx: true })]}
+              extensions={extensions}
+              options={options}
               theme="dark"
               value={accuracyDependency2}
               onChange={onChangeDependency2}
