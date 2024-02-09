@@ -1,11 +1,21 @@
 import { React } from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
 import "../../../css/OutputSpace.css";
 
 const GenerateStandardOutput = ({ testResult }) => {
   return (
     <>
       <div className="output-space">
-        <pre className="output-text">{testResult.unitTest}</pre>
+        <CodeMirror
+          className="output-code"
+          value={testResult.unitTest}
+          height="555px"
+          extensions={[javascript()]}
+          lineNumbers={false}
+          readOnly={true}
+          theme="dark"
+        ></CodeMirror>
       </div>
     </>
   );

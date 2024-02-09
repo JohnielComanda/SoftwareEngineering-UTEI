@@ -20,7 +20,7 @@ const AccuracyOutputSpace = ({
     const fetchTestResult = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:7070/api/AccuracyTest/${resultId}`
+          `https://utei20240206153836.azurewebsites.net/api/accuracy/${resultId}`
         );
         setAccuracyResult(response.data);
         console.log("TEST RESULT ACCURACY: ", testResult);

@@ -23,14 +23,17 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
 
   const loginUser = async () => {
     await axios
-      .post(`https://localhost:7070/api/authenticate/login`, userDetails)
+      .post(
+        `https://utei20240206153836.azurewebsites.net/api/authenticate/login`,
+        userDetails
+      )
       .then((response) => {
         console.log("login response: ", response);
         setUserId(response.data.userId);
         setUserName(response.data.email);
         setIsAuthenticated(true);
         localStorage.setItem("authToken", response.data.accessToken);
-        navigate("/efficiency_test");
+        navigate("/efficiency-test");
       })
       .catch((error) => {
         if (error.response && error.response.data) {
@@ -55,6 +58,12 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <>
       <div className="login-container">
@@ -76,10 +85,22 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
             <input name="email" type="email" placeholder="Email" />
             <input
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               onKeyPress={handleEnterKeyPress}
             />
+            <button
+              className="show-hide-btn"
+              type="button"
+              onClick={togglePasswordVisibility}
+            >
+              <img
+                type="button"
+                alt="show password"
+                src={showPassword ? "hide.png" : "show.png"}
+              ></img>
+              {showPassword ? "Hide" : "Show"}
+            </button>
           </div>
           <div className="login-button">
             <button ref={signupButtonRef} onClick={onClickSubmit}>

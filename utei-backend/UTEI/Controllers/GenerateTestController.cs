@@ -4,8 +4,8 @@ using UTEI.Service.GenerateUnitTest;
 
 namespace UTEI.Controllers
 {
-    [Route("api/[Controller]")]
     [ApiController]
+    [Route("api/generate")]
     public class GenerateTestController : ControllerBase
     {
         private readonly IGenerateTestService _generateService;

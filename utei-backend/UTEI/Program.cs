@@ -36,7 +36,7 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
 {
     MongoDbSettings = new MongoDbSettings
     {
-        ConnectionString = "mongodb+srv://JohnielComanda:FYsVjt5pqg3bJCA2@cluster0.hg9di7y.mongodb.net/?retryWrites=true&w=majority",
+        ConnectionString = Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING"),
         DatabaseName = "UTEI"
     },
     IdentityOptionsAction = options =>
@@ -51,7 +51,6 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
         options.Lockout.MaxFailedAccessAttempts = 5;
 
         options.User.RequireUniqueEmail = true;
-
     }
 };
 
@@ -78,9 +77,9 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
-        ValidIssuer = "https://unit-test-function.azurewebsites.net",
-        ValidAudience = "https://unit-test-function.azurewebsites.net",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1swek3u4uo2u4a6e")),
+        ValidIssuer = "http://localhost:3000",
+        ValidAudience = "http://localhost:3000",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("ISSUER_SIGNING_KEY")!)),
         ClockSkew = TimeSpan.Zero
     };
 });
@@ -127,9 +126,10 @@ void ConfigureServices(WebApplicationBuilder builder)
 // Configure HTTP request pipeline method
 void ConfigurePipeline(WebApplication app)
 {
+    app.UseSwagger();
     if (app.Environment.IsDevelopment())
     {
-        app.UseSwagger();
+        
         app.UseSwaggerUI();
     }
 
