@@ -21,7 +21,7 @@ namespace UTEI.GPTManager.GenerateUnitTest
             string prompt = "respond with: Cannot generate unit test with the given input!";
             if (baseMethod.Length > 20)
             {
-                prompt = $"Generate a complete unit test given the method:```\\n{baseMethod}\\n```using ```\\n{progLang}\\n```that adheres to the proper conventions of writing unit test.\"";
+                prompt = $"Generate a complete usable unit test given the method:```\\n{baseMethod}\\n```using ```\\n{progLang}\\n```that adheres to the proper conventions of writing unit test and return just the unit test without any addition information.\"";
 
             }
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);

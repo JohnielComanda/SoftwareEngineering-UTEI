@@ -6,7 +6,7 @@ const TestCase = ({ testResult }) => {
     return <div className="output-space"></div>;
   }
 
-  let resultArray = testResult.testResult.split("+");
+  let resultArray = testResult.testResult[0].split("+");
 
   const result = resultArray[0];
   const expectedValue = resultArray[1];

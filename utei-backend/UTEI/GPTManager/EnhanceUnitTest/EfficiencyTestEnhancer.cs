@@ -22,7 +22,7 @@ namespace UTEI.GPTManager.EnhanceUnitTest
             string prompt = "respond with: Cannot Generate unit test with the given input!";
             if (unitTest.Length > 20)
             {
-                prompt = $"Write an improved version of the following unit test method using {progLang}:\n\n```\n{unitTest}\n``` that adheres to the proper conventions of writing proper unit test.";
+                prompt = $"Write an improved version of the following unit test method using {progLang}:\n\n```\n{unitTest}\n``` that adheres to the proper conventions of writing proper unit test and just respond an improved version without additional information.";
             }
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }

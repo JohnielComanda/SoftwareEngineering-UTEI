@@ -13,11 +13,13 @@ namespace UTEI.GPTManager
         /// <returns>Returns the response coming from OpenAI</returns>
         public static async Task<string> RequestHandler(string prompt, IHttpClientFactory httpClientFactory)
         {
-            IHttpClientFactory _httpClientFactory = httpClientFactory;
-
             var requestPayload = new
             {
-                prompt = prompt,
+                model = "gpt-3.5-turbo",
+                messages = new[]
+                {
+            new { role = "user", content = prompt }
+        },
                 temperature = 0.25,
                 max_tokens = 2048,
                 top_p = 1.0,
@@ -39,10 +41,18 @@ namespace UTEI.GPTManager
                     {
                         var responseContent = await response.Content.ReadFromJsonAsync<OpenAIResponse>();
 
-                        if (responseContent != null && responseContent.choices!.Length > 0)
+                        if (responseContent != null && responseContent.choices?.Length > 0)
                         {
-                            var improvedUnitTest = responseContent.choices[0].text!.Trim();
-                            return improvedUnitTest;
+                            var completion = responseContent.choices[0];
+                            if (completion.message != null)
+                            {
+                                var generatedText = completion.message.content!.Trim();
+                                return generatedText;
+                            }
+                            else
+                            {
+                                return "No message content found in the response.";
+                            }
                         }
                         else
                         {
@@ -65,5 +75,6 @@ namespace UTEI.GPTManager
                 }
             }
         }
+
     }
 }
