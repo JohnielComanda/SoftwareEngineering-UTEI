@@ -124,3 +124,35 @@
   text-align: center;
   margin-top: 2rem;
 }
+
+.login-loading {
+  position: absolute;
+  margin-left: 50%;
+
+  bottom: 40%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.login-spinner {
+  position: absolute;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-top: 2px solid #6c6c6c;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

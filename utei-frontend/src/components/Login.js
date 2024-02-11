@@ -21,27 +21,29 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails]);
 
+  const [isLoading, setIsLoading] = useState(false);
   const loginUser = async () => {
-    await axios
-      .post(
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
         `https://utei20240206153836.azurewebsites.net/api/authenticate/login`,
         userDetails
-      )
-      .then((response) => {
-        console.log("login response: ", response);
-        setUserId(response.data.userId);
-        setUserName(response.data.email);
-        setIsAuthenticated(true);
-        localStorage.setItem("authToken", response.data.accessToken);
-        navigate("/efficiency-test");
-      })
-      .catch((error) => {
-        if (error.response && error.response.data) {
-          // Handle error
-          console.error("login failed:", error.response.data);
-          setGoResponse(error.response.data);
-        }
-      });
+      );
+      console.log("login response: ", response.data);
+      setUserId(response.data.userId);
+      setUserName(response.data.email);
+      setIsAuthenticated(true);
+      localStorage.setItem("authToken", response.data.accessToken);
+      navigate("/efficiency-test");
+    } catch (error) {
+      if (error.response && error.response.data) {
+        // Handle error
+        console.error("login failed:", error.response.data);
+        setGoResponse(error.response.data);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const onClickSubmit = () => {
@@ -113,6 +115,11 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
           <div className="loginFail">{goResponse ? goResponse : ""}</div>
         </div>
       </div>
+      {isLoading && (
+        <div className="login-loading">
+          <div className="login-spinner" />
+        </div>
+      )}
     </>
   );
 };
