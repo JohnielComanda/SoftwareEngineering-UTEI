@@ -143,8 +143,8 @@ const Register = () => {
               className={
                 goResponse ===
                 "User registered successfully. Please verify your email."
-                  ? "regFail"
-                  : "regSuccess"
+                  ? "regSuccess"
+                  : "regFail"
               }
             >
               {isLoading ? (

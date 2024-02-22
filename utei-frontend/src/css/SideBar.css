@@ -22,10 +22,10 @@
 }
 
 .btn-test {
-  background-image: url("/public/approval.png");
+  background-image: url("/public/saved2.png");
   background-repeat: no-repeat;
   background-position: 10px center;
-  padding-left: 35px;
+  padding-left: 50px;
   background-size: 17px;
   display: inline;
   border-radius: 10px;
@@ -33,9 +33,26 @@
   text-align: left;
   height: 40px;
   margin-left: -25px;
-  width: 270px;
+  width: 260px;
   border: 1.5px solid #252934;
   background-color: #252934;
+}
+
+.btn-test-clicked {
+  background-image: url("/public/saved1.png");
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  padding-left: 50px;
+  background-size: 17px;
+  display: inline;
+  border-radius: 10px;
+  color: #fff;
+  text-align: left;
+  height: 40px;
+  margin-left: -25px;
+  width: 260px;
+  border: 1.5px solid #252934;
+  background-color: #393e48;
 }
 
 li {
@@ -43,7 +60,7 @@ li {
 }
 
 .btn-test:hover {
-  background-color: #95a1ca;
+  background-color: #393e48;
 }
 
 .clear-history {

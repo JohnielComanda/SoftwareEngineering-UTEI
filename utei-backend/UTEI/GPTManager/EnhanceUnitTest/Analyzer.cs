@@ -21,7 +21,10 @@ namespace UTEI.GPTManager.EnhanceUnitTest
             string prompt = "respond with: Cannot Analyze unit test with the given input!";
             if (unitTest.Length > 20)
             {
-                prompt = $"Write a detailed summary and suggestion of the unit test method depending on it's estimated performance including it's runtime, compile time, unit test code efficiency, and adherence to writing of a proper unit test```\n{unitTest}\n```. return also a detailed summary of each criteria and separate the summary and suggestion using $ between the two before the suggestion output";
+                prompt = $"Write a detailed summary and suggestion of the unit test method, considering its estimated performance including runtime, compile time, unit test code efficiency, and adherence to writing a proper unit test.\n\n" +
+                         $"Unit Test Method:\n{unitTest}\n\n" +
+                         $"Return a detailed summary of each criterion and separate the summary and suggestion using '$' between the two before the suggestion output.";
+
 
             }
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
