@@ -16,5 +16,6 @@ namespace UTEI.Models
         public string? ProgrammingLanguage { get; set; }
         public DateTime? Date { get; set; }
         public string? UnitTest { get; set; }
+        public string? Framework { get; set; }
     }
 }

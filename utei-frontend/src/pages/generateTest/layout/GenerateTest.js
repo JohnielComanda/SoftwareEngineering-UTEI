@@ -18,9 +18,11 @@ const GenerateTest = ({
   setSelectedResult,
   newDataAction,
   setNewDataAction,
+  selectedFramework,
+  setSelectedFramework,
 }) => {
   const [resultId, setResultId] = useState("");
-  const [activeTab, setActiveTab] = useState(2);
+  const [activeTab, setActiveTab] = useState(0);
   console.log("GenerateTest selectedResult:", selectedResult);
   return (
     <div>
@@ -50,6 +52,8 @@ const GenerateTest = ({
           setGenerateResult={setGenerateResult}
           selectedResult={selectedResult}
           setSelectedResult={setSelectedResult}
+          selectedFramework={selectedFramework}
+          setSelectedFramework={setSelectedFramework}
         />
         <GenerateOutputSpace
           //output props

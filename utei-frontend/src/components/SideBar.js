@@ -52,13 +52,13 @@ const SideBar = ({
   };
 
   const tabs = [
+    { to: "/generate-test", text: "Generate Unit Test", className: "generate" },
     {
       to: "/efficiency-test",
       text: "Identify Efficiency",
       className: "efficiency",
     },
     { to: "/accuracy-test", text: "Identify Accuracy", className: "accuracy" },
-    { to: "/generate-test", text: "Generate Unit Test", className: "generate" },
   ];
 
   return (

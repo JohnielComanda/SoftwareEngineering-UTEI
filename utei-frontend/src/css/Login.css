@@ -13,12 +13,14 @@
   width: 50%;
   height: 100%;
   position: relative;
+  justify-content: center;
+  text-align: center;
 }
 
 .info-container::after {
   border-radius: 10px 0px 0px 10px;
   content: "";
-  opacity: 0.3;
+  opacity: 0.5;
   position: absolute;
   top: 0;
   right: 0;
@@ -27,21 +29,33 @@
   z-index: -1;
   background-image: url("../../public/login_background.png");
   background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .info-container h1 {
-  margin-left: 2.7rem;
-  margin-top: 2.5rem;
-  color: white;
+  background-color: rgba(34, 41, 49, 0.5);
+  color: #ffffff;
+  font-size: 22px;
+  align-content: center;
 }
 
-.highlight2 {
-  color: #f83d3d; /* Set the color to your desired value */
+.highlight0 {
+  font-size: 35px;
+  color: #ffffff;
 }
 
 .highlight1 {
-  color: rgb(31, 97, 249); /* Set the color to your desired value */
+  font-size: 35px;
+  color: #5ac8fa;
+}
+
+.highlight2 {
+  font-size: 35px;
+  color: #ffd700;
+}
+
+.highlight3 {
+  font-size: 35px;
+  color: #0fcb15;
 }
 
 .info-container ul {

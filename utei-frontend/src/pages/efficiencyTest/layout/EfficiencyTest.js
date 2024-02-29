@@ -20,7 +20,7 @@ const EfficiencyTest = ({
   setNewDataAction,
 }) => {
   const [resultId, setResultId] = useState("");
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
 
   return (
     <>

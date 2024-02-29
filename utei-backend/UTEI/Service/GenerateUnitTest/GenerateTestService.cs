@@ -22,7 +22,7 @@ namespace UTEI.Service.GenerateUnitTest
         /// <returns>Returns the generate test result id</returns>
         public async Task<string> CreateTest(GenerateTestCreationDto generateTest)
         {
-            var unitTestResult = await _unitTestGenerator.Generator(generateTest.ProgrammingLanguage!, generateTest.BaseMethod!);
+            var unitTestResult = await _unitTestGenerator.Generator(generateTest.ProgrammingLanguage!, generateTest.BaseMethod!, generateTest.Framework!);
 
             var generateUnitTest = new GenerateTest()
             {
@@ -31,6 +31,7 @@ namespace UTEI.Service.GenerateUnitTest
                 ProgrammingLanguage = generateTest.ProgrammingLanguage,
                 Date = DateTime.Today,
                 UnitTest = unitTestResult,
+                Framework =  generateTest.Framework,
             };
 
             return await _repository.CreateTest(generateUnitTest);

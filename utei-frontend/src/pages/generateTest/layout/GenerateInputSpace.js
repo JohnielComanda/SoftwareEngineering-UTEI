@@ -7,6 +7,7 @@ import { java } from "@codemirror/lang-java";
 import { python } from "@codemirror/lang-python";
 import { cpp } from "@codemirror/lang-cpp";
 import "../../../css/InputSpace.css";
+import SelectFramework from "./SelectFramework";
 
 const GenerateInputSpace = ({
   userId,
@@ -21,6 +22,8 @@ const GenerateInputSpace = ({
   generateSelectedLanguage,
   setGenerateSelectedLanguage,
   setNewDataAction,
+  selectedFramework,
+  setSelectedFramework,
 }) => {
   const [action, setAction] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -46,7 +49,6 @@ const GenerateInputSpace = ({
         );
         setResultId(response.data);
         setNewDataAction((prev) => prev + 1);
-        alert("Successfully created a test.");
       } catch (error) {
         console.error(error);
         alert("Failed to create a test.");
@@ -65,6 +67,7 @@ const GenerateInputSpace = ({
       userId,
       baseMethod: `${generateBaseMethod}`,
       programmingLanguage: `${generateSelectedLanguage}`,
+      framework: `${selectedFramework}`,
     }));
     setSelectedResult({});
     setGenerateResult({});
@@ -125,11 +128,17 @@ const GenerateInputSpace = ({
             selectedResult={selectedResult}
             selectedLanguage={generateSelectedLanguage}
           />
+          <SelectFramework
+            selectedLanguage={generateSelectedLanguage}
+            selectedResult={selectedResult}
+            selectedFramework={selectedFramework}
+            setSelectedFramework={setSelectedFramework}
+          ></SelectFramework>
         </div>
         <CodeMirror
           name="unitTest"
           className="input-space"
-          placeholder={"Paste your unit test method here!"}
+          placeholder={"Paste your unit test method here"}
           value={
             Object.keys(selectedResult).length === 0
               ? genereateBaseInput.baseMethod

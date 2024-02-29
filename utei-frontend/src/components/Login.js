@@ -71,16 +71,13 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
       <div className="login-container">
         <div className="info-container">
           <h1>
-            Test your <span class="highlight1">Unit Test</span> in simple steps
-            with the power of <span class="highlight2">AI</span> as a tool
+            Streamline your testing process{" "}
+            <span class="highlight1">Generate</span>
+            <span class="highlight0">{" > "}</span>
+            <span class="highlight2">Enhance</span>
+            <span class="highlight0">{" > "}</span>
+            <span class="highlight3">Test</span>
           </h1>
-          <ul>
-            <h6>Supports Multiple Languages</h6>
-            <h6>Automated Test Cases</h6>
-            <h6>Generates Recommendation</h6>
-            <h6>Generates Enhanced Version</h6>
-            <h6>Generates Unit Test</h6>
-          </ul>
         </div>
         <div className="input-container">
           <div className="input-field">

@@ -5,6 +5,7 @@ import "../../../css/OutputSpace.css";
 import StandardOutput from "../output/StandardOutput";
 import SuggestionOutput from "../output/SuggestionOutput";
 import EnhancedOutput from "../output/EnhancedOutput";
+import { Tooltip } from "@mui/material";
 
 const EfficiencyOutputSpace = ({
   resultId,

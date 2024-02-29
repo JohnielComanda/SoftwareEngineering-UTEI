@@ -132,6 +132,7 @@ function App() {
   const [generateSelectedLanguage, setGenerateSelectedLanguage] = useState("");
   const [generateResult, setGenerateResult] = useState({});
   const [generateSelectedResult, setGenerateSelectedResult] = useState({});
+  const [selectedFramework, setSelectedFramework] = useState("");
 
   return (
     <div className="background">
@@ -231,26 +232,24 @@ function App() {
           <Route
             path="/generate-test"
             element={
-              isAuthenticated ? (
-                <GenerateTest
-                  userId={userId}
-                  testType={""}
-                  selectedResult={generateSelectedResult}
-                  setSelectedResult={setGenerateSelectedResult}
-                  genereateBaseInput={genereateBaseInput}
-                  setGenerateBaseInput={setGenerateBaseInput}
-                  generateBaseMethod={generateBaseMethod}
-                  setGenerateBaseMethod={setGenerateBaseMethod}
-                  generateSelectedLanguage={generateSelectedLanguage}
-                  setGenerateSelectedLanguage={setGenerateSelectedLanguage}
-                  generateResult={generateResult}
-                  setGenerateResult={setGenerateResult}
-                  newDataAction={newDataAction}
-                  setNewDataAction={setNewDataAction}
-                />
-              ) : (
-                <Navigate to="/login" replace />
-              )
+              <GenerateTest
+                userId={userId}
+                testType={""}
+                selectedResult={generateSelectedResult}
+                setSelectedResult={setGenerateSelectedResult}
+                genereateBaseInput={genereateBaseInput}
+                setGenerateBaseInput={setGenerateBaseInput}
+                generateBaseMethod={generateBaseMethod}
+                setGenerateBaseMethod={setGenerateBaseMethod}
+                generateSelectedLanguage={generateSelectedLanguage}
+                setGenerateSelectedLanguage={setGenerateSelectedLanguage}
+                generateResult={generateResult}
+                setGenerateResult={setGenerateResult}
+                newDataAction={newDataAction}
+                setNewDataAction={setNewDataAction}
+                selectedFramework={selectedFramework}
+                setSelectedFramework={setSelectedFramework}
+              />
             }
           />
         </Routes>
