@@ -34,7 +34,7 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
       setUserName(response.data.email);
       setIsAuthenticated(true);
       localStorage.setItem("authToken", response.data.accessToken);
-      navigate("/efficiency-test");
+      navigate("/generate-test");
     } catch (error) {
       if (error.response && error.response.data) {
         // Handle error

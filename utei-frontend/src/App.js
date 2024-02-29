@@ -232,24 +232,28 @@ function App() {
           <Route
             path="/generate-test"
             element={
-              <GenerateTest
-                userId={userId}
-                testType={""}
-                selectedResult={generateSelectedResult}
-                setSelectedResult={setGenerateSelectedResult}
-                genereateBaseInput={genereateBaseInput}
-                setGenerateBaseInput={setGenerateBaseInput}
-                generateBaseMethod={generateBaseMethod}
-                setGenerateBaseMethod={setGenerateBaseMethod}
-                generateSelectedLanguage={generateSelectedLanguage}
-                setGenerateSelectedLanguage={setGenerateSelectedLanguage}
-                generateResult={generateResult}
-                setGenerateResult={setGenerateResult}
-                newDataAction={newDataAction}
-                setNewDataAction={setNewDataAction}
-                selectedFramework={selectedFramework}
-                setSelectedFramework={setSelectedFramework}
-              />
+              isAuthenticated ? (
+                <GenerateTest
+                  userId={userId}
+                  testType={""}
+                  selectedResult={generateSelectedResult}
+                  setSelectedResult={setGenerateSelectedResult}
+                  genereateBaseInput={genereateBaseInput}
+                  setGenerateBaseInput={setGenerateBaseInput}
+                  generateBaseMethod={generateBaseMethod}
+                  setGenerateBaseMethod={setGenerateBaseMethod}
+                  generateSelectedLanguage={generateSelectedLanguage}
+                  setGenerateSelectedLanguage={setGenerateSelectedLanguage}
+                  generateResult={generateResult}
+                  setGenerateResult={setGenerateResult}
+                  newDataAction={newDataAction}
+                  setNewDataAction={setNewDataAction}
+                  selectedFramework={selectedFramework}
+                  setSelectedFramework={setSelectedFramework}
+                />
+              ) : (
+                <Navigate to="/login" replace />
+              )
             }
           />
         </Routes>
