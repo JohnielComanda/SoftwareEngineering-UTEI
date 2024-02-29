@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Tooltip } from "@mui/material";
 import "../../../css/OutputSpace.css";
 
 const EffiencyBar = (props) => {
