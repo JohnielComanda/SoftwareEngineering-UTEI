@@ -31,7 +31,7 @@ const TempTest = ({
   setNewDataAction,
 }) => {
   const [resultId, setResultId] = useState("");
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(2);
   console.log("TempTest TO VIEW: ", accuracyInput);
   return (
     <>

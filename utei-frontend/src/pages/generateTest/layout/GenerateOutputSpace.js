@@ -1,6 +1,7 @@
 import { React, useEffect } from "react";
 import GenerateStandardOutput from "../output/GenerateStandardOutput";
 import axios from "axios";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import "../../../css/OutputSpace.css";
 
 const GenerateOutputSpace = ({
@@ -37,6 +38,16 @@ const GenerateOutputSpace = ({
         <button disabled={true} className="standard2">
           Standard Output
         </button>{" "}
+        {testResult.unitTest ? (
+          <CopyToClipboard
+            text={testResult.unitTest}
+            onCopy={(text, result) => console.log(result)}
+          >
+            <button className="copy-btn"> Copy</button>
+          </CopyToClipboard>
+        ) : (
+          ""
+        )}
       </div>
       <GenerateStandardOutput testResult={testResult} />
     </div>

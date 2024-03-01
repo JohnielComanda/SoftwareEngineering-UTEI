@@ -13,5 +13,6 @@ namespace UTEI.Dtos
         public string? BaseMethod { get; set; }
         [Required(ErrorMessage = "Programming language used in Unit Test method is required.")]
         public string? ProgrammingLanguage { get; set; }
+        public string? Framework { get; set; }
     }
 }

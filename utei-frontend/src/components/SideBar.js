@@ -18,6 +18,7 @@ const SideBar = ({
     setActiveTab(tabIndex);
     console.log("Active Tab: ", activeTab);
   };
+  const [clickedButtonIndex, setClickedButtonIndex] = useState(null);
 
   useEffect(() => {
     // This method is for the fetching
@@ -44,19 +45,20 @@ const SideBar = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newDataAction]);
 
-  const handleViewHistory = (test) => {
+  const handleViewHistory = (test, index) => {
+    setClickedButtonIndex(index);
     setTestResult({});
     setSelectedResult(test);
   };
 
   const tabs = [
+    { to: "/generate-test", text: "Generate Unit Test", className: "generate" },
     {
       to: "/efficiency-test",
       text: "Identify Efficiency",
       className: "efficiency",
     },
     { to: "/accuracy-test", text: "Identify Accuracy", className: "accuracy" },
-    { to: "/generate-test", text: "Generate Unit Test", className: "generate" },
   ];
 
   return (
@@ -84,10 +86,14 @@ const SideBar = ({
             <ul>
               <li>
                 <button
-                  onClick={() => handleViewHistory(test)}
-                  className="btn-test"
+                  onClick={() => handleViewHistory(test, index)}
+                  className={
+                    clickedButtonIndex === index
+                      ? "btn-test-clicked"
+                      : "btn-test"
+                  }
                 >
-                  {test.programmingLanguage + "   " + test.date}
+                  {test.programmingLanguage + " - " + test.date.slice(0, 10)}
                 </button>
               </li>
             </ul>

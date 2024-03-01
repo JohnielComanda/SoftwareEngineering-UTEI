@@ -26,11 +26,32 @@ namespace UTEI.Service
         public async Task<string> CreateTest(EfficiencyTestCreationDto testEfficiency)
         {
             var tempResponse = await _analyzer.Analyze(testEfficiency.UnitTest!);
-            var resultSummarySuggestion = tempResponse.Split("$");
-            var summary = resultSummarySuggestion[0];
-            var suggestion = resultSummarySuggestion[1];
+            string summary = string.Empty;
+            string suggestion = string.Empty;
+
+            // Check if the response contains the delimiter '$'
+            var delimiterIndex = tempResponse.IndexOf('$');
+            if (delimiterIndex != -1)
+            {
+                // Split the response into summary and suggestion based on the delimiter
+                summary = tempResponse.Substring(0, delimiterIndex);
+                suggestion = tempResponse.Substring(delimiterIndex + 1);
+
+                // Now you can use 'summary' and 'suggestion' separately
+            }
+            else
+            {
+                // Handle the case where the delimiter is not found in the response
+                // This could indicate an unexpected format or error in the response
+                // You may log a warning or handle it based on your application's logic
+            }
+
             var efficiencyScore = await _analyzer.EvaluateTest(testEfficiency.UnitTest!);
+
+            Console.WriteLine("Efficiency Score1: ", int.Parse(efficiencyScore));
+
             var enhancedVersion = await _enhancer.Enhancer(testEfficiency.ProgrammingLanguage!, testEfficiency.UnitTest!);
+            Console.WriteLine("Efficiency Score2: ", int.Parse(efficiencyScore));
 
             var efficiencyTest = new EfficiencyTest()
             {
@@ -43,7 +64,7 @@ namespace UTEI.Service
                 TestSuggestions = suggestion,
                 EnhancedVersion = enhancedVersion
             };
-
+            Console.WriteLine("Efficiency Score3: ", (efficiencyTest.EfficiencyScore));
             return await _repository.CreateTest(efficiencyTest);
         }
 

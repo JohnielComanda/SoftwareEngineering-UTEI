@@ -55,7 +55,6 @@ const AccuracyInputSpace = ({
         setResultId(response.data);
         console.log("Result ID: ", response.data);
         setNewDataAction((prev) => prev + 1);
-        alert("Successfully created a test.");
       } catch (error) {
         console.error(error);
         alert("Failed to create a test.");
@@ -193,7 +192,7 @@ const AccuracyInputSpace = ({
         <div>
           <CodeMirror
             name="unitTest"
-            placeholder={"Paste Unit test here!!!"}
+            placeholder={"Paste Unit test here"}
             height="170px"
             extensions={extensions}
             options={options}
@@ -203,7 +202,7 @@ const AccuracyInputSpace = ({
           ></CodeMirror>
           <CodeMirror
             name="basedMethod"
-            placeholder={"Paste Based method here!!!"}
+            placeholder={"Paste Based method here"}
             height="170px"
             extensions={extensions}
             options={options}

@@ -25,7 +25,14 @@ namespace UTEI.GPTManager.AccuracyUnitTest
 
         public async Task<string> Summary(string unitTest)
         {
-            var prompt = $"Given this unit test```\n{unitTest}\n```. Measure the performance of unit test in terms of: \r\n\r\nExecution Time: \"Answer this in number\"\r\nIsolated: \"Answer this in percentage\"\r\nCode Coverage: \"Answer this in percentage\"\r\nMaintainability: \"Answer this in percentage\"\r\nTest Data: \"give a brief explanation here\"\r\nMemory Usage: \"Answer this in numbers\"\r\n\r\nConclusion: \"If it is already efficient and accurate. Just brief\" ";
+            var prompt = $"Given this unit test:\n```\n{unitTest}\n```\nEstimate the performance of the unit test in terms of:\n\n" +
+              $"Execution Time: Provide an estimated execution time in milliseconds.\n" +
+              $"Isolated: Provide an estimate of how isolated the unit test is, represented as a percentage.\n" +
+              $"Code Coverage: Provide an estimate of code coverage achieved by the unit test, represented as a percentage.\n" +
+              $"Maintainability: Provide an estimate of the maintainability of the unit test, represented as a percentage.\n" +
+              $"Test Data: Provide a brief explanation of the test data being used.\n" +
+              $"Memory Usage: Provide an estimated memory usage in megabytes.\n\n" +
+              $"All response should have a straight to the point output and don't give responses such as 'cannot be measured'.";
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }
 
@@ -35,11 +42,12 @@ namespace UTEI.GPTManager.AccuracyUnitTest
             if(accuInfo.UnitTestType!.Equals("Multi Dependency"))
             {
                 string depen = accuInfo.Dependency1 + accuInfo.Dependency2;
-                prompt = $"Given this {accuInfo.ProgrammingLanguage}:'''\n{accuInfo.UnitTest}\n''' and the based method: '''\n{accuInfo.BaseMethod}\n''' and these dependencies: '''\n{depen}\n''' only return pass or fail, expected output, actual result. The output should look like this Pass or Fail + Expected Output Value Only + Actual Output Value Only";
+                prompt = $"Given this {accuInfo.ProgrammingLanguage}:'''\n{accuInfo.UnitTest}\n''' and the based method: '''\n{accuInfo.BaseMethod}\n''' and these dependencies: '''\n{depen}\n''' only return pass or fail, expected output, actual result. The output should look like this Pass or Fail + Expected Output Value Only + Actual Output Value Only. For example, 'Pass + 42 + 42'.";
             }
             else
             {
-                prompt = $"Given this {accuInfo.ProgrammingLanguage}:'''\n{accuInfo.UnitTest}\n''' and the based method: '''\n{accuInfo.BaseMethod}\n''' only return pass or fail, expected output, actual result. The output should look like this Pass or Fail + Expected Output Value Only + Actual Output Value Only";
+                prompt = $"Given this {accuInfo.ProgrammingLanguage}:'''\n{accuInfo.UnitTest}\n''' and the based method: '''\n{accuInfo.BaseMethod}\n''', please provide the test outcome, expected output, and actual output, separated by '+'. The expected format is: Pass or Fail + Expected Output + Actual Output. For example, 'Pass + 42 + 42'.";
+
             }
             return await GPTRequestHandler.RequestHandler(prompt, _httpClientFactory);
         }

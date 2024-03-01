@@ -21,27 +21,29 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails]);
 
+  const [isLoading, setIsLoading] = useState(false);
   const loginUser = async () => {
-    await axios
-      .post(
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
         `https://utei20240206153836.azurewebsites.net/api/authenticate/login`,
         userDetails
-      )
-      .then((response) => {
-        console.log("login response: ", response);
-        setUserId(response.data.userId);
-        setUserName(response.data.email);
-        setIsAuthenticated(true);
-        localStorage.setItem("authToken", response.data.accessToken);
-        navigate("/efficiency-test");
-      })
-      .catch((error) => {
-        if (error.response && error.response.data) {
-          // Handle error
-          console.error("login failed:", error.response.data);
-          setGoResponse(error.response.data);
-        }
-      });
+      );
+      console.log("login response: ", response.data);
+      setUserId(response.data.userId);
+      setUserName(response.data.email);
+      setIsAuthenticated(true);
+      localStorage.setItem("authToken", response.data.accessToken);
+      navigate("/generate-test");
+    } catch (error) {
+      if (error.response && error.response.data) {
+        // Handle error
+        console.error("login failed:", error.response.data);
+        setGoResponse(error.response.data);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const onClickSubmit = () => {
@@ -69,16 +71,13 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
       <div className="login-container">
         <div className="info-container">
           <h1>
-            Test your <span class="highlight1">Unit Test</span> in simple steps
-            with the power of <span class="highlight2">AI</span> as a tool
+            Streamline your testing process{" "}
+            <span class="highlight1">Generate</span>
+            <span class="highlight0">{" > "}</span>
+            <span class="highlight2">Enhance</span>
+            <span class="highlight0">{" > "}</span>
+            <span class="highlight3">Test</span>
           </h1>
-          <ul>
-            <h6>Supports Multiple Languages</h6>
-            <h6>Automated Test Cases</h6>
-            <h6>Generates Recommendation</h6>
-            <h6>Generates Enhanced Version</h6>
-            <h6>Generates Unit Test</h6>
-          </ul>
         </div>
         <div className="input-container">
           <div className="input-field">
@@ -113,6 +112,11 @@ const Login = ({ setUserId, setIsAuthenticated, setUserName }) => {
           <div className="loginFail">{goResponse ? goResponse : ""}</div>
         </div>
       </div>
+      {isLoading && (
+        <div className="login-loading">
+          <div className="login-spinner" />
+        </div>
+      )}
     </>
   );
 };

@@ -132,6 +132,7 @@ function App() {
   const [generateSelectedLanguage, setGenerateSelectedLanguage] = useState("");
   const [generateResult, setGenerateResult] = useState({});
   const [generateSelectedResult, setGenerateSelectedResult] = useState({});
+  const [selectedFramework, setSelectedFramework] = useState("");
 
   return (
     <div className="background">
@@ -247,6 +248,8 @@ function App() {
                   setGenerateResult={setGenerateResult}
                   newDataAction={newDataAction}
                   setNewDataAction={setNewDataAction}
+                  selectedFramework={selectedFramework}
+                  setSelectedFramework={setSelectedFramework}
                 />
               ) : (
                 <Navigate to="/login" replace />
