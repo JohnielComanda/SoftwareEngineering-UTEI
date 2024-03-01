@@ -46,7 +46,6 @@ const EfficiencyInputSpace = ({
         );
         setResultId(response.data);
         setNewDataAction((prev) => prev + 1);
-        alert("Successfully created a test.");
       } catch (error) {
         console.error(error);
         alert("Failed to create a test.");
@@ -128,7 +127,7 @@ const EfficiencyInputSpace = ({
         <CodeMirror
           name="unitTest"
           className="input-space"
-          placeholder={"Paste your unit test method here!"}
+          placeholder={"Paste your unit test method here"}
           value={
             Object.keys(selectedResult).length === 0
               ? unitTest

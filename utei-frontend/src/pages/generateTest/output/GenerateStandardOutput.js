@@ -9,7 +9,11 @@ const GenerateStandardOutput = ({ testResult }) => {
       <div className="output-space">
         <CodeMirror
           className="output-code"
-          value={testResult.unitTest}
+          value={
+            testResult.unitTest === "-1" || testResult === ""
+              ? "Input code is not testable."
+              : testResult.unitTest
+          }
           height="555px"
           extensions={[javascript()]}
           lineNumbers={false}

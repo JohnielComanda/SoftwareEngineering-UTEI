@@ -188,3 +188,17 @@
   align-items: center;
   border-radius: 5px;
 }
+
+.copy-btn {
+  margin-left: 68.5%;
+  height: 70%;
+  border-radius: 8px 8px 8px 8px;
+  background-color: #0b314c;
+  color: #ffffff;
+  cursor: pointer;
+  border: 1.5px solid #fff;
+}
+
+.copy-btn:hover {
+  background-color: #001d3253;
+}

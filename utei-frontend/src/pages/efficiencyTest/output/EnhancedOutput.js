@@ -9,7 +9,11 @@ const EnhancedOutput = ({ testResult }) => {
       <div className="output-space">
         <CodeMirror
           className="output-code"
-          value={testResult.enhancedVersion}
+          value={
+            testResult.efficiencyScore === 5 || testResult.efficiencyScore === 4
+              ? "No improved version needed for this unit test."
+              : testResult.enhancedVersion
+          }
           height="555px"
           extensions={[javascript()]}
           lineNumbers={false}

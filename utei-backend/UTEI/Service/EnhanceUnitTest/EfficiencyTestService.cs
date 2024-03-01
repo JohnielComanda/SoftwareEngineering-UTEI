@@ -47,7 +47,11 @@ namespace UTEI.Service
             }
 
             var efficiencyScore = await _analyzer.EvaluateTest(testEfficiency.UnitTest!);
+
+            Console.WriteLine("Efficiency Score1: ", int.Parse(efficiencyScore));
+
             var enhancedVersion = await _enhancer.Enhancer(testEfficiency.ProgrammingLanguage!, testEfficiency.UnitTest!);
+            Console.WriteLine("Efficiency Score2: ", int.Parse(efficiencyScore));
 
             var efficiencyTest = new EfficiencyTest()
             {
@@ -60,7 +64,7 @@ namespace UTEI.Service
                 TestSuggestions = suggestion,
                 EnhancedVersion = enhancedVersion
             };
-
+            Console.WriteLine("Efficiency Score3: ", (efficiencyTest.EfficiencyScore));
             return await _repository.CreateTest(efficiencyTest);
         }
 
